@@ -9,7 +9,7 @@ class Utils {
 
     // method to redirect to a different page
     public static function redirect($page) {
-        header("Location: /$page");
+        header("Location: $page");
         exit();
     }
 

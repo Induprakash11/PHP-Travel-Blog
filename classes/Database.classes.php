@@ -38,35 +38,36 @@ class Database {
         return $conn;
     }
 
-    public static function paramtype($value) {
-        switch (gettype($value)) {
-            case 'integer':
-                return 'i';
-            case 'double':
-                return 'd';
-            case 'string':
-                return 's';
-            case 'boolean':
-                return 'b';
-            case 'NULL':
-                return 's';
-            default:
-                return 'b';
-        }
+    public static function paramtype($param) {
+        if (is_int($param)) return 'i';
+        if (is_double($param)) return 'd';
+        if (is_string($param)) return 's';
+        return 'b'; // blob or unknown
     }
+    
 
     public static function query($sql, $params = []) {
-        $stmt = self::connection()->prepare($sql);
+        $stmt = self::checkconnection()->prepare($sql);
         if (!$stmt) {
             throw new Exception("Query preparation failed: " . self::$conn->error);
         }
+    
+        // Count placeholders
+        $placeholderCount = substr_count($sql, '?');
+    
+        if ($placeholderCount !== count($params)) {
+            throw new Exception("Mismatch between number of placeholders ($placeholderCount) and parameters (" . count($params) . ")");
+        }
+    
         if (!empty($params)) {
             $types = implode('', array_map([self::class, 'paramtype'], $params));
             $stmt->bind_param($types, ...$params);
         }
+    
         $stmt->execute();
         return $stmt;
     }
+    
 
     public static function fetchResult($sql, $params = []) {
         $stmt = self::query($sql, $params);
@@ -93,10 +94,10 @@ class Database {
         return $stmt->affected_rows;
     }
 
-    public static function delete($sql, $params = []) {
-        $stmt = self::query($sql, $params);
-        return $stmt->affected_rows;
-    }
+    // public static function delete($sql, $params = []) {
+    //     $stmt = self::query($sql, $params);
+    //     return $stmt->affected_rows;
+    // }
 
     // public static function beginTransaction() {
     //     self::$conn->begin_transaction();

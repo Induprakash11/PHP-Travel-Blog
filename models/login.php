@@ -1,6 +1,5 @@
 <?php require_once __DIR__ . '/../controllers/load.php';
 
-
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Sanitize user input
     $email = Utils::sanitize($_POST['email'] ?? '');

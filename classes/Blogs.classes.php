@@ -7,7 +7,7 @@ class Blogs {
     public static $blog_image;
 
     public static function checkDB() {
-        $db = Database::connection();
+        $db = Database::checkconnection();
         if ($db->connect_error) {
             throw new Exception("Connection failed: " . $db->connect_error);
         }

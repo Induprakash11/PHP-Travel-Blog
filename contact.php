@@ -3,7 +3,7 @@
 // start the session
 Session::start();
 
-// Check if the user is already logged in
+// check if the user is authenticated
 User::isAuthenticated();
 
 ?>

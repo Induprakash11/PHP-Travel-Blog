@@ -51,25 +51,16 @@ class User extends Database {
         return false;
     }
 
-    // method to set user session
-    public static function setUserSession($id, $name, $email) {
-        session_regenerate_id(true);
-        $_SESSION['id'] = $id;
-        $_SESSION['name'] = $name;
-        $_SESSION['email'] = $email;
-        $_SESSION['created_at'] = date("Y-m-d H:i:s");
-    }
-
     
-    // method to get user Details from session
-    public static function getUserSession() {
-        return [
-            'id' => $_SESSION['id'],
-            'name' => $_SESSION['name'],
-            'email' => $_SESSION['email'],
-            'created_at' => $_SESSION['created_at']
-        ];
-    }
+    // // method to get user Details from session
+    // public static function getUserSession() {
+    //     return [
+    //         'id' => $_SESSION['id'],
+    //         'name' => $_SESSION['name'],
+    //         'email' => $_SESSION['email'],
+    //         'created_at' => $_SESSION['created_at']
+    //     ];
+    // }
 
     // method to get user details
     public static function getUserDetails($userId) {
@@ -96,17 +87,26 @@ class User extends Database {
 
     // method to check if the user is logged in
     public static function isAuthenticated() {
-        if (!isset($_SESSION['user_id'])) {
-            header("Location: /login.php");
+        if (!Session::has('user_id')) {
+            header("Location: login");
             exit();
         }
         return true; // user is authenticated
+    }
+
+    public static function isNotAuthenticated() {
+        if (isset($_SESSION['user_id'])) {
+            header("Location: home");
+            exit();
+        }
+        return true; // user is not authenticated
     }
 
     // method to logout the user
     public static function logout() {
         session::destroy();
         unset($_SESSION['user_id']);
+
     }
 }
 
