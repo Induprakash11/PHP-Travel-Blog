@@ -1,0 +1,202 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+
+body {
+    font-family: 'Poppins', sans-serif;
+}
+
+html{
+    scroll-behavior: smooth;
+}
+.hero {
+    background: url('https://cdn.wegic.ai/cms/seo/img/travel-blog-examples/179E378C.png?format=webp&args=pr:sharp/q:60') center/cover no-repeat;
+    height: 60vh;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+.hero h1 {
+    font-size: 3rem;
+    text-shadow: 2px 2px 5px rgba(0,0,0,0.5);
+}
+.card img {
+    height: 200px;
+    object-fit: cover;
+}
+.footer {
+    background: grey;
+    color: white;
+    text-align: center;
+    padding: 15px 0;
+}
+
+.navbar-brand {
+    font-weight: bold;
+    font-size: 1.5rem;
+}
+
+.nav-link {
+    font-size: 1.1rem;
+    margin-right: 1rem;
+}
+
+.nav-link:hover {
+    color: #007bff;
+}
+
+@media (max-width: 991.98px) {
+    .navbar-collapse {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 60%;
+        height: 100%;
+        background-color: rgba(226, 225, 225, 0.7);
+        z-index: 1050;
+        display: none;
+    }
+    .navbar-collapse.show {
+        display: block;
+    }
+    .navbar-nav {
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100%;
+    }
+    .nav-link {
+        color: black !important;
+        font-size: 1.5rem;
+        margin: 0.5rem 0;
+    }
+    .sign {
+        display: flex;
+        flex-direction: column;
+        align-items: baseline;
+        justify-content: center;
+        margin-top: 9rem;
+    }
+}
+
+.hero p {
+    font-size: 1.5rem;
+}
+
+/* Blog Section Styles */
+#blogs .card {
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+#blogs .card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+#blogs .card-title {
+    font-size: 1.25rem;
+    font-weight: bold;
+}
+
+/* Contact Section Styles */
+#contact .form-control {
+    border-radius: 0;
+    box-shadow: none;
+    border-color: #ced4da;
+}
+
+#contact .form-control:focus {
+    border-color: #007bff;
+    box-shadow: none;
+}
+
+#contact button {
+    background-color: #007bff;
+    border: none;
+    padding: 10px 20px;
+    font-size: 1rem;
+    border-radius: 0;
+    transition: background-color 0.3s;
+}
+
+#contact button:hover {
+    background-color: #0056b3;
+}
+
+form{
+    max-width: fit;
+    margin: 0 auto;
+}
+
+form input, form textarea{
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+form button{
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+}
+
+.blog-content p:hover {
+    background-color: #f8f9fa;
+    transition: background-color 0.3s ease;
+    padding: 10px;
+    border-radius: 8px;
+}
+
+.category-image {
+    transition: transform 0.4s ease;
+    cursor: pointer;
+    border-radius: 8px;
+    overflow: hidden;
+    height: 400px;
+    width: 800px;
+    object-fit: cover;
+    margin: 0 auto;
+}
+
+.category-image:hover {
+    transform: scale(1.03);
+    transition: transform 0.4s ease;
+}
+
+.blog-content p {
+    transition: background-color 0.3s ease, padding 0.3s ease;
+}
+
+.profile-card {
+    max-width: 400px;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+    text-align: center;
+}
+.profile-card h2 {
+    margin-bottom: 10px;
+    color: #333;
+}
+.profile-card p {
+    margin: 5px 0;
+    color: #555;
+}
+.profile-card a {
+    display: inline-block;
+    margin-top: 15px;
+    padding: 10px 20px;
+    color: #fff;
+    background-color: #007bff;
+    text-decoration: none;
+    border-radius: 5px;
+}
+.profile-card a:hover {
+    background-color: #0056b3;
+}
+

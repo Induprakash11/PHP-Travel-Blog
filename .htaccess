@@ -1,0 +1,15 @@
+Options +FollowSymLinks -MultiViews
+RewriteEngine On
+RewriteBase /Travel%20Blog/
+
+# Blog details rewrite rule
+RewriteRule ^blog-details/([^/]+)/?$ blog-details.php?category_name=$1 [L,QSA,B]
+
+# General rule for extensionless PHP files
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^([^.]+)$ $1.php [NC,L]
+
+ErrorDocument 404 /Travel%20Blog/views/_custom-404.php
+
+# Block access to specific JSON file
+RewriteRule ^classes/config/config\.json$ - [F,L]

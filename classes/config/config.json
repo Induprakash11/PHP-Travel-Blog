@@ -1,0 +1,7 @@
+{
+	"server": "localhost",
+	"username": "root",
+	"password": "",
+	"dbname": "user_system",
+	"base_path": "/Travel Blog/"
+}
