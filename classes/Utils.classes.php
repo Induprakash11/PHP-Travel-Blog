@@ -15,6 +15,7 @@ class Utils {
 
     // method to set a flash message
     public static function setFlash($name, $message) {
+        Session::start();
         $_SESSION[$name] = $message;
     }
 

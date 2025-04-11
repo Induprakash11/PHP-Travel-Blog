@@ -10,7 +10,7 @@
 <title>TraveLog</title>
 
 <!-- Favicon -->
-<link rel="icon" href="/Travel-Blog/assets/images/favicon.png">
+<link rel="icon" href="/Travel Blog/assets/images/favicon.png">
 
 
 <!-- Font Awesome -->
@@ -20,7 +20,7 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
 
 <!-- Custom CSS -->
-<link rel="stylesheet" href="/Travel-Blog/assets/style/styles.css">
+<link rel="stylesheet" href="/Travel Blog/assets/style/styles.css">
 
 <!-- custom JS -->
 <script src="/Travel-Blog/assets/js/script.js"></script>

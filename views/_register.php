@@ -6,7 +6,7 @@
                     <h2>Register</h2>
                 </div>
                 <div class="card-body">
-                    <?php echo Utils::displayFlash('error', 'danger'); ?>
+                    <?php echo Utils::displayFlash('', 'danger'); ?>
                 <form method="POST" class="card-body p-4">
                     <div class="mb-3">
                         <label for="username" class="form-label">Username</label>

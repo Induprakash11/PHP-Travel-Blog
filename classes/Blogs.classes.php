@@ -42,6 +42,16 @@ class Blogs {
         return null;
     }
 
+    // Fetch blog by user_id
+    public static function getBlogByUserId($user_id) {
+        $sql = "SELECT * FROM blogs WHERE user_id = ?";
+        $stmt = self::checkDB()->prepare($sql);
+        $stmt->bind_param("i", $user_id); // "i" for integer
+        $stmt->execute();
+        $result = $stmt->get_result();
+        return $result->fetch_all(MYSQLI_ASSOC);
+    }
+
     public static function getBlogByTitle($title) {
         $sql = "SELECT * FROM blogs WHERE title = ?";
         $stmt = self::checkDB()->prepare($sql);

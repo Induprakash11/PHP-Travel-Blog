@@ -1,4 +1,5 @@
 <?php require_once __DIR__ . '/../controllers/load.php';
+    
 
 class Contact extends Database {
 
@@ -59,26 +60,4 @@ class Contact extends Database {
 
         return $result->fetch_assoc();
     }
-
-    // Send email logic here
-    public static function sendEmail($name, $email, $mobile, $message) {
-        $to = "admin@example.com"; // Replace with the recipient's email address
-        $subject = "New Contact Message from $name";
-        $body = "You have received a new message:\n\n";
-        $body .= "Name: $name\n";
-        $body .= "Email: $email\n";
-        $body .= "Mobile: $mobile\n";
-        $body .= "Message:\n$message\n";
-
-        $headers = "From: $email\r\n";
-        $headers .= "Reply-To: $email\r\n";
-
-        if (mail($to, $subject, $body, $headers)) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-
-}
+} 

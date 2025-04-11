@@ -1,8 +1,14 @@
+<?php require_once __DIR__ . '/../controllers/load.php';
+?>
 <section id="contact" class="container my-5">
     <div class="row justify-content-center">
         <div class="col-lg-8">
             <h2 class="text-center mb-4">Enquire Me</h2>
             <form method="POST" enctype="multipart/form-data">
+                <?php Utils::displayFlash('mail send error','danger');
+                Utils::displayFlash('mail send success','success');
+                Utils::displayFlash('field empty error', 'warning'); ?>
+
                 <div class="mb-3">
                     <label for="name" class="form-label">Name</label>
                     <input type="text" class="form-control" name="name" id="name" placeholder="Your Name" required>

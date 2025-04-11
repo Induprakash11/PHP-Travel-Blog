@@ -7,13 +7,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     // Validate user input
     if (User::checkEmptyFields([$email, $password])) {
-        Utils::setFlash('error', 'All fields are required.');
+        Utils::setFlash('field error', 'All fields are required.');
         // die('error');
     }
 
     // Validate email format
     if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-        Utils::setFlash('error', 'Invalid email format.');
+        Utils::setFlash('Invalid email error', 'Invalid email format.');
     }
 
     // Login the user
@@ -25,13 +25,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             Session::set('user_name', $user['name']);
             Session::set('user_email', $user['email']);
             Session::set('user_created', $user['created_at']);
-            Utils::setFlash('success', 'Login successful.');
+            Utils::setFlash('login success', 'Login successful.');
             Utils::redirect('home');
         } else {
-            Utils::setFlash('error', 'User not found.');
+            Utils::setFlash('User found error', 'User not found.');
         }
     } else {
-        Utils::setFlash('error', 'Invalid email or password.');
+        Utils::setFlash('invalid login error', 'Invalid email or password.');
     }
 }
 ?>

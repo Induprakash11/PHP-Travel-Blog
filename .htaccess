@@ -3,7 +3,7 @@ RewriteEngine On
 RewriteBase /Travel%20Blog/
 
 # Blog details rewrite rule
-RewriteRule ^blog-details/([^/]+)/?$ blog-details.php?category_name=$1 [L,QSA,B]
+RewriteRule ^blog-details/([^/]+)/?$ blog-details.php?title=$1 [L,QSA,B]
 
 # General rule for extensionless PHP files
 RewriteCond %{REQUEST_FILENAME} !-f
