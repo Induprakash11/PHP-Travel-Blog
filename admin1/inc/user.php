@@ -47,7 +47,7 @@
                                         <p><?= $user['name'] ?></p>
                                     </td>
                                     <td><?= $user['email'] ?></td>
-                                    <td><?= $user['created_at'] ?></td>
+                                    <td><?= \Carbon\Carbon::parse($user['created_at'])->diffForHumans() ?></td>
                                     <td>
                                         <span class="status-pill <?= $user['role'] === 'admin' ? 'active' : 'pending' ?>">
                                             <?= $user['role'] ?>
@@ -72,20 +72,20 @@
                     </tbody>
                 </table>
             </div>
-            <nav aria-label="Page navigation">
-                <ul class="pagination justify-content-end">
-                    <li class="page-item disabled">
-                        <a class="page-link" href="javascript:void(0)" tabindex="-1" aria-disabled="true">Previous</a>
-                    </li>
-                    <li class="page-item active"><a class="page-link" href="javascript:void(0)">1</a></li>
-                    <li class="page-item"><a class="page-link" href="javascript:void(0)">2</a></li>
-                    <li class="page-item"><a class="page-link" href="javascript:void(0)">3</a></li>
-                    <li class="page-item">
-                        <a class="page-link" href="javascript:void(0)">Next</a>
-                    </li>
-                </ul>
-            </nav>
         </div>
+        <nav aria-label="Page navigation">
+            <ul class="pagination justify-content-end">
+                <li class="page-item disabled">
+                    <a class="page-link" href="javascript:void(0)" tabindex="-1" aria-disabled="true">Previous</a>
+                </li>
+                <li class="page-item active"><a class="page-link" href="javascript:void(0)">1</a></li>
+                <li class="page-item"><a class="page-link" href="javascript:void(0)">2</a></li>
+                <li class="page-item"><a class="page-link" href="javascript:void(0)">3</a></li>
+                <li class="page-item">
+                    <a class="page-link" href="javascript:void(0)">Next</a>
+                </li>
+            </ul>
+        </nav>
     </div>
 
     <!-- User Roles & Permissions Card -->

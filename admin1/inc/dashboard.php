@@ -126,7 +126,7 @@
                                 <tr>
                                     <td><p><?= $user['name'] ?></p></td>
                                     <td><?= $user['email'] ?></td>
-                                    <td><?= $user['created_at'] ?></td>
+                                    <td><?= \Carbon\Carbon::parse($user['created_at'])->diffForHumans() ?></td>
                                     <!-- <td><span class="status-pill active">Published</span></td> -->
                                 </tr>
                                 <?php } 
@@ -167,7 +167,7 @@
                                     </td>
                                     <td><p><?= $blog['title'] ?></p></td>
                                     <td><?= $blog['user_name'] ?></td>
-                                    <td><?= $blog['created_at'] ?></td>
+                                    <td><?= \Carbon\Carbon::parse($blog['created_at'])->diffForHumans() ?></td>
                                     <td><span class="status-pill active">Published</span></td>
                                 </tr>
                                 <?php } 

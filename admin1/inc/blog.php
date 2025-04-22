@@ -55,7 +55,7 @@
 										</td>
 										<td><?= htmlspecialchars($blog['user_name']) ?></td>
 										<td><?= htmlspecialchars(mb_strimwidth($blog['content'], 0, 40, "...")) ?></td>
-										<td><?= htmlspecialchars($blog['created_at']) ?></td>
+										<td><?= \Carbon\Carbon::parse($blog['created_at'])->diffForHumans() ?></td>
 										<td><span class="status-pill active">Published</span></td>
 										<td>
 											<button class="btn btn-sm btn-primary me-1" data-bs-toggle="modal" data-bs-target="#editUserModal">
