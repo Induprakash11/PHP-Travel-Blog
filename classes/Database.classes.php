@@ -118,11 +118,11 @@ class Database {
         }
     }
 }
-// // check database connection
+// check database connection
 // $db = Database::checkconnection();
 // if (!$db) {
 //     die("Connection failed: Unable to establish a database connection.");
 // } else {
-//     echo "Connected successfully";
+//     die("Connected successfully");
 // }
 ?>

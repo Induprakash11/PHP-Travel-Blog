@@ -19,7 +19,7 @@
             // Loop through each blog and display it
             foreach ($blogs as $row) { ?>
             <div class="card" style="margin-bottom: 20px; border: 1px solid #ddd; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
-                <img src="<?= htmlspecialchars($row['blog_image']) ?>" class="card-img-top" alt="<?= htmlspecialchars($row['title']) ?>" style="border-top-left-radius: 10px; border-top-right-radius: 10px; max-height: 200px; object-fit: cover;">
+                <img src="admin1/assets/uploads/<?= $row['blog_image'] ?>" class="card-img-top" alt="<?= htmlspecialchars($row['title']) ?>" style="border-top-left-radius: 10px; border-top-right-radius: 10px; max-height: 200px; object-fit: cover;">
                 <div class="card-body" style="padding: 15px;">
                     <h5 class="card-title" style="color: #1976d2;"><?= htmlspecialchars($row['title']) ?></h5>
                     <p class="card-text" style="color: #555;"><?= htmlspecialchars(mb_strimwidth($row['content'], 0, 35, "...")) ?></p>

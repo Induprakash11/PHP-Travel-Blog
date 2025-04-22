@@ -3,15 +3,15 @@
 class User extends Database {
     
     // method to register a new user
-    public static function register($name, $email, $password) {
+    public static function register($name, $email, $password, $role = 'user') {
         // check if the email is already registered
         if (self::isEmailRegistered($email)) {
             return false; // email already exists
         }
         // hash the password before storing it
         $passwordHash = password_hash($password, PASSWORD_BCRYPT);
-        $sql = "INSERT INTO users (name, email, password) VALUES (?, ?, ?)";
-        return self::query($sql, [$name, $email, $passwordHash]);
+        $sql = "INSERT INTO users (name, email, password, role) VALUES (?, ?, ?, ?)";
+        return self::query($sql, [$name, $email, $passwordHash, $role]);
     }
 
     // method to check empty fields
@@ -67,6 +67,19 @@ class User extends Database {
         return self::fetchOne("SELECT id, name, email FROM users WHERE id = ?", [$userId]);
     }
 
+    // method to get user id
+    public static function getUserId($userName) {
+        $user = self::fetchOne("SELECT id FROM users WHERE name = ?", [$userName]);
+        return $user ? $user['id'] : null;
+    }
+
+    // method to add user
+    public static function addUser($name, $email, $password, $role) {
+        $passwordHash = password_hash($password, PASSWORD_BCRYPT);
+        $sql = "INSERT INTO users (name, email, password, role) VALUES (?, ?, ?, ?)";
+        return self::query($sql, [$name, $email, $passwordHash, $role]);
+    }
+
     // method to update user details
     public static function updateUser($userId, $name, $email) {
         $sql = "UPDATE users SET name = ?, email = ? WHERE id = ?";
@@ -88,7 +101,7 @@ class User extends Database {
     // method to check if the user is logged in
     public static function isAuthenticated() {
         if (!Session::has('user_id')) {
-            header("Location: login");
+            header("Location: /Travel Blog/login");
             exit();
         }
         return true; // user is authenticated
@@ -102,11 +115,23 @@ class User extends Database {
         return true; // user is not authenticated
     }
 
+    public static function onlyAdmin() {
+        if (Session::get('role') !== 'admin') {
+            header("Location: /Travel Blog/home");
+            exit();
+        }
+    }
+
     // method to logout the user
     public static function logout() {
         session::destroy();
         unset($_SESSION['user_id']);
 
+    }
+
+    // method to get all users
+    public static function getAllUsers() {
+        return self::fetchAll("SELECT * FROM users");
     }
 }
 

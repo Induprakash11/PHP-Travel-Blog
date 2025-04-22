@@ -39,7 +39,7 @@
                             required />
                     </div>
                     <div class="d-grid">
-                        <button type="submit" class="btn btn-primary btn-block">Register</button>
+                        <button type="submit" name="register" class="btn btn-primary btn-block">Register</button>
                     </div>
                     <div class="mt-3">
                         <p>Already have an account ?  <a href="login">Login</a></p>

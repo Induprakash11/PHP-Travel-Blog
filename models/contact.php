@@ -1,12 +1,12 @@
 <?php require_once __DIR__ . '/../controllers/load.php';
-      require_once 'vendor/autoload.php';
+      require_once __DIR__. '/../vendor/autoload.php';
 
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
 
 // contact form submission
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['sendMail'])) {
     $name = $_POST['name'];
     $email = $_POST['email'];
     $mobile = $_POST['mobile'];
@@ -89,7 +89,7 @@ $mail->Body = '
             Utils::setFlash('mail send error','Message could not be sent.');
         } else {
             Utils::setFlash('mail send success','Message Send Successfully');
-            Utils::redirect('contact');
+            Utils::redirect('home');
         }
 
     }

@@ -2,7 +2,7 @@
 require_once __DIR__ . '/../controllers/load.php';
 
 // Check if the form is submitted
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['register'])) {
     // Sanitize user input
     $name = Utils::sanitize($_POST['username'] ?? '');
     $email = Utils::sanitize($_POST['email'] ?? '');

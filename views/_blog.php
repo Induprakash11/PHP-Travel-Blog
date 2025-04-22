@@ -1,19 +1,33 @@
 <section id="blogs" class="container my-5">
+    <!-- Breadcrumb Navigation -->
+    <nav aria-label="breadcrumb" class="">
+        <ol class="breadcrumb p-3 rounded d-flex justify-content-" style="background-color: #eeeef0;">
+            <li class="breadcrumb-item">
+                <a href="/Travel Blog/home" style="text-decoration: none;">Home</a>
+            </li>
+            <li class="breadcrumb-item <?= str_contains($_SERVER['REQUEST_URI'], '/Travel Blog/blog') ? 'active' : '' ?>" aria-current="page">
+                <a href="/Travel Blog/blog" style="text-decoration: none;">Blogs</a>
+            </li>
+        </ol>
+    </nav>
+
     <h2 class="text-center mb-4">Latest Travel Blogs</h2>
+    <p class="text-center mb-4">Explore our latest travel blogs and get inspired for your next adventure!</p>
+
 
     <div class="row">
         <?php
 
         // Fetch all blogs
         $blogs = Blogs::getAllBlogs();
-        
+
         if (isset($blogs)) {
             // Loop through each blog and display it
             foreach ($blogs as $row) { ?>
                 <div class="col-md-4 p-lg-3">
                     <div class="card">
                         <!-- Display blog image -->
-                        <img src="<?= htmlspecialchars($row['blog_image']) ?>"
+                        <img src="admin1/assets/uploads/<?= $row['blog_image'] ?>"
                             class="card-img-top"
                             alt="<?= htmlspecialchars($row['title']) ?>">
                         <div class="card-body">

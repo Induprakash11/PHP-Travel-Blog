@@ -26,7 +26,7 @@
                     <textarea class="form-control" name="message" id="message" rows="4" placeholder="Your Message" required ></textarea>
                 </div>
                 <div class="d-grid">
-                    <button type="submit" id="submit" name="contact" class="btn btn-primary btn-block">Send Message</button>
+                    <button type="submit" id="submit" name="sendMail" class="btn btn-primary btn-block">Send Message</button>
                 </div>
             </form>
         </div>

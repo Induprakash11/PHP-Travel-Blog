@@ -9,8 +9,13 @@ class Utils {
 
     // method to redirect to a different page
     public static function redirect($page) {
-        header("Location: $page");
-        exit();
+        if (!headers_sent()) {
+            header("Location: $page");
+            exit();
+        } else {
+            echo "<script>window.location.href='$page';</script>";
+            exit();
+        }
     }
 
     // method to set a flash message

@@ -12,45 +12,47 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ms-auto">
             <li class="nav-item">
-                <a class="nav-link <?= basename($_SERVER['PHP_SELF']) == '/' ? 'active' : ''; ?>" href="/Travel Blog/">
-                <i class="fa fa-home me-1"></i> Home 
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link <?= basename($_SERVER['PHP_SELF']) == 'blog' ? 'active' : ''; ?>" href="/Travel Blog/blog">
-                <i class="fa fa-blog me-1"></i> Blogs 
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link <?= basename($_SERVER['PHP_SELF']) == 'contact' ? 'active' : ''; ?>" href="/Travel Blog/contact">
-                <i class="fa fa-address-book me-1"></i> Contact
-                </a>
-            </li>
-            <?php if (Session::has('user_id')): ?>
+                    <input type="checkbox" id="switch-mode" hidden>
+                    <label for="switch-mode" class="switch-mode"></label>
+                </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/Travel Blog/dashboard">
-                        <i class="fa fa-user me-1"></i> <?= Session::get("user_name") ?>
+                    <a class="nav-link <?= basename($_SERVER['PHP_SELF']) == '/' ? 'active' : ''; ?>" href="/Travel Blog/">
+                        <i class="fa fa-home me-1"></i> Home
                     </a>
                 </li>
                 <li class="nav-item">
-                <a class="nav-link" href="logout">
-                <i class="fa fa-sign-out-alt"></i> Logout
-                </a>
-                </li>
-                </div>
-            <?php else: ?>
-                <li class="nav-item">
-                <a class="nav-link <?= basename($_SERVER['PHP_SELF']) == 'login' ? 'active' : ''; ?>" href="login">
-                    <i class="fa fa-user  me-1"></i> Login
-                </a>
+                    <a class="nav-link <?= basename($_SERVER['PHP_SELF']) == 'blog' ? 'active' : ''; ?>" href="/Travel Blog/blog">
+                        <i class="fa fa-blog me-1"></i> Blogs
+                    </a>
                 </li>
                 <li class="nav-item">
-                <a class="nav-link <?= basename($_SERVER['PHP_SELF']) == 'register' ? 'active' : ''; ?>" href="register">
-                    <i class="fa fa-user-plus me-1"></i> Register
-                </a>
-            </li>
-            <?php endif; ?>
-            </div>
+                    <a class="nav-link <?= basename($_SERVER['PHP_SELF']) == 'contact' ? 'active' : ''; ?>" href="/Travel Blog/contact">
+                        <i class="fa fa-address-book me-1"></i> Contact
+                    </a>
+                </li>
+                <?php if (Session::has('user_id')): ?>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/Travel Blog/dashboard">
+                            <i class="fa fa-user me-1"></i> <?= Session::get("user_name") ?>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="logout">
+                            <i class="fa fa-sign-out-alt"></i> Logout
+                        </a>
+                    </li>
+                <?php else: ?>
+                    <li class="nav-item">
+                        <a class="nav-link <?= basename($_SERVER['PHP_SELF']) == 'login' ? 'active' : ''; ?>" href="login">
+                            <i class="fa fa-user  me-1"></i> Login
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link <?= basename($_SERVER['PHP_SELF']) == 'register' ? 'active' : ''; ?>" href="register">
+                            <i class="fa fa-user-plus me-1"></i> Register
+                        </a>
+                    </li>
+                <?php endif; ?>
             </ul>
         </div>
     </div>
