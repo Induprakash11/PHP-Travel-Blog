@@ -2,7 +2,7 @@
 	<h1 class="h3 mb-4 text-danger">Settings</h1>
 
 	<div class="row">
-		<div class="col-lg-6">
+		<div class="col-lg-6"  data-aos="fade-up" data-aos-duration="1500">
 			<!-- General Settings Card -->
 			<div class="card shadow mb-4">
 				<div class="card-header py-3">
@@ -50,7 +50,7 @@
 				</div>
 			</div>
 		</div>
-		<div class="col-lg-6">
+		<div class="col-lg-6" data-aos="fade-down" data-aos-duration="1500">
 			<!-- Blog Settings Card -->
 			<div class="card shadow mb-4">
 				<div class="card-header py-3">

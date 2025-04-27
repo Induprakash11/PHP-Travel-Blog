@@ -17,6 +17,9 @@
 <!-- Custom CSS -->
 <link rel="stylesheet" href="assets/css/style.css">
 
+<!-- AOS Animation CSS -->
+<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
 <!-- Chart.js -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.min.js">
 

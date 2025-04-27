@@ -45,6 +45,12 @@ User::onlyAdmin();
     <script id="app-script">
         <?php include "inc/script.php" ?>
     </script>
+
+    <!-- AOS Animation Library -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init();
+    </script>
 </body>
 
 </html>

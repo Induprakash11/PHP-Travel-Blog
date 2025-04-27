@@ -41,14 +41,14 @@
 	--silver: #C0C0C0;
 	--light-silver: #F5F5F5;
 	--primary-color: #4e73df;
-	--secondary-color: #1cc88a;
+	--secondary-color: #12ffc4;
 	--danger-color: #e74a3b;
 	--warning-color: #f6c23e;
 	--info-color: #36b9cc;
 	--dark-color: #5a5c69;
 	--light-color: #f8f9fc;
 	--sidebar-width: 250px;
-	--lightred: #ffbbbb;
+	--lightred: #fca8a8;
 	--lightsecondary-color: #8effd5;
 }
 
@@ -201,73 +201,6 @@ body {
 	background: var(--white);
 }
 
-/* Dashboard Card Styles */
-.dashboard-card {
-	border-left: 0.25rem solid;
-	border-right: 0.25rem solid;
-	padding: 1rem;
-	position: relative;
-	overflow: hidden;
-}
-
-.dashboard-card.primary {
-	border-left-color: var(--red);
-	border-right-color: var(--secondary-color);
-}
-
-.dashboard-card.primary .card-icon {
-	color: var(--red);
-}
-
-.dashboard-card.success {
-	border-left-color: var(--secondary-color);
-	border-right-color: var(--red);
-}
-
-.dashboard-card.success .card-icon {
-	color: var(--secondary-color);
-}
-
-.dashboard-card.warning {
-	border-left-color: var(--red);
-	border-right-color: var(--warning-color);
-
-}
-
-.dashboard-card.warning .card-icon {
-	color: var(--red);
-}
-
-.dashboard-card.danger {
-	border-left-color: var(--danger-color);
-}
-
-.dashboard-card.danger .card-icon {
-	color: var(--danger-color);
-}
-
-.dashboard-card .card-icon {
-	position: absolute;
-	top: 50%;
-	right: 1rem;
-	transform: translateY(-50%);
-	font-size: 2rem;
-	opacity: 0.3;
-}
-
-.dashboard-card h5 {
-	font-size: 0.8rem;
-	text-transform: uppercase;
-	font-weight: 700;
-	color: var(--dark-color);
-}
-
-.dashboard-card h2 {
-	font-size: 1.5rem;
-	font-weight: 700;
-	margin: 0;
-	color: var(--dark-color);
-}
 
 /* Table Styles */
 .table thead th {
@@ -428,4 +361,109 @@ input:checked+.toggle-slider:before {
 		margin-left: 80px;
 		width: calc(100% - 80px);
 	}
+
+    /* New dashboard styles */
+    .dashboard-container {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20px;
+        padding: 20px;
+        justify-content: center;
+        background-color: var(--light);
+    }
+
+    .profile-section, .blogs-section {
+        background: white;
+        border-radius: 10px;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        padding: 20px;
+        flex: 1 1 300px;
+        max-width: 400px;
+    }
+
+    .profile-card {
+        padding: 20px;
+        border-radius: 10px;
+        background-color: var(--white);
+        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        border: 2px solid var(--primary-color);
+    }
+
+    .profile-title {
+        color: var(--danger-color);
+        margin-bottom: 15px;
+    }
+
+    .profile-icon {
+        color: var(--primary-color);
+        margin-right: 8px;
+    }
+
+    .btn-logout {
+        display: inline-block;
+        margin-top: 15px;
+        padding: 10px 15px;
+        background-color: var(--primary-color);
+        color: var(--white);
+        border-radius: 5px;
+        text-decoration: none;
+        transition: background-color 0.3s ease;
+    }
+
+    .btn-logout:hover {
+        background-color: var(--danger-color);
+    }
+
+    .blogs-title {
+        color: var(--danger-color);
+        margin-bottom: 15px;
+        text-align: center;
+    }
+
+    .blog-card {
+        border: 1px solid var(--grey);
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        margin-bottom: 20px;
+        overflow: hidden;
+        background-color: var(--white);
+        display: flex;
+        flex-direction: column;
+    }
+
+    .blog-image {
+        width: 100%;
+        height: 200px;
+        object-fit: cover;
+        border-top-left-radius: 10px;
+        border-top-right-radius: 10px;
+    }
+
+    .blog-content {
+        padding: 15px;
+    }
+
+    .blog-title {
+        color: var(--primary-color);
+        margin-bottom: 10px;
+    }
+
+    .blog-excerpt {
+        color: var(--dark-color);
+        margin-bottom: 15px;
+    }
+
+    .btn-readmore {
+        display: inline-block;
+        padding: 8px 12px;
+        background-color: var(--primary-color);
+        color: var(--white);
+        border-radius: 5px;
+        text-decoration: none;
+        transition: background-color 0.3s ease;
+    }
+
+    .btn-readmore:hover {
+        background-color: var(--danger-color);
+    }
 }

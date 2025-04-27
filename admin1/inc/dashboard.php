@@ -1,10 +1,13 @@
 <?php include_once __DIR__ . '/../model/dashboard.php';
 ?>
 <div class="dashboard-section">
-    <h1 class="h3 mb-4 text-danger">Dashboard</h1>
+    <div data-aos="fade-left" data-aos-duration="1000" class="dashboard-header">
+        <h1 class="h3 mb-4 text-danger">Dashboard</h1>
+    </div>
 
     <!-- Dashboard Cards -->
-    <div class="row">
+    <div class="row" data-aos="fade-down"
+     data-aos-duration="1000">
         <div class="col-xl-4 col-md-6 mb-4">
             <div class="card">
                 <div class="card-body dashboard-card success">
@@ -105,7 +108,7 @@
 
         <!-- Recent Activities -->
         <div class="row">
-            <div class="col-lg-6">
+            <div class="col-lg-6"  data-aos="fade-right" data-aos-duration="2000">
                 <div class="card shadow mb-4" style="max-height: 400px; overflow-y: scroll; scrollbar-width:none;">
                     <div class="card-header py-3">
                         <h6 class="m-0 font-weight-bold">Recent User Activities</h6>
@@ -143,7 +146,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-lg-6">
+            <div class="col-lg-6"  data-aos="fade-left" data-aos-duration="2000">
                 <div class="card shadow mb-4" style="max-height: 365px; overflow-y: scroll; scrollbar-width:none;">
                     <div class="card-header py-3">
                         <h6 class="m-0 font-weight-bold">Recent Blog Posts</h6>

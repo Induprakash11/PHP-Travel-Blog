@@ -1,23 +1,25 @@
 <?php include_once __DIR__ . '/../model/user.php' ?>
 <div class="users-section">
-    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+    <div class="d-sm-flex align-items-center justify-content-between mb-4" data-aos="fade-down">
         <h1 class="h3 mb-0 text-danger">User Management</h1>
         <button class="btn btn-prim" data-bs-toggle="modal" data-bs-target="#addUserModal">
             <i class="fa fa-user-plus fa-sm me-2"></i>Add New User
         </button>
     </div>
-    <?php Utils::displayFlash('User added', 'success'); ?>
-    <?php Utils::displayFlash('User error', 'danger'); ?>
-    <?php Utils::displayFlash('User Updated', 'success'); ?>
-    <?php Utils::displayFlash('Fields error', 'danger'); ?>
-    <?php Utils::displayFlash('Email error', 'danger'); ?>
-    <?php Utils::displayFlash('Password error', 'danger'); ?>
-    <?php Utils::displayFlash('Password input error', 'danger'); ?>
-    <?php Utils::displayFlash('UserID error', 'danger'); ?>
-    <?php Utils::displayFlash('User deleted', 'success'); ?>
-    <?php Utils::displayFlash('User error', 'danger'); ?>
+    <div class="displayflash" data-aos="zoom-out">
+        <?php Utils::displayFlash('User added', 'success'); ?>
+        <?php Utils::displayFlash('User error', 'danger'); ?>
+        <?php Utils::displayFlash('User Updated', 'success'); ?>
+        <?php Utils::displayFlash('Fields error', 'danger'); ?>
+        <?php Utils::displayFlash('Email error', 'danger'); ?>
+        <?php Utils::displayFlash('Password error', 'danger'); ?>
+        <?php Utils::displayFlash('Password input error', 'danger'); ?>
+        <?php Utils::displayFlash('UserID error', 'danger'); ?>
+        <?php Utils::displayFlash('User deleted', 'success'); ?>
+        <?php Utils::displayFlash('User error', 'danger'); ?>
+    </div>
 
-    <div class="card shadow mb-4">
+    <div class="card shadow mb-4" data-aos="fade-right" data-aos-duration="2000">
         <div class="card-header py-3">
             <div class="row align-items-center">
                 <div class="col-md-6">
@@ -103,7 +105,7 @@
     </div>
 
     <!-- User Roles & Permissions Card -->
-    <div class="card shadow mb-4">
+    <div class="card shadow mb-4" data-aos="fade-left" data-aos-duration="1000">
         <div class="card-header py-3">
             <h6 class="m-0 font-weight-bold text-danger">User Roles & Permissions</h6>
         </div>

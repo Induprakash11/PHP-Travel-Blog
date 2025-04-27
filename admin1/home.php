@@ -1,4 +1,4 @@
-<?php require_once __DIR__.'/../controllers/load.php';
+<?php require_once __DIR__ . '/../controllers/load.php';
 
 Database::connection();
 User::onlyAdmin();
@@ -14,22 +14,22 @@ User::onlyAdmin();
 <body>
     <!-- Preloader -->
     <div id="loading-bar"></div>
-    
+
     <div class="wrapper">
         <!-- Sidebar -->
         <?php include "inc/sidebar.php"; ?>
-        
+
         <!-- Page Content -->
         <div id="content">
             <!-- Top Navbar -->
             <?php include "inc/navbar.php"; ?>
-            
+
             <!-- Main Content Area -->
             <div class="container-fluid">
-                
+
                 <!-- Dashboard Section -->
                 <?php include "inc/dashboard.php"; ?>
-                
+
             </div>
         </div>
     </div>
@@ -44,6 +44,12 @@ User::onlyAdmin();
     <!-- Custom JS -->
     <script id="app-script">
         <?php include "inc/script.php" ?>
+    </script>
+
+    <!-- AOS Animation Library -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init();
     </script>
 </body>
 

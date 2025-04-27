@@ -1,12 +1,12 @@
-<section id="blogs" class="container my-5">
+<section id="blogs" class="container my-5" data-aos="fade-up" data-aos-ancher-placement="top-bottom">
     <!-- Breadcrumb Navigation -->
-    <nav aria-label="breadcrumb" class="">
-        <ol class="breadcrumb p-3 rounded d-flex justify-content-" style="background-color: #eeeef0;">
+    <nav aria-label="breadcrumb" data-aos="fade-left" data-aos-duration="1500">
+        <ol class="breadcrumb p-3 rounded d-flex justify-content-" style="background: linear-gradient(to right, var(--red), var(--secondary-color));">
             <li class="breadcrumb-item">
-                <a href="/Travel Blog/home" style="text-decoration: none;">Home</a>
+                <a href="/Travel Blog/home" style="text-decoration: none; color:var(--secondary-color)">Home</a>
             </li>
             <li class="breadcrumb-item <?= str_contains($_SERVER['REQUEST_URI'], '/Travel Blog/blog') ? 'active' : '' ?>" aria-current="page">
-                <a href="/Travel Blog/blog" style="text-decoration: none;">Blogs</a>
+                <a href="/Travel Blog/blog" style="text-decoration: none; color:var(--secondary-color);">Blogs</a>
             </li>
         </ol>
     </nav>
@@ -26,7 +26,7 @@
             foreach ($blogs as $row) {
                 if ($row['status'] === "published") { ?>
                 <div class="col-md-4 p-lg-3">
-                    <div class="card">
+                    <div class="card" data-aos="fade-up" data-aos-easing="ease-out-cubic" data-aos-duration="<?= 1000 + ($loopIndex * 200) ?>">
                         <!-- Display blog image -->
                         <img src="admin1/assets/uploads/<?= $row['blog_image'] ?>"
                             class="card-img-top"
@@ -37,7 +37,7 @@
                             <!-- Display truncated blog content -->
                             <p class="card-text"><?= htmlspecialchars(mb_strimwidth($row['content'], 0, 35, "...")) ?></p>
                             <!-- Link to blog details -->
-                            <a href="blog-details/<?= ($row['title']); ?>" class="btn btn-primary">Read More</a>
+                            <a href="blog-details/<?= ($row['title']); ?>" class="btn btn-danger">Read More</a>
                         </div>
                     </div>
                 </div>

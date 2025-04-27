@@ -6,6 +6,7 @@
 			<i class="fa fa-plus fa-sm me-2"></i> New Post
 		</button>
 	</div>
+	<div class="displayflash" data-aos="zoom-out">
 	<?php Utils::displayFlash('Blog added', 'success'); ?>
 	<?php Utils::displayFlash('File size error', 'danger'); ?>
     <?php Utils::displayFlash('File type error', 'danger'); ?>
@@ -15,9 +16,9 @@
 	<?php Utils::displayFlash('Blog deleted', 'success'); ?>
 	<?php Utils::displayFlash('Blog not found', 'danger'); ?>
 	<?php Utils::displayFlash('Upload error', 'danger'); ?>
+	</div>
 
-
-	<div class="card shadow mb-4">
+	<div class="card shadow mb-4" data-aos="fade-right" data-aos-duration="1000">
 		<div class="card-header py-3">
 			<div class="row align-items-center">
 				<div class="col-md-6">
@@ -115,7 +116,7 @@
 	</div>
 
 	<!-- Blog Categories Card -->
-	<div class="card shadow mb-4">
+	<div class="card shadow mb-4" data-aos="fade-left" data-aos-duration="1500">
 		<div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
 			<h5 class="m-0 font-weight-bold text-danger">Categories</h5>
 			<button class="btn btn-sm btn-prim" style="border:white solid 2px" data-bs-toggle="modal" data-bs-target="#addCategoryModal">

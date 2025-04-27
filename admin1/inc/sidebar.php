@@ -32,6 +32,12 @@ $current_page = basename($_SERVER['REQUEST_URI'], ".php");
                 <span>Settings</span>
             </a>
         </li>
+        <li class="<?= ($current_page == '/../Travel Blog/home') ? 'active' : '' ?>">
+            <a href="/../Travel Blog/home">
+                <i class="fas fa-plane"></i>
+                <span>Travel Blog</span>
+            </a>
+        </li>
         <li class="<?= ($current_page == 'logout') ? 'active' : '' ?>">
             <a href="/../Travel Blog/logout">
                 <i class="fas fa-sign-out-alt"></i>
