@@ -27,7 +27,7 @@ class Utils {
     // method to display a flash message
     public static function displayFlash($name, $type) {
         if (isset($_SESSION[$name])) {
-            echo "<div class='alert alert-$type'>".$_SESSION[$name]."</div>";
+            echo "<div class='alert text-dark alert-$type'>".$_SESSION[$name]."</div>";
             unset($_SESSION[$name]);
         }
     }

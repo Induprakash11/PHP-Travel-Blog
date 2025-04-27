@@ -1,0 +1,13 @@
+#loading-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 6px;
+    width: 0%;
+    background: linear-gradient(90deg, #fc3a2d, #12ee80, #0cae5b);
+    box-shadow: 0 0 10px #fc3a2d, 0 0 20px #12ee80;
+    border-radius: 3px;
+    transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 9999;
+    opacity: 0.9;
+}

@@ -1,17 +1,27 @@
 <?php include_once __DIR__ . '/../model/user.php' ?>
 <div class="users-section">
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-        <h1 class="h3 mb-0 text-gray-800">User Management</h1>
-        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addUserModal">
-            <i class="fas fa-user-plus fa-sm text-white-50 me-2"></i>Add New User
+        <h1 class="h3 mb-0 text-danger">User Management</h1>
+        <button class="btn btn-prim" data-bs-toggle="modal" data-bs-target="#addUserModal">
+            <i class="fa fa-user-plus fa-sm me-2"></i>Add New User
         </button>
     </div>
     <?php Utils::displayFlash('User added', 'success'); ?>
+    <?php Utils::displayFlash('User error', 'danger'); ?>
+    <?php Utils::displayFlash('User Updated', 'success'); ?>
+    <?php Utils::displayFlash('Fields error', 'danger'); ?>
+    <?php Utils::displayFlash('Email error', 'danger'); ?>
+    <?php Utils::displayFlash('Password error', 'danger'); ?>
+    <?php Utils::displayFlash('Password input error', 'danger'); ?>
+    <?php Utils::displayFlash('UserID error', 'danger'); ?>
+    <?php Utils::displayFlash('User deleted', 'success'); ?>
+    <?php Utils::displayFlash('User error', 'danger'); ?>
+
     <div class="card shadow mb-4">
         <div class="card-header py-3">
             <div class="row align-items-center">
                 <div class="col-md-6">
-                    <h6 class="m-0 font-weight-bold text-primary">All Users</h6>
+                    <h6 class="m-0 font-weight-bold text-danger">All Users</h6>
                 </div>
                 <div class="col-md-6">
                     <div class="input-group">
@@ -54,10 +64,14 @@
                                         </span>
                                     </td>
                                     <td>
-                                        <button class="btn btn-sm btn-primary me-1" data-bs-toggle="modal" data-bs-target="#editUserModal">
+                                        <button class="btn btn-sm btn-prim me-1" data-id="<?= htmlspecialchars($user['id'], ENT_QUOTES, 'UTF-8'); ?>"
+                                            data-name="<?= htmlspecialchars($user['name'], ENT_QUOTES, 'UTF-8'); ?>"
+                                            data-email="<?= htmlspecialchars($user['email'], ENT_QUOTES, 'UTF-8'); ?>"
+                                            data-role="<?= htmlspecialchars($user['role'], ENT_QUOTES, 'UTF-8'); ?>"
+                                            data-bs-toggle="modal" data-bs-target="#editUserModal">
                                             <i class="fas fa-edit"></i>
                                         </button>
-                                        <button class="btn btn-sm btn-danger">
+                                        <button class="btn btn-sm btn-red" onclick="deleteUser(<?= htmlspecialchars($user['id'], ENT_QUOTES, 'UTF-8'); ?>)">
                                             <i class="fas fa-trash"></i>
                                         </button>
                                     </td>
@@ -73,7 +87,7 @@
                 </table>
             </div>
         </div>
-        <nav aria-label="Page navigation">
+        <!-- <nav aria-label="Page navigation">
             <ul class="pagination justify-content-end">
                 <li class="page-item disabled">
                     <a class="page-link" href="javascript:void(0)" tabindex="-1" aria-disabled="true">Previous</a>
@@ -85,13 +99,13 @@
                     <a class="page-link" href="javascript:void(0)">Next</a>
                 </li>
             </ul>
-        </nav>
+        </nav> -->
     </div>
 
     <!-- User Roles & Permissions Card -->
     <div class="card shadow mb-4">
         <div class="card-header py-3">
-            <h6 class="m-0 font-weight-bold text-primary">User Roles & Permissions</h6>
+            <h6 class="m-0 font-weight-bold text-danger">User Roles & Permissions</h6>
         </div>
         <div class="card-body">
             <div class="table-responsive">
@@ -114,7 +128,7 @@
                             <td><i class="fas fa-check text-success"></i></td>
                             <td><i class="fas fa-check text-success"></i></td>
                             <td>
-                                <button class="btn btn-sm btn-primary me-1" data-bs-toggle="modal" data-bs-target="#editRoleModal">
+                                <button class="btn btn-sm btn-prim me-1" data-bs-toggle="modal" data-bs-target="#editRoleModal">
                                     <i class="fas fa-edit"></i>
                                 </button>
                             </td>
@@ -127,7 +141,7 @@
                             <td><i class="fas fa-times text-danger"></i></td>
                             <td><i class="fas fa-times text-danger"></i></td>
                             <td>
-                                <button class="btn btn-sm btn-primary me-1" data-bs-toggle="modal" data-bs-target="#editRoleModal">
+                                <button class="btn btn-sm btn-prim me-1" data-bs-toggle="modal" data-bs-target="#editRoleModal">
                                     <i class="fas fa-edit"></i>
                                 </button>
                             </td>
@@ -181,8 +195,8 @@
                         <input type="checkbox" class="form-check-input" id="sendCredentials">
                         <label class="form-check-label" for="sendCredentials">Send user credentials by email</label>
                     </div> -->
-                    <button type="submit" name="addUser" class="btn btn-primary">Add User</button>
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="submit" name="addUser" class="btn btn-prim">Add User</button>
+                    <button type="button" class="btn btn-red" data-bs-dismiss="modal">Cancel</button>
                 </form>
             </div>
         </div>
@@ -198,67 +212,79 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form>
+                <form method="post">
                     <div class="row mb-3">
-                        <div class="col-md-6">
+                        <div class="col-md-12">
+                            <label for="editUserId" class="form-label">User ID</label>
+                            <input type="text" class="form-control" name="editId" id="userIdInput" readonly>
+                            <small class="text-muted">User Id is permenant can't Edit</small>
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col-md-12">
                             <label for="editUsername" class="form-label">Username</label>
-                            <input type="text" class="form-control" id="editUsername" value="john_doe" readonly>
+                            <input type="text" class="form-control" name="editName" id="userNameInput" required>
                         </div>
-                        <div class="col-md-6">
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col-md-12">
                             <label for="editEmail" class="form-label">Email</label>
-                            <input type="email" class="form-control" id="editEmail" value="john@example.com" required>
+                            <input type="email" class="form-control" name="editEmail" id="userEmailInput" required>
                         </div>
                     </div>
                     <div class="row mb-3">
-                        <div class="col-md-6">
-                            <label for="editFirstName" class="form-label">First Name</label>
-                            <input type="text" class="form-control" id="editFirstName" value="John">
-                        </div>
-                        <div class="col-md-6">
-                            <label for="editLastName" class="form-label">Last Name</label>
-                            <input type="text" class="form-control" id="editLastName" value="Doe">
-                        </div>
-                    </div>
-                    <div class="row mb-3">
-                        <div class="col-md-6">
+                        <div class="col-md-12">
                             <label for="editPassword" class="form-label">New Password</label>
-                            <input type="password" class="form-control" id="editPassword">
+                            <input type="password" class="form-control" name="editPassword">
                             <small class="text-muted">Leave blank to keep current password</small>
-                        </div>
-                        <div class="col-md-6">
-                            <label for="editConfirmPassword" class="form-label">Confirm New Password</label>
-                            <input type="password" class="form-control" id="editConfirmPassword">
                         </div>
                     </div>
                     <div class="mb-3">
                         <label for="editRole" class="form-label">Role</label>
-                        <select class="form-select" id="editRole" required>
-                            <option value="administrator" selected>Administrator</option>
-                            <option value="editor">Editor</option>
-                            <option value="author">Author</option>
-                            <option value="contributor">Contributor</option>
-                            <option value="subscriber">Subscriber</option>
+                        <select class="form-select" name="editRole" id="userRoleInput" required>
+                            <option value="">Select Role</option>
+                            <option value="admin" selected>Admin</option>
+                            <option value="user">User</option>
                         </select>
                     </div>
-                    <div class="mb-3">
-                        <label class="form-label">Status</label>
-                        <div class="form-check form-switch">
-                            <input class="form-check-input" type="checkbox" id="userStatus" checked>
-                            <label class="form-check-label" for="userStatus">Active</label>
-                        </div>
-                    </div>
+                    <button type="button" class="btn btn-red" data-bs-dismiss="modal">Cancel</button>
+                    <button type="submit" name="editUser" class="btn btn-prim">Save Changes</button>
                 </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                <button type="button" class="btn btn-primary">Save Changes</button>
             </div>
         </div>
     </div>
 </div>
 
+<script>
+    var exampleModal = document.getElementById('editUserModal');
+    exampleModal.addEventListener('show.bs.modal', function(event) {
+        var button = event.relatedTarget;
+        var userId = button.getAttribute('data-id');
+        var userName = button.getAttribute('data-name');
+        var userEmail = button.getAttribute('data-email');
+        var userRole = button.getAttribute('data-role');
+
+        // Pass data to modal
+        // Set values into input fields
+        document.getElementById('userIdInput').value = userId;
+        document.getElementById('userNameInput').value = userName;
+        document.getElementById('userEmailInput').value = userEmail;
+        document.getElementById('userRoleInput').value = userRole;
+    });
+
+    // Function to delete user
+    function deleteUser(userId) {
+        if (confirm("Are you sure you want to delete this user?")) {
+            window.location.href = "user_delete?id=" + userId;
+        } else {
+            // User clicked "Cancel", do nothing
+            return false;
+        }
+    }
+</script>
+
 <!-- Edit Role Modal -->
-<div class="modal fade" id="editRoleModal" tabindex="-1" aria-labelledby="editRoleModalLabel" aria-hidden="true">
+<!-- <div class="modal fade" id="editRoleModal" tabindex="-1" aria-labelledby="editRoleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -346,8 +372,8 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                <button type="button" class="btn btn-primary">Save Changes</button>
+                <button type="button" class="btn btn-prim">Save Changes</button>
             </div>
         </div>
     </div>
-</div>
+</div> -->

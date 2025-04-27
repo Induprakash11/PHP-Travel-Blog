@@ -81,9 +81,11 @@ class User extends Database {
     }
 
     // method to update user details
-    public static function updateUser($userId, $name, $email) {
-        $sql = "UPDATE users SET name = ?, email = ? WHERE id = ?";
-        return self::query($sql, [$name, $email, $userId]);
+    public static function editUser($userId, $username, $email, $password, $role) {
+        // hash the password before storing it
+        $passwordHash = password_hash($password, PASSWORD_BCRYPT);
+        $sql = "UPDATE users SET name = ?, email = ?, password = ?, role = ? WHERE id = ?";
+        return self::query($sql, [$username, $email, $passwordHash, $role, $userId]);
     }
 
     // method to delete user account

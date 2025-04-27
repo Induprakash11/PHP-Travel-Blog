@@ -1,12 +1,15 @@
-<?php require_once __DIR__ . '/../controllers/load.php';
+<?php require_once __DIR__ . '/../controllers/load.php'; // Include the load.php file from the controllers directory
 
-class Database {
+
+
+class Database
+{
     public static $conn;
 
-    public static function connection() {
+    public static function connection()
+    {
         if (self::$conn === null) {
             try {
-                // Load the configuration file
                 $set = "ConfigLoader::setconfig";
                 $get = "ConfigLoader::getconfig";
 
@@ -17,7 +20,6 @@ class Database {
                 $password = $get('password');
                 $dbname = $get('dbname');
 
-                // Establish database connection
                 self::$conn = new mysqli($server, $username, $password, $dbname);
 
                 if (self::$conn->connect_error) {
@@ -30,7 +32,8 @@ class Database {
         return self::$conn;
     }
 
-    public static function checkconnection() { 
+    public static function checkconnection()
+    {
         $conn = Database::connection();
         if (!$conn) {
             die("Connection failed: Unable to establish a database connection.");
@@ -38,61 +41,66 @@ class Database {
         return $conn;
     }
 
-    public static function paramtype($param) {
+    public static function paramtype($param)
+    {
         if (is_int($param)) return 'i';
         if (is_double($param)) return 'd';
         if (is_string($param)) return 's';
-        return 'b'; // blob or unknown
+        return 'b';
     }
-    
 
-    public static function query($sql, $params = []) {
+    public static function query($sql, $params = [])
+    {
         $stmt = self::checkconnection()->prepare($sql);
         if (!$stmt) {
             throw new Exception("Query preparation failed: " . self::$conn->error);
         }
-    
-        // Count placeholders
+
         $placeholderCount = substr_count($sql, '?');
-    
+
         if ($placeholderCount !== count($params)) {
             throw new Exception("Mismatch between number of placeholders ($placeholderCount) and parameters (" . count($params) . ")");
         }
-    
+
         if (!empty($params)) {
             $types = implode('', array_map([self::class, 'paramtype'], $params));
             $stmt->bind_param($types, ...$params);
         }
-    
+
         $stmt->execute();
         return $stmt;
     }
-    
 
-    public static function fetchResult($sql, $params = []) {
+    public static function fetchResult($sql, $params = [])
+    {
         $stmt = self::query($sql, $params);
         return $stmt->get_result();
     }
 
-    public static function fetchAll($sql, $params = []) {
+    public static function fetchAll($sql, $params = [])
+    {
         $stmt = self::query($sql, $params);
         return $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
     }
 
-    public static function fetchOne($sql, $params = []) {
+    public static function fetchOne($sql, $params = [])
+    {
         $stmt = self::query($sql, $params);
         return $stmt->get_result()->fetch_assoc();
     }
 
-    public static function insert($sql, $params = []) {
+    public static function insert($sql, $params = [])
+    {
         $stmt = self::query($sql, $params);
         return self::$conn->insert_id;
     }
 
-    public static function update($sql, $params = []) {
+    public static function update($sql, $params = [])
+    {
         $stmt = self::query($sql, $params);
         return $stmt->affected_rows;
     }
+
 
     // public static function delete($sql, $params = []) {
     //     $stmt = self::query($sql, $params);
@@ -111,7 +119,8 @@ class Database {
     //     self::$conn->rollback();
     // }
 
-    public static function close() {
+    public static function close()
+    {
         if (self::$conn !== null) {
             self::$conn->close();
             self::$conn = null;
@@ -125,4 +134,3 @@ class Database {
 // } else {
 //     die("Connected successfully");
 // }
-?>

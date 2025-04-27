@@ -14,17 +14,39 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['addUser'])) {
     // Debugging line removed to allow the script to proceed
 
     if (User::checkEmptyFields([$username, $email, $password, $confirmPassword, $role])) {
-        Utils::setFlash('Please fill in all fields', 'danger');
+        Utils::setFlash('Fields error', 'Please fill in all fields');
     } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-        Utils::setFlash('Invalid email format.', 'danger');
+        Utils::setFlash('Email error', 'Invalid email format.');
     } elseif ($password !== $confirmPassword) {
-        Utils::setFlash('Passwords do not match.', 'danger');
+        Utils::setFlash('Password error', 'Passwords do not match.');
+    } elseif (!User::isStrongPassword($password)) {
+        Utils::setFlash('Password input error', 'Password must be at least 8 characters long and contain at least one uppercase letter, one lowercase letter, and one number.');
+    } elseif (User::isEmailRegistered($email)) {
+        Utils::setFlash('Email error', 'Email already registered');
     } elseif (User::addUser($username, $email, $password, $role)) {
         Utils::setFlash('User added', 'User added successfully');
         header('Location: users');
         exit();
     } else {
-        Utils::setFlash('User not added', 'danger');
+        Utils::setFlash('User error', 'User Not Found');
+    }
+}
+
+// Edit user Modal 
+if (isset($_POST['editUser']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
+    $userId = Utils::sanitize($_POST['editId']);
+    $username = Utils::sanitize($_POST['editName']);
+    $email = Utils::sanitize($_POST['editEmail']);
+    $password = Utils::sanitize($_POST['editPassword']);
+    $role = Utils::sanitize($_POST['editRole']);
+    
+    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        Utils::setFlash('Email error', 'Invalid email format.');
+    } elseif (User::editUser($userId, $username, $email, $password, $role)) {
+        Utils::setFlash('User Updated', 'User updated successfully');
+        Utils::redirect('users');
+    } else {
+        Utils::setFlash('User error', 'User Not Found');
     }
 }
 

@@ -1,13 +1,13 @@
-<?php include_once __DIR__.'/../model/dashboard.php';
+<?php include_once __DIR__ . '/../model/dashboard.php';
 ?>
 <div class="dashboard-section">
-    <h1 class="h3 mb-4 text-gray-800">Dashboard</h1>
+    <h1 class="h3 mb-4 text-danger">Dashboard</h1>
 
     <!-- Dashboard Cards -->
     <div class="row">
         <div class="col-xl-4 col-md-6 mb-4">
             <div class="card">
-                <div class="card-body dashboard-card primary">
+                <div class="card-body dashboard-card success">
                     <h5>Total Users</h5>
                     <h2><?= count($users) ?></h2>
                     <div class="card-icon">
@@ -31,7 +31,7 @@
 
         <div class="col-xl-4 col-md-6 mb-4">
             <div class="card">
-                <div class="card-body dashboard-card warning">
+                <div class="card-body dashboard-card success">
                     <h5>Comments</h5>
                     <h2>156</h2>
                     <div class="card-icon">
@@ -54,8 +54,8 @@
         </div>
     </div> -->
 
-    <!-- Analytics Charts -->
-    <div class="row">
+        <!-- Analytics Charts -->
+        <!-- <div class="row">
         <div class="col-xl-8 col-lg-7">
             <div class="card shadow mb-4">
                 <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
@@ -101,87 +101,101 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> -->
 
-    <!-- Recent Activities -->
-    <div class="row">
-        <div class="col-lg-6">
-            <div class="card shadow mb-4" style="max-height: 380px; overflow-y: scroll; scrollbar-width:none;">
-                <div class="card-header py-3">
-                    <h6 class="m-0 font-weight-bold text-primary">Recent User Activities</h6>
-                </div>
-                <div class="card-body">
-                    <div class="table-responsive">
-                        <table class="table table-hover">
-                            <thead>
-                                <tr>
-                                    <th>UserName</th>
-                                    <th>Email</th>
-                                    <th>Created At</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                            <?php if (isset($users) && count($users) > 0) {
-								foreach ($users as $user) { ?>
-                                <tr>
-                                    <td><p><?= $user['name'] ?></p></td>
-                                    <td><?= $user['email'] ?></td>
-                                    <td><?= \Carbon\Carbon::parse($user['created_at'])->diffForHumans() ?></td>
-                                    <!-- <td><span class="status-pill active">Published</span></td> -->
-                                </tr>
-                                <?php } 
-							} else { ?>
-                            <tr>
-                                <td colspan="3">No Users Found</td>
-                            </tr>
-							<?php } ?>
-                            </tbody>
-                        </table>
+        <!-- Recent Activities -->
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="card shadow mb-4" style="max-height: 400px; overflow-y: scroll; scrollbar-width:none;">
+                    <div class="card-header py-3">
+                        <h6 class="m-0 font-weight-bold">Recent User Activities</h6>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>UserName</th>
+                                        <th>Email</th>
+                                        <th>Created At</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php if (isset($users) && count($users) > 0) {
+                                        foreach ($users as $user) { ?>
+                                            <tr>
+                                                <td>
+                                                    <p><?= $user['name'] ?></p>
+                                                </td>
+                                                <td><?= $user['email'] ?></td>
+                                                <td><?= \Carbon\Carbon::parse($user['created_at'])->diffForHumans() ?></td>
+                                                <!-- <td><span class="status-pill active">Published</span></td> -->
+                                            </tr>
+                                        <?php }
+                                    } else { ?>
+                                        <tr>
+                                            <td colspan="3">No Users Found</td>
+                                        </tr>
+                                    <?php } ?>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="col-lg-6">
-            <div class="card shadow mb-4" style="max-height: 400px; overflow-y: scroll; scrollbar-width:none;">
-                <div class="card-header py-3">
-                    <h6 class="m-0 font-weight-bold text-primary">Recent Blog Posts</h6>
-                </div>
-                <div class="card-body">
-                    <div class="table-responsive">
-                        <table class="table table-hover">
-                            <thead>
-                                <tr>
-                                    <th>Image</th>
-                                    <th>Title</th>
-                                    <th>User</th>
-                                    <th>Posted At</th>
-                                    <th>Status</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                            <?php if (isset($blogs) && count($blogs) > 0) {
-								foreach ($blogs as $blog) { ?>
-                                <tr>
-                                    <td>
-                                    <img height="20px" width="20px" src="<?= $blog['blog_image'] ?>">
-                                    </td>
-                                    <td><p><?= $blog['title'] ?></p></td>
-                                    <td><?= $blog['user_name'] ?></td>
-                                    <td><?= \Carbon\Carbon::parse($blog['created_at'])->diffForHumans() ?></td>
-                                    <td><span class="status-pill active">Published</span></td>
-                                </tr>
-                                <?php } 
-							} else { ?>
-							<tr>
-								<td colspan="3">No Blogs Found</td>
-							</tr>
-							<?php } ?>
-                            </tbody>
-                        </table>
+            <div class="col-lg-6">
+                <div class="card shadow mb-4" style="max-height: 365px; overflow-y: scroll; scrollbar-width:none;">
+                    <div class="card-header py-3">
+                        <h6 class="m-0 font-weight-bold">Recent Blog Posts</h6>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>Image</th>
+                                        <th>Title</th>
+                                        <th>User</th>
+                                        <th>Posted At</th>
+                                        <th>Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php if (isset($blogs) && count($blogs) > 0) {
+                                        foreach ($blogs as $blog) { ?>
+                                            <tr>
+                                                <td>
+                                                    <img height="20px" width="20px" src="assets/uploads/<?= $blog['blog_image'] ?>">
+                                                </td>
+                                                <td>
+                                                    <p><?= $blog['title'] ?></p>
+                                                </td>
+                                                <td><?php
+                                                    $userName = array_filter($users, function ($user) use ($blog) {
+                                                        return $user['id'] === $blog['user_id'];
+                                                    });
+                                                    echo htmlspecialchars(reset($userName)['name'] ?? 'Unknown');
+                                                    ?>
+                                                </td>
+                                                <td><?= \Carbon\Carbon::parse($blog['created_at'])->diffForHumans() ?></td>
+                                                <td>
+                                                    <span class="status-pill <?= $blog['status'] === 'published' ? 'active' : 'pending' ?>">
+                                                        <?= ucfirst($blog['status']) ?>
+                                                    </span>
+                                                </td>
+                                            </tr>
+                                        <?php }
+                                    } else { ?>
+                                        <tr>
+                                            <td colspan="3">No Blogs Found</td>
+                                        </tr>
+                                    <?php } ?>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
 </div>

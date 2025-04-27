@@ -126,11 +126,4 @@ $(document).ready(function() {
                     }
                 });
             }
-
-            // Delete confirmation
-            $('.btn-danger').on('click', function() {
-                if (confirm('Are you sure you want to delete this item? This action cannot be undone.')) {
-                    alert('Deleted Successfully!');
-                }
-            });
         });

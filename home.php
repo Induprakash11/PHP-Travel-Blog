@@ -14,6 +14,9 @@ User::isAuthenticated();
     <?= ViewTemp::view("_head") ?>
 </head>
 <body>
+    <!-- Loading Bar -->
+    <div id="loading-bar"></div>
+    
     <!-- Navbar -->
     <?= ViewTemp::view("_navbar") ?>
 

@@ -1,21 +1,12 @@
-<!-- < ?php require_once __DIR__.'/../controllers/load.php';
-
-Database::connection();
-User::onlyAdmin();
-$users = User::getAllUsers();
-$blogs = Blogs::getAllBlogs();
-
-?> -->
-
 <div class="settings-section">
-	<h1 class="h3 mb-4 text-gray-800">Settings</h1>
+	<h1 class="h3 mb-4 text-danger">Settings</h1>
 
 	<div class="row">
 		<div class="col-lg-6">
 			<!-- General Settings Card -->
 			<div class="card shadow mb-4">
 				<div class="card-header py-3">
-					<h6 class="m-0 font-weight-bold text-primary">General Settings</h6>
+					<h6 class="m-0 font-weight-bold text-danger">General Settings</h6>
 				</div>
 				<div class="card-body">
 					<form>
@@ -54,7 +45,7 @@ $blogs = Blogs::getAllBlogs();
 								<option value="F j, Y">November 20, 2023</option>
 							</select>
 						</div>
-						<button type="submit" class="btn btn-primary">Save Changes</button>
+						<button type="submit" class="btn btn-prim">Save Changes</button>
 					</form>
 				</div>
 			</div>
@@ -63,7 +54,7 @@ $blogs = Blogs::getAllBlogs();
 			<!-- Blog Settings Card -->
 			<div class="card shadow mb-4">
 				<div class="card-header py-3">
-					<h6 class="m-0 font-weight-bold text-primary">Blog Settings</h6>
+					<h6 class="m-0 font-weight-bold text-danger">Blog Settings</h6>
 				</div>
 				<div class="card-body">
 					<form>
@@ -100,7 +91,7 @@ $blogs = Blogs::getAllBlogs();
 							<input type="checkbox" class="form-check-input" id="allowTrackbacks" checked>
 							<label class="form-check-label" for="allowTrackbacks">Allow Trackbacks and Pingbacks</label>
 						</div>
-						<button type="submit" class="btn btn-primary">Save Changes</button>
+						<button type="submit" class="btn btn-prim">Save Changes</button>
 					</form>
 				</div>
 			</div>

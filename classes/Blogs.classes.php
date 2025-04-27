@@ -1,5 +1,58 @@
 <?php require_once __DIR__ . '/../controllers/load.php';
 
+/*
+This `Blogs` class provides a set of static methods to manage blog-related operations, 
+such as adding, editing, deleting, and retrieving blog posts. It interacts with a database 
+and handles file uploads for blog images.
+
+Properties:
+- `$bid`, `$title`, `$content`, `$blog_image`: Static properties (not used in the current implementation).
+
+Methods:
+1. `checkDB()`: 
+   - Ensures a database connection is established using the `Database::checkconnection()` method.
+   - Throws an exception if the connection fails.
+
+2. `addBlog($title, $content, $user, $user_id, $status, $image)`:
+   - Adds a new blog post to the database.
+   - Handles image upload by saving the file to a specific directory.
+   - Prepares and executes an SQL `INSERT` statement to store blog details.
+
+3. `uploadImage($image)`:
+   - Handles the upload of an image file.
+   - Saves the file to a specific directory and returns the file name.
+
+4. `getBlogById($id)`:
+   - Retrieves a single blog post by its ID.
+   - Executes an SQL `SELECT` query and returns the blog details as an associative array.
+
+5. `getBlogByUserId($user_id)`:
+   - Retrieves all blog posts created by a specific user.
+   - Executes an SQL `SELECT` query and returns the results as an array of associative arrays.
+
+6. `getBlogByTitle($title)`:
+   - Retrieves a single blog post by its title.
+   - Executes an SQL `SELECT` query and returns the blog details as an associative array.
+
+7. `editBlog($blog_id, $title, $content, $user, $status, $image)`:
+   - Updates an existing blog post in the database.
+   - Handles image upload by saving the file to a specific directory.
+   - Prepares and executes an SQL `UPDATE` statement to modify blog details.
+
+8. `deleteBlog($id)`:
+   - Deletes a blog post from the database by its ID.
+   - Executes an SQL `DELETE` query.
+
+9. `getAllBlogs()`:
+   - Retrieves all blog posts along with the associated user details.
+   - Executes an SQL `SELECT` query with a `JOIN` to fetch user names and orders the results by creation date.
+
+Key Notes:
+- The class uses prepared statements to prevent SQL injection.
+- Image uploads are handled by saving files to a specific directory and ensuring no duplicate files exist.
+- Error handling is implemented using `error_log()` for logging and `die()` for critical failures.
+*/
+
 class Blogs
 {
     public static $bid;
@@ -17,7 +70,8 @@ class Blogs
     }
 
     //method to addBlog
-    public static function addBlog($title, $content, $user, $user_id, $status, $image) {
+    public static function addBlog($title, $content, $userId, $status, $image)
+    {
         $conn = self::checkDB();
 
         // Define the upload directory
@@ -38,14 +92,14 @@ class Blogs
         }
 
         // Prepare the SQL statement
-        $stmt = $conn->prepare("INSERT INTO blogs (title, content, user_name, user_id, status, blog_image) VALUES (?, ?, ?, ?, ?, ?)");
+        $stmt = $conn->prepare("INSERT INTO blogs (title, content, user_id, status, blog_image) VALUES (?, ?, ?, ?, ?)");
 
         if (!$stmt) {
             error_log("Prepare failed: " . $conn->error);
             return false;
         }
 
-        $stmt->bind_param("sssiss", $title, $content, $user, $user_id, $status, $image['name']);
+        $stmt->bind_param("sssiss", $title, $content, $userId, $status, $image['name']);
 
         if ($stmt->execute()) {
             return true;
@@ -54,8 +108,29 @@ class Blogs
             return false;
         }
     }
-    
-    
+
+    //method to uploadfile($files)
+    public static function uploadImage($image)
+    {
+        $uploadDir = __DIR__ . '/../admin1/assets/uploads/';
+        $imagePath = $uploadDir . basename($image['name']);
+
+        // Check if the file already exists and delete it
+        if (!is_dir($uploadDir)) {
+            mkdir($uploadDir, 0777, true); // Create the directory if it doesn't exist
+        } elseif (file_exists($imagePath)) {
+            unlink($imagePath); // Delete the existing file
+        }
+
+        // Move the uploaded file to the uploads directory
+        if (!move_uploaded_file($image['tmp_name'], $imagePath)) {
+            error_log("Failed to upload image.");
+            return false;
+        }
+
+        return $image['name'];
+    }
+
     public static function getBlogById($id)
     {
         $sql = "SELECT * FROM blogs WHERE id = ?";
@@ -111,25 +186,94 @@ class Blogs
         return null;
     }
 
-
-    public static function updateBlog($id, $data)
+    //method to editBlog using uploadImage method
+    public static function editBlog($blog_id, $title, $content, $userId, $status, $image = null)
     {
-        $sql = "UPDATE blogs SET title = ?, content = ?, author = ?, date = ? WHERE id = ?";
-        $stmt = self::checkDB()->prepare($sql);
-        $stmt->bind_param("ssssi", $data['title'], $data['content'], $data['author'], $data['date'], $id);
-        return $stmt->execute();
+        $conn = self::checkDB();
+
+        // Define the upload directory
+        $uploadDir = __DIR__ . '/../admin1/assets/uploads/';
+
+        $imageName = null;
+
+        if ($image && isset($image['tmp_name']) && is_uploaded_file($image['tmp_name'])) {
+            $imagePath = $uploadDir . basename($image['name']);
+
+            // Check if the file already exists and delete it
+            if (!is_dir($uploadDir)) {
+                mkdir($uploadDir, 0777, true); // Create the directory if it doesn't exist
+            } elseif (file_exists($imagePath)) {
+                unlink($imagePath); // Delete the existing file
+            }
+
+            // Move the uploaded file to the uploads directory
+            if (!move_uploaded_file($image['tmp_name'], $imagePath)) {
+                error_log("Failed to upload image.");
+                return false;
+            }
+            $imageName = $image['name'];
+        }
+
+        if ($imageName) {
+            // Prepare the SQL statement with image update
+            $stmt = $conn->prepare("UPDATE blogs SET user_id = ?, title = ?, content = ?, status = ?, blog_image = ? WHERE id = ?");
+            if (!$stmt) {
+                error_log("Prepare failed: " . $conn->error);
+                return false;
+            }
+            $stmt->bind_param("issssi", $userId, $title, $content, $status, $imageName, $blog_id);
+        } else {
+            // Prepare the SQL statement without image update
+            $stmt = $conn->prepare("UPDATE blogs SET user_id = ?, title = ?, content = ?, status = ? WHERE id = ?");
+            if (!$stmt) {
+                error_log("Prepare failed: " . $conn->error);
+                return false;
+            }
+            $stmt->bind_param("isssi", $userId, $title, $content, $status, $blog_id);
+        }
+
+        if ($stmt->execute()) {
+            return true;
+        } else {
+            error_log("Execute failed: " . $stmt->error);
+            return false;
+        }
     }
 
-    public static function deleteBlog($id)
+
+    // Delete all blogs by user_id and then delete associated images
+    public static function deleteBlogsByUserId($user_id)
     {
-        $sql = "DELETE FROM blogs WHERE id = ?";
+        // Get all blogs by user_id to get image filenames
+        $blogs = self::getBlogByUserId($user_id);
+
+        // Delete blog records from database
+        $sql = "DELETE FROM blogs WHERE user_id = ?";
         $stmt = self::checkDB()->prepare($sql);
-        $stmt->bind_param("i", $id);
-        return $stmt->execute();
+        $stmt->bind_param("i", $user_id);
+        $result = $stmt->execute();
+
+        // Delete associated image files after deleting records
+        if (is_array($blogs) && !empty($blogs)) {
+            $uploadDir = __DIR__ . '/../admin1/assets/uploads/';
+            foreach ($blogs as $blog) {
+                $imagePath = $uploadDir . $blog['blog_image'];
+                if (file_exists($imagePath) && is_file($imagePath)) {
+                    unlink($imagePath);
+                }
+            }
+        }
+
+        return $result;
     }
 
+
+    // Fetch all blogs details
     public static function getAllBlogs()
     {
-        return Database::fetchAll("SELECT * FROM blogs ORDER BY created_at DESC");
+        return Database::fetchAll("SELECT blogs.*, users.name AS user_name 
+        FROM blogs 
+        JOIN users ON blogs.user_id = users.id
+        ORDER BY blogs.created_at DESC");
     }
 }

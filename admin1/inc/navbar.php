@@ -1,12 +1,12 @@
 <nav class="navbar navbar-expand-lg navbar-light">
     <div class="container-fluid">
-        <button class="btn btn-outline-primary" id="sidebarToggle">
+        <button class="btn btn-outline-light" id="sidebarToggle">
             <i class="fas fa-bars"></i>
         </button>
 
         <div class="ms-auto d-flex align-items-center">
             <div class="dropdown">
-                <a class="nav-link dropdown-toggle" href="javascript:void(0)" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <a class="nav-link dropdown-toggle text-light" href="javascript:void(0)" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                     <i class="fas fa-bell fa-fw"></i>
                     <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
                         3
@@ -28,7 +28,7 @@
 
             <div class="dropdown ms-3">
                 <a class="navbar-user d-flex align-items-center" href="javascript:void(0)" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    <img src="../admin/assets/images/people.png" alt="User" class="img-profile rounded-circle">
+                    <img src="assets/images/people.png" alt="User" class="img-profile rounded-circle">
                 </a>
                 <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
                     <li><a class="dropdown-item" href="javascript:void(0)"><i class="fas fa-user fa-sm fa-fw me-2 text-gray-400"></i> Profile</a></li>

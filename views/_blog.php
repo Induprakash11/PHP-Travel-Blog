@@ -23,7 +23,8 @@
 
         if (isset($blogs)) {
             // Loop through each blog and display it
-            foreach ($blogs as $row) { ?>
+            foreach ($blogs as $row) {
+                if ($row['status'] === "published") { ?>
                 <div class="col-md-4 p-lg-3">
                     <div class="card">
                         <!-- Display blog image -->
@@ -40,7 +41,7 @@
                         </div>
                     </div>
                 </div>
-            <?php }
+            <?php } }
         } else { ?>
             <!-- Display message if no blogs are found -->
             <p class="text-center">No blogs found</p>

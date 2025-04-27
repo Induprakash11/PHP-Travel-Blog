@@ -26,9 +26,13 @@
 <!-- <link rel="stylesheet" href="../admin/assets/css/style.css"> -->
 
 <!-- custom JS -->
-<script src="/../Travel Blog/assets/js/script.js"></script>
+<script src="/Travel Blog/assets/Js/script.js"></script>
 <!-- <script src="/admin/assets/js/script.js"></script> -->
 
 <!-- Bootstrap JS -->
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"></script>
+
+<!-- loading Js -->
+<link rel="stylesheet" type="text/css" href="/Travel Blog/assets/style/loading-bar.css"/>
+<script type="text/javascript" src="/Travel Blog/assets/Js/loading-bar.js"></script>

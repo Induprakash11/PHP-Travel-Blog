@@ -23,6 +23,8 @@ if(isset($_SESSION['user_id'])) {
 </head>
 
 <body>
+    <!-- Loading Bar -->
+    <div id="loading-bar"></div>
 
     <!-- Navbar -->
     <?= ViewTemp::view("_navbar") ?>
