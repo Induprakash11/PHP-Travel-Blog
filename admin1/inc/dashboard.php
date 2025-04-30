@@ -1,13 +1,18 @@
 <?php include_once __DIR__ . '/../model/dashboard.php';
 ?>
 <div class="dashboard-section">
-    <div data-aos="fade-left" data-aos-duration="1000" class="dashboard-header">
+    <div class="row">
+    <div data-aos="fade-left" data-aos-duration="1000" class="dashboard-header col-6">
         <h1 class="h3 mb-4 text-danger">Dashboard</h1>
+    </div>
+    <div class="col-6" data-aos="fade-right" data-aos-duration="1000">
+        <?php echo Utils::displayFlash('login success', 'success'); ?>
+    </div>
     </div>
 
     <!-- Dashboard Cards -->
     <div class="row" data-aos="fade-down"
-     data-aos-duration="1000">
+        data-aos-duration="1000">
         <div class="col-xl-4 col-md-6 mb-4">
             <div class="card">
                 <div class="card-body dashboard-card success">
@@ -108,10 +113,22 @@
 
         <!-- Recent Activities -->
         <div class="row">
-            <div class="col-lg-6"  data-aos="fade-right" data-aos-duration="2000">
-                <div class="card shadow mb-4" style="max-height: 400px; overflow-y: scroll; scrollbar-width:none;">
-                    <div class="card-header py-3">
-                        <h6 class="m-0 font-weight-bold">Recent User Activities</h6>
+            <div class="col-lg-6" data-aos="fade-right" data-aos-duration="2000">
+                <div class="card shadow mb-4" style="min-height: 400px; overflow-y: scroll; scrollbar-width:none;">
+                    <div class="row card-header py-3">
+                        <div class="col-lg-6 col-sm-12">
+                            <h6 class="m-0 font-weight-bold">Recent User Activities</h6>
+                        </div>
+                        <div class="col-lg-6 col-sm-12">
+                            <form method="get">
+                                <div class="input-group">
+                                    <input type="text" class="form-control border-danger" name="userSearch" placeholder="Search Users..." value="<?= htmlspecialchars($_GET['userSearch'] ?? '') ?>">
+                                    <button class="btn btn-outline-danger" type="submit">
+                                        <i class="fas fa-search"></i>
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
@@ -146,10 +163,22 @@
                     </div>
                 </div>
             </div>
-            <div class="col-lg-6"  data-aos="fade-left" data-aos-duration="2000">
-                <div class="card shadow mb-4" style="max-height: 365px; overflow-y: scroll; scrollbar-width:none;">
-                    <div class="card-header py-3">
-                        <h6 class="m-0 font-weight-bold">Recent Blog Posts</h6>
+            <div class="col-lg-6" data-aos="fade-left" data-aos-duration="2000">
+                <div class="card shadow mb-4" style="min-height: 400px; overflow-y: scroll; scrollbar-width:none;">
+                    <div class="row card-header py-3">
+                        <div class="col-lg-6 col-sm-12">
+                            <h6 class="m-0 font-weight-bold">Recent Blog Posts</h6>
+                        </div>
+                        <div class="col-lg-6 col-sm-12">
+                            <form method="get">
+                                <div class="input-group">
+                                    <input type="text" class="form-control border-danger" name="blogSearch" placeholder="Search Blogs..." value="<?= htmlspecialchars($_GET['blogSearch'] ?? '') ?>">
+                                    <button class="btn btn-outline-danger" type="submit">
+                                        <i class="fas fa-search"></i>
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">

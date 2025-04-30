@@ -118,7 +118,7 @@ class User extends Database {
     }
 
     public static function onlyAdmin() {
-        if (Session::get('role') !== 'admin') {
+        if (Session::get('user_role') !== 'admin') {
             header("Location: /Travel Blog/home");
             exit();
         }
@@ -134,6 +134,42 @@ class User extends Database {
     // method to get all users
     public static function getAllUsers() {
         return self::fetchAll("SELECT * FROM users");
+    }
+
+    public static function searchUsers($searchTerm)
+    {
+        $db = self::connection();
+        $searchTerm = "%{$searchTerm}%";
+        $sql = "SELECT * 
+                FROM users 
+                WHERE name LIKE ? OR email LIKE ? OR id LIKE ?
+                ORDER BY created_at DESC";
+        $stmt = $db->prepare($sql);
+        if (!$stmt) {
+            error_log("Prepare failed: " . $db->error);
+            return [];
+        }
+        $stmt->bind_param("sss", $searchTerm, $searchTerm, $searchTerm);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        return $result->fetch_all(MYSQLI_ASSOC);
+    }
+
+    // method to get user by email
+    public static function getUserByEmail($email) {
+        return self::fetchOne("SELECT id, name, email, role, created_at FROM users WHERE email = ?", [$email]);
+    }
+
+    // New helper method to set user session variables consistently
+    public static function setUserSession($user) {
+        if (!$user) {
+            return;
+        }
+        Session::set('user_id', $user['id']);
+        Session::set('user_name', $user['name']);
+        Session::set('user_email', $user['email']);
+        Session::set('user_role', $user['role'] ?? 'user');
+        Session::set('user_created', $user['created_at'] ?? date('Y-m-d H:i:s'));
     }
 }
 

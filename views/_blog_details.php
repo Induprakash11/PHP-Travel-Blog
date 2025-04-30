@@ -24,16 +24,16 @@ $status = $blog['status'];
 
 <div class="container my-5" style="max-width: 800px; margin: auto;">
     <!-- Breadcrumb Navigation -->
-    <nav aria-label="breadcrumb"  data-aos="fade-left" data-aos-duration="1500">
+    <nav  aria-label="breadcrumb"  data-aos="fade-left" data-aos-duration="1500">
         <ol class="breadcrumb p-3 rounded d-flex justify-content-" style="background: linear-gradient(to right, var(--red), var(--secondary-color));">
             <li class="breadcrumb-item">
-                <a href="/Travel Blog/home" style="text-decoration: none; color:var(--secondary-color)">Home</a>
+                <a href="/Travel Blog/home">Home</a>
             </li>
             <li class="breadcrumb-item">
-                <a href="/Travel Blog/blog" style="text-decoration: none; color:var(--secondary-color);">Blogs</a>
+                <a href="/Travel Blog/blog">Blogs</a>
             </li>
             <li class="breadcrumb-item <?= str_contains($_SERVER['REQUEST_URI'], '/Travel Blog/blog') ? 'active' : '' ?>" aria-current="page">
-                <a style="color: white;"><?= $blog_title ?> Description</a>
+                <a style="color: lightgrey;"><?= $blog_title ?> Description</a>
             </li>
         </ol>
     </nav>
@@ -50,10 +50,10 @@ $status = $blog['status'];
         <img src="/Travel Blog/admin1/assets/uploads/<?= $blog_image ?>" 
              alt="<?= htmlspecialchars($blog_title) ?>" 
              class="img-fluid rounded shadow category-image" 
-             style="max-width: 100%; height: auto; border: 2px solid #ddd; padding: 5px;">
+             style="max-width: 50%; height: auto; border: 2px solid #ddd; padding: 5px;">
     </div>
     <div class="text-center mb-4" data-aos="fade-down" data-aos-duration="1500">
-        <h4 style="margin-top: 10px; color: #6c757d;"><?= htmlspecialchars($status) ?></h4>
+        <h4 style="margin-top: 10px; color: var(--red);"><?= htmlspecialchars($status) ?></h4>
     </div>        
     <!-- Content -->
     <div class="blog-content" data-aos="fade-up" data-aos-duration="1500">

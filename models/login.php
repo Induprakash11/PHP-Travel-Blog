@@ -17,29 +17,22 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     // Login the user
-    if (User::login($email, $password)) {
-        // Set session keys
-        $user = User::fetchOne("SELECT * FROM users WHERE email = ?", [$email]);
-        if ($user['role'] === 'user') {
-            Session::set('user_id', $user['id']);
-            Session::set('user_name', $user['name']);
-            Session::set('user_email', $user['email']);
-            Session::set('user_created', $user['created_at']);
-            Utils::setFlash('login success', 'Login successful.');
-            Utils::redirect('home');
-        } else if ($user['role'] === 'admin') {
-            Session::set('user_id', $user['id']);
-            Session::set('user_name', $user['name']);
-            Session::set('user_email', $user['email']);
-            Session::set('user_created', $user['created_at']);
-            Session::set('role', $user['role']);
-            Utils::setFlash('login success', 'Login successful.');
-            Utils::redirect('admin1/home');
+        if (User::login($email, $password)) {
+            // Set session keys
+            $user = User::fetchOne("SELECT * FROM users WHERE email = ?", [$email]);
+            if ($user['role'] === 'user') {
+                User::setUserSession($user);
+                Utils::setFlash('login success', 'Login successful.');
+                Utils::redirect('home');
+            } else if ($user['role'] === 'admin') {
+                User::setUserSession($user);
+                Utils::setFlash('login success', 'Login successful.');
+                Utils::redirect('admin1/home');
+            } else {
+                Utils::setFlash('login error', 'Login failed.');
+            }
         } else {
-            Utils::setFlash('login error', 'Login failed.');
+            Utils::setFlash('invalid login error', 'Invalid email or password.');
         }
-    } else {
-        Utils::setFlash('invalid login error', 'Invalid email or password.');
-    }
 }
 ?>

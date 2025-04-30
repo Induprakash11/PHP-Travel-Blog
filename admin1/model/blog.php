@@ -2,7 +2,14 @@
 // Removed unused Carbon import
 
 $users = User::getAllUsers();
-$blogs = Blogs::getAllBlogs();
+
+$searchTerm = $_GET['blogSearch'] ?? '';
+
+if (!empty($searchTerm)) {
+    $blogs = Blogs::searchBlogs($searchTerm);
+} else {
+    $blogs = Blogs::getAllBlogs();
+}
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['addBlog'])) {
     $title = Utils::sanitize($_POST['title']);

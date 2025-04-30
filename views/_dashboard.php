@@ -1,34 +1,62 @@
-<div class="dashboard" style="display: flex;">
-    <div class="div1" style="position: fixed; width: 40%; height: 50%; padding: 20px;" data-aos="fade-right" data-aos-duration="1000">
-        <div class="profile-card" style="min-height: 300px; padding: 20px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); border: 2px solid #90caf9;">
-            <h3 style="color:#fd5d5d;">Welcome to Travel Blog</h3>
-            <p><strong><i class="fa fa-user" style="color: #DB504A;"></i> Name :</strong> <?php echo Utils::sanitize($_SESSION['user_name']); ?></p>
-            <p><strong><i class="fa fa-envelope" style="color: #DB504A;"></i> Email :</strong> <?php echo Utils::sanitize($_SESSION['user_email']); ?></p>
-            <p><strong><i class="fa fa-calendar" style="color: #DB504A;"></i> Member Since :</strong> <?php echo Utils::sanitize($_SESSION['user_created']); ?></p>
-            <a href="logout" style="color: #ffffff; background:var(--red); padding: 10px 15px; border-radius: 5px; text-decoration: none;">Logout</a>
+<div class="container" id="dashboard">
+    <div class="div1" data-aos="fade-right" data-aos-duration="1000">
+        <div class="profile-card">
+            <h3>Welcome to Travel Blog</h3>
+            <p><strong><i class="fa fa-user"></i> Name :</strong> <?php echo Utils::sanitize($_SESSION['user_name']); ?></p>
+            <p><strong><i class="fa fa-envelope"></i> Email :</strong> <?php echo Utils::sanitize($_SESSION['user_email']); ?></p>
+            <p><strong><i class="fa fa-calendar"></i> Member Since :</strong> <?php echo Utils::sanitize($_SESSION['user_created']); ?></p>
+            <a href="logout" class="logout-btn">Logout</a>
         </div>
     </div>
-    <div class="div2" style="margin-left: 50%; overflow:auto ;width: 30%; padding: 20px;" data-aos="fade-left" data-aos-dura    tion="1000">
-        <h3 style="color:var(--red);">My Travel Blogs</h3>
+    <div class="div2">
+    <div class="row align-items-center">
+        <div class="col-lg-6 col-sm-12 mb-2 mb-lg-0 d-flex justify-content-lg-start justify-content-center">
+            <h3>My Posts</h3>
+        </div>
+        <div class="col-lg-6 col-sm-12 d-flex justify-content-lg-end justify-content-center">
+            <form method="get" class="w-100" style="max-width: 400px;">
+                <div class="input-group">
+                    <input type="text" class="form-control border-danger" name="blogSearch" placeholder="Search blogs..." value="<?= htmlspecialchars($_GET['blogSearch'] ?? '') ?>">
+                    <button class="btn btn-outline-danger" type="submit">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
         <?php
         // Fetch all blogs
-        $id = $_SESSION['user_id'];
-        $blogs = Blogs::getBlogByUserId($id);
+        // Fetch blogs based on search
+        $searchTerm = $_GET['blogSearch'] ?? '';
+        if (!empty($searchTerm)) {
+            $blogs = Blogs::searchBlogs($searchTerm);
+        } else {
+            $id = $_SESSION['user_id'];
+            $blogs = Blogs::getBlogByUserId($id);
+        }
 
         if (isset($blogs)) {
             // Loop through each blog and display it
             foreach ($blogs as $row) { ?>
-            <div class="card" style="margin-bottom: 20px; border: 1px solid #ddd; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
-                <img src="admin1/assets/uploads/<?= $row['blog_image'] ?>" class="card-img-top" alt="<?= htmlspecialchars($row['title']) ?>" style="border-top-left-radius: 10px; border-top-right-radius: 10px; max-height: 200px; object-fit: cover;">
-                <div class="card-body" style="padding: 15px;">
-                    <h5 class="card-title" style="color: #DB504A;"><?= htmlspecialchars($row['title']) ?></h5>
-                    <p class="card-text" style="color: #555;"><?= htmlspecialchars(mb_strimwidth($row['content'], 0, 35, "...")) ?></p>
-                    <a href="blog-details/<?= ($row['title']); ?>" class="btn btn-primary" style="background-color: #DB504A; border: none;">Read More</a>
+            <div class="card" data-aos="fade-left" data-aos-duration="1000">
+                <img src="admin1/assets/uploads/<?= $row['blog_image'] ?>" class="card-img-top" alt="<?= htmlspecialchars($row['title']) ?>">
+                <div class="card-body">
+                    <h5 class="card-title"><?= htmlspecialchars($row['title']) ?></h5>
+                    <p class="card-text"><?= htmlspecialchars(mb_strimwidth($row['content'], 0, 35, "...")) ?></p>
+                    <a href="blog-details/<?= ($row['title']); ?>" class="btn read-more-btn">Read More</a>
                 </div>
             </div>
             <?php }
         } else { ?>
-            <p class="text-center" style="color: #555;">No blogs found</p>
+            <!-- Display message if no blogs are found -->
+            <div class="text-center my-5" data-aos="fade-up" data-aos-duration="1500">
+            <h3 class="text-muted">No Blogs Found</h3>
+            <p class="text-muted">It seems there are no blogs available at the moment. Check back later or create a new blog post!</p>
+            <button class="btn btn-red mt-3" data-bs-toggle="modal" data-bs-target="#addBlogModal">
+                <i class="fa fa-plus fa-sm me-2"></i> Create New Blog
+            </button>
+            </div>
         <?php }; ?>
     </div>
 </div>
+

@@ -7,7 +7,7 @@
 <meta name="og:title" content="TraveLog">
 
 <!-- Title -->
-<title>TraveLog</title>
+<title>Travel Blog</title>
 
 <!-- Favicon -->
 <link rel="icon" href="/Travel Blog/assets/images/favicon.png">
@@ -23,7 +23,7 @@
 
 <!-- Custom CSS -->
 <link rel="stylesheet" href="/Travel Blog/assets/style/styles.css">
-<!-- <link rel="stylesheet" href="../admin/assets/css/style.css"> -->
+<link rel="stylesheet" href="/Travel Blog/admin1/assets/css/responsive.css">
 
 <!-- custom JS -->
 <script src="/Travel Blog/assets/Js/script.js"></script>

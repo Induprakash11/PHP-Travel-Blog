@@ -1,8 +1,15 @@
 <?php require_once __DIR__.'/../../controllers/load.php';
 use Carbon\Carbon;
 
-$users = User::getAllUsers();
 $blogs = Blogs::getAllBlogs();
+
+$searchTerm = $_GET['userSearch'] ?? '';
+
+if (!empty($searchTerm)) {
+    $users = User::searchUsers($searchTerm);
+} else {
+    $users = User::getAllUsers();
+}
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['addUser'])) {
     $username = Utils::sanitize($_POST['username']);

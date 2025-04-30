@@ -1,5 +1,9 @@
 <?php 
 require_once __DIR__ . '/../controllers/load.php';
+require_once __DIR__. '/../vendor/autoload.php';
+
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
 
 // Check if the form is submitted
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['register'])) {
@@ -33,13 +37,53 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['register'])) {
     }
 
     // Register the user
-    if (User::register($name, $email, $password)) {
-        Utils::setFlash('register success', 'Registration successful. You can now log in.');
-        Utils::redirect('login');
-        
-    } else {
-        Utils::setFlash('register error', 'An error occurred during registration. Please try again.');
-        
+if (User::register($name, $email, $password)) {
+    // Generate OTP
+    $otp = rand(100000, 999999);
+
+    // Start session
+    Session::start();
+
+    // Fetch user details by email
+    $user = User::getUserByEmail($email);
+
+    // Set OTP in session
+    Session::set('otp', $otp);
+
+    // Set user session variables using helper function
+    User::setUserSession($user);
+
+    // Send OTP email
+    $mail = new PHPMailer(true);
+    try {
+        //Server settings
+        $mail->isSMTP();
+        $mail->Host = 'smtp.gmail.com'; // Replace with your SMTP server
+        $mail->SMTPAuth = true;
+        $mail->Username = 'prakashindu212@gmail.com'; // SMTP username
+        $mail->Password = 'dwxi ense cepp msjv'; // SMTP password
+        $mail->SMTPSecure = 'tls';
+        $mail->Port = 587;
+
+        //Recipients
+        $mail->setFrom('TravelBlog@example.com', 'Travel Blog');
+        $mail->addAddress($email, $name);
+
+        // Content
+        $mail->isHTML(true);
+        $mail->Subject = 'OTP Code';
+        $mail->Body    = "Your OTP code is: <b>$otp</b>";
+
+        $mail->send();
+    } catch (Exception $e) {
+        Utils::setFlash('email error', "Message could not be sent. Mailer Error: {$mail->ErrorInfo}");
+        Utils::redirect('register');
+        exit;
     }
+
+    Utils::redirect('otp');
+} else {
+    Utils::setFlash('register error', 'An error occurred during registration. Please try again.');
+}
 }
 ?>

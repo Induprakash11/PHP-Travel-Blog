@@ -1,8 +1,8 @@
 <?php include_once __DIR__ . '/../model/user.php' ?>
-<div class="users-section">
-    <div class="d-sm-flex align-items-center justify-content-between mb-4" data-aos="fade-down">
-        <h1 class="h3 mb-0 text-danger">User Management</h1>
-        <button class="btn btn-prim" data-bs-toggle="modal" data-bs-target="#addUserModal">
+<div class="users-section container">
+    <div class="row mb-4 d-flex justify-content-between" data-aos="fade-down">
+        <h1 class="col-lg-6 h3 text-danger">User Management</h1>
+        <button class="col-lg-6 w-25 btn btn-prim"  data-bs-toggle="modal" data-bs-target="#addUserModal">
             <i class="fa fa-user-plus fa-sm me-2"></i>Add New User
         </button>
     </div>
@@ -22,21 +22,23 @@
     <div class="card shadow mb-4" data-aos="fade-right" data-aos-duration="2000">
         <div class="card-header py-3">
             <div class="row align-items-center">
-                <div class="col-md-6">
-                    <h6 class="m-0 font-weight-bold text-danger">All Users</h6>
-                </div>
-                <div class="col-md-6">
-                    <div class="input-group">
-                        <input type="text" class="form-control" placeholder="Search users...">
-                        <button class="btn btn-outline-secondary" type="button">
-                            <i class="fas fa-search"></i>
-                        </button>
-                    </div>
-                </div>
+            <div class="col-lg-6 col-sm-12 mb-2 mb-lg-0">
+                <h6 class="font-weight-bold text-danger">All Users</h6>
+            </div>
+            <div class="col-lg-6 col-sm-12">
+            <form method="get">
+					<div class="input-group">
+						<input type="text" class="form-control border-danger" name="userSearch" placeholder="Search Users..." value="<?= htmlspecialchars($_GET['userSearch'] ?? '') ?>">
+						<button class="btn btn-outline-danger" type="submit">
+							<i class="fas fa-search"></i>
+						</button>
+					</div>
+				</form>
+            </div>
             </div>
         </div>
         <div class="card-body">
-            <div class="table-responsive" style="max-height: 300px; overflow-y: scroll; scrollbar-width:none;">
+            <div class="table-responsive" style="max-height: 300px; overflow-x: scroll; overflow-y:hidden;">
                 <table class="table table-hover">
                     <thead>
                         <tr>
@@ -105,7 +107,7 @@
     </div>
 
     <!-- User Roles & Permissions Card -->
-    <div class="card shadow mb-4" data-aos="fade-left" data-aos-duration="1000">
+    <!-- <div class="card shadow mb-4" data-aos="fade-left" data-aos-duration="1000">
         <div class="card-header py-3">
             <h6 class="m-0 font-weight-bold text-danger">User Roles & Permissions</h6>
         </div>
@@ -152,7 +154,7 @@
                 </table>
             </div>
         </div>
-    </div>
+    </div> -->
 </div>
 
 <!-- Add User Modal -->

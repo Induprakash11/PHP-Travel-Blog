@@ -276,4 +276,25 @@ class Blogs
         JOIN users ON blogs.user_id = users.id
         ORDER BY blogs.created_at DESC");
     }
+
+    // Search blogs by title or content
+    public static function searchBlogs($searchTerm)
+    {
+        $db = self::checkDB();
+        $searchTerm = "%{$searchTerm}%";
+        $sql = "SELECT blogs.*, users.name AS user_name 
+                FROM blogs 
+                JOIN users ON blogs.user_id = users.id
+                WHERE blogs.title LIKE ? OR users.name LIKE ?
+                ORDER BY blogs.created_at DESC";
+        $stmt = $db->prepare($sql);
+        if (!$stmt) {
+            error_log("Prepare failed: " . $db->error);
+            return [];
+        }
+        $stmt->bind_param("ss", $searchTerm, $searchTerm);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        return $result->fetch_all(MYSQLI_ASSOC);
+    }
 }

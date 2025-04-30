@@ -100,15 +100,20 @@ nav {
 .navbar-brand {
     font-weight: bold;
     font-size: 1.5rem;
-    background: var(--lightsecondary-color);
-    color: #000000;
+    color: white;
     padding: 0 5px ;
-    border-radius: 10px;
-    box-shadow: 5px 8px 16px 0px rgba(0, 0, 0, 0.5);
+}
+.navbar-brand:hover {
+    color: var(--secondary-color);
+}
+
+.navbar-collapse {
+    position: relative;
+    left: 100px;
 }
 
 .nav-link {
-    font-size: 1.1rem;
+    font-size: 1rem;
     margin-right: 1rem;
     color: var(--white);
 }
@@ -117,48 +122,17 @@ nav {
     color: var(--red);
 }
 
-@media (max-width: 991.98px) {
-    .navbar-collapse {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 60%;
-        height: 100%;
-        background-color: rgba(226, 225, 225, 0.7);
-        z-index: 1050;
-        display: none;
-    }
-    .navbar-collapse.show {
-        display: block;
-    }
-    .navbar-nav {
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        height: 100%;
-    }
-    .navbar-nav .nav-link {
-        margin: 1rem 0;
-        font-size: 1.5rem;
-    }
-
-    .sign {
-        display: flex;
-        flex-direction: column;
-        align-items: baseline;
-        justify-content: center;
-        margin-top: 9rem;
-    }
-    #contact button {
-        position: static;
-    }
-}
-
 .hero p {
     font-size: 1.5rem;
 }
 
 /* Blog Section Styles */
+#blogs {
+    padding: 20px;
+    border-radius: 10px;
+    min-height: 100vh;  
+}
+
 #blogs .card {
     transition: transform 0.3s, box-shadow 0.3s;
 }
@@ -202,20 +176,20 @@ nav {
     border: 1px solid var(--lightred);
 }
 
-form{
+#contact form{
     margin: 0 auto;
 }
 
-form input, form textarea{
-    width: 100%;
-    padding: 10px;
+#contact .form-control{
+    width: 90%;
+    padding: 5px;
     margin-bottom: 10px;
     border: 1px solid var(--red);
     border-radius: 5px;
 }
 
-form button{
-    padding: 10px 20px;
+#contact form button{
+    padding: 10px 10px;
     background-color: var(--secondary-color);
     color: #fff;
 }
@@ -224,6 +198,54 @@ form button{
     transition: background-color 0.3s ease;
     padding: 10px;
     border-radius: 8px;
+}
+
+/* Modal styling */
+.modal-content {
+	border: none;
+	border-radius: 0.5rem;
+}
+
+.modal-header {
+	background-color: var(--secondary-color);
+	color: white;
+	border-radius: 0.5rem 0.5rem 0 0;
+}
+
+/* Button */
+.btn-prim {
+	color:var(--white);
+	background:var(--secondary-color);
+	border: var(--secondary-color);
+}
+
+.btn-prim:hover {
+	color: var(--red);
+	background: var(--white);
+}
+
+.btn-prim .fa-user-plus:hover {
+	color: var(--secondary-color);
+}
+
+.btn-red {
+	color: var(--white);
+	background: var(--red);
+}
+
+.btn-red:hover {
+	color: var(--red);
+	background: var(--white);
+}
+
+/* Breadcrumbs */
+
+.breadcrumb .breadcrumb-item a {
+    color: var(--white);
+    text-decoration: none;
+}
+.breadcrumb .breadcrumb-item a:hover {
+    color: var(--secondary-color);
 }
 
 .category-image {
@@ -246,25 +268,82 @@ form button{
     transition: background-color 0.3s ease, padding 0.3s ease;
 }
 
-.dashboard {
-    min-height: 510px;
+#dashboard {
+    display: flex;
+    flex-wrap: wrap;
+    min-height: 100vh;
 }
+
+.div1 {
+    flex: 1 2 100%;
+    max-width: 100%;
+    padding: 60px 0;
+    box-sizing: border-box;
+}
+
 .profile-card {
-    max-width: 400px;
-    margin: auto;
+    min-height: 290px;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border: 2px solid #90caf9;
+    background: var(--lightsecondary-color);
+}
+
+.profile-card h3 {
+    color: var(--red);
+}
+
+.profile-card i {
+    color: var(--red);
+}
+
+.div2 {
+    flex: 1 2 100%;
+    max-width: 50%;
     padding: 20px;
+    box-sizing: border-box;
+}
+
+.div2 h3 {
+    color: var(--red);
+}
+
+.div2 .card {
+    margin-bottom: 20px;
     border: 1px solid #ddd;
     border-radius: 10px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    background-color: var(--secondary-color);
-    text-align: center;
+    max-width: 50%;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
-.profile-card h2 {
-    margin-bottom: 10px;
-    color: var(--secondary-color);
+
+.div2 .card-img-top {
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    max-height: 150px;
+    object-fit: cover;
+    width: 100%;
 }
-.profile-card p {
-    margin: 5px 0;
+
+.div2 .card-body {
+    padding: 15px;
+}
+
+.div2 .card-title {
+    color: #DB504A;
+}
+
+.div2 .card-text {
+    color: #555;
+}
+
+.div2 .read-more-btn {
+    background-color: #DB504A;
+    border: none;
+    color: #fff;
+}
+
+.div2 .text-center {
     color: #555;
 }
 .profile-card a {
@@ -272,12 +351,13 @@ form button{
     margin-top: 15px;
     padding: 10px 20px;
     color: #fff;
-    background-color: var(--secondary-color);
+    background-color: var(--red);
     text-decoration: none;
     border-radius: 5px;
 }
 .profile-card a:hover {
-    background-color: var(--lightred);
+    background-color: var(--white);
+    color: var(--red);
 }
 
 /* Custom scroll bar */
@@ -296,4 +376,164 @@ form button{
 
 ::-webkit-scrollbar-thumb:hover {
 	background: var(--danger-color);
+}
+
+.container .card-header {
+    background: var(--secondary-color);
+    color: var(--red);
+    font-weight: bold;
+    font-size: 1.2rem;
+    text-align: center;
+}
+
+.container .card-body {
+    background: var(--light);
+    color: var(--red);
+}
+
+.container .card-body p {
+    font-size: 1rem;
+    color: var(--dark);
+}
+.container .card-body .btn-danger  {
+    color: var(--dark);
+    text-decoration: none;
+}
+
+.container .card-body ul {
+    list-style-type: none;
+    padding: 0;
+}
+.container .card-body ul li {
+    color: var(--dark);
+}
+.container .card-body ul li a {
+    color: var(--red);
+}
+
+
+.container .card-body form input[type="text"],
+.container .card-body form input[type="email"],
+.container .card-body form input[type="password"],
+.container .card-body form textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid var(--red);
+    border-radius: 5px;
+}
+
+.container .card-body form input[type="text"]:focus,
+.container .card-body form input[type="email"]:focus,
+.container .card-body form input[type="password"]:focus,
+.container .card-body form textarea:focus {
+    border-color: var(--red);
+    box-shadow: 0 0 5px var(--red);
+}
+
+.container .card-body form button {
+    padding: 10px 20px;
+    position: relative;
+    left: 100px;
+    max-width: 200px;
+    background-color: var(--red);
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.container .card-body form button:hover {
+    background-color: var(--secondary-color);
+    color: var(--red);
+}
+.container .card-body form button:disabled {
+    background-color: var(--dark);
+    cursor: not-allowed;
+}
+.container .card-body form .error {
+    color: var(--red);
+    font-size: 0.9rem;
+}
+.container .card-body form .success {
+    color: var(--green);
+    font-size: 0.9rem;
+}
+.container .card-body form .success-message {
+    color: var(--green);
+    font-size: 1rem;
+    margin-top: 10px;
+}
+.container .card-body form .error-message {
+    color: var(--red);
+    font-size: 1rem;
+    margin-top: 10px;
+}
+.container .card-body form .error-message ul {
+    list-style-type: none;
+    padding: 0;
+}
+.container .card-body form .error-message ul li {
+    color: var(--red);
+}
+.container .card-body form .error-message ul li a {
+    color: var(--red);
+}
+
+.container .card-body form .error-message ul li a:visited {
+    color: var(--red);
+}
+.container .card-body form .error-message ul li a:active {
+    color: var(--red);
+}
+.container .card-body form .error-message ul li a:focus {
+    color: var(--red);
+}
+
+@media (max-width: 991.98px) {
+    .navbar-collapse {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 60%;
+        height: 100%;
+        background-color: rgba(226, 225, 225, 0.7);
+        z-index: 1050;
+        display: none;
+    }
+    .navbar-collapse.show {
+        display: block;
+    }
+    .navbar-nav {
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100%;
+        background: linear-gradient(to bottom, rgba(219, 80, 74, 0.5) 0%, rgba(18, 255, 196, 0.5) 100%);
+    }
+    .navbar-nav .nav-link {
+        margin: 1rem 0;
+        font-size: 1.5rem;
+        color: var(--white);
+    }
+    
+    .navbar-nav .nav-link:hover {
+        color: var(--red);
+    }
+
+    .sign {
+        display: flex;
+        flex-direction: column;
+        align-items: baseline;
+        justify-content: center;
+        margin-top: 9rem;
+    }
+    #contact button {
+        position: static;
+    }
+    .container .card-body form button {
+        position: static;
+        left: 100px;
+        max-width: 100%;
+    }
 }

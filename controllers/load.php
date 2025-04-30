@@ -10,6 +10,7 @@ require_once __DIR__.'/../models/register.php';
 require_once __DIR__.'/../models/login.php';
 require_once __DIR__.'/../models/blogs.php';
 require_once __DIR__.'/../models/contact.php';
+require_once __DIR__.'/../models/otp.php';
 // Load the configuration file
 class ViewTemp {
     public static function view($name){

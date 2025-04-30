@@ -183,7 +183,7 @@ body {
 }
 
 .btn-prim:hover {
-	color: var(--secondary-color);
+	color: var(--red);
 	background: var(--white);
 }
 
@@ -331,6 +331,75 @@ input:checked+.toggle-slider:before {
 	border-radius: 0.5rem 0.5rem 0 0;
 }
 
+/* Dashboard Card Styles */
+.dashboard-card {
+	border-left: 0.25rem solid;
+	border-right: 0.25rem solid;
+	padding: 1rem;
+	position: relative;
+	overflow: hidden;
+}
+
+.dashboard-card.primary {
+	border-left-color: var(--red);
+	border-right-color: var(--secondary-color);
+}
+
+.dashboard-card.primary .card-icon {
+	color: var(--red);
+}
+
+.dashboard-card.success {
+	border-left-color: var(--secondary-color);
+	border-right-color: var(--red);
+}
+
+.dashboard-card.success .card-icon {
+	color: var(--secondary-color);
+}
+
+.dashboard-card.warning {
+	border-left-color: var(--red);
+	border-right-color: var(--warning-color);
+
+}
+
+.dashboard-card.warning .card-icon {
+	color: var(--red);
+}
+
+.dashboard-card.danger {
+	border-left-color: var(--danger-color);
+}
+
+.dashboard-card.danger .card-icon {
+	color: var(--danger-color);
+}
+
+.dashboard-card .card-icon {
+	position: absolute;
+	top: 50%;
+	right: 1rem;
+	transform: translateY(-50%);
+	font-size: 2rem;
+	opacity: 0.3;
+}
+
+.dashboard-card h5 {
+	font-size: 0.8rem;
+	text-transform: uppercase;
+	font-weight: 700;
+	color: var(--dark-color);
+}
+
+.dashboard-card h2 {
+	font-size: 1.5rem;
+	font-weight: 700;
+	margin: 0;
+	color: var(--dark-color);
+}
+
+
 /* Responsive styles */
 @media (max-width: 768px) {
 	#sidebar {
@@ -373,9 +442,6 @@ input:checked+.toggle-slider:before {
     }
 
     .profile-section, .blogs-section {
-        background: white;
-        border-radius: 10px;
-        box-shadow: 0 4px 12px rgba(0,0,0,0.1);
         padding: 20px;
         flex: 1 1 300px;
         max-width: 400px;
@@ -403,7 +469,7 @@ input:checked+.toggle-slider:before {
         display: inline-block;
         margin-top: 15px;
         padding: 10px 15px;
-        background-color: var(--primary-color);
+        background-color: var(--red);
         color: var(--white);
         border-radius: 5px;
         text-decoration: none;
@@ -418,17 +484,6 @@ input:checked+.toggle-slider:before {
         color: var(--danger-color);
         margin-bottom: 15px;
         text-align: center;
-    }
-
-    .blog-card {
-        border: 1px solid var(--grey);
-        border-radius: 10px;
-        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-        margin-bottom: 20px;
-        overflow: hidden;
-        background-color: var(--white);
-        display: flex;
-        flex-direction: column;
     }
 
     .blog-image {

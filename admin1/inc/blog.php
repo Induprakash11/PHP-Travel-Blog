@@ -19,23 +19,25 @@
 	</div>
 
 	<div class="card shadow mb-4" data-aos="fade-right" data-aos-duration="1000">
-		<div class="card-header py-3">
-			<div class="row align-items-center">
-				<div class="col-md-6">
-					<h5 class="m-0 font-weight-bold text-danger">All Blog Posts</h5>
-				</div>
-				<div class="col-md-6">
+	<div class="card-header py-3">
+            <div class="row align-items-center">
+            <div class="col-lg-6 col-sm-12 mb-2 mb-lg-0">
+                <h6 class="font-weight-bold text-danger">All Blogs</h6>
+            </div>
+			<div class="col-lg-6 col-sm-12">
+				<form method="get">
 					<div class="input-group">
-						<input type="text" class="form-control" placeholder="Search posts...">
-						<button class="btn btn-outline-secondary" type="button">
+						<input type="text" class="form-control border-danger"  name="blogSearch" placeholder="Search blogs..." value="<?= htmlspecialchars($_GET['blogSearch'] ?? '') ?>">
+						<button class="btn btn-outline-danger" type="submit">
 							<i class="fas fa-search"></i>
 						</button>
 					</div>
-				</div>
+				</form>
 			</div>
-		</div>
+            </div>
+        </div>
 		<div class="card-body">
-			<div class="table-responsive" style="max-height: 300px; overflow-y: scroll; scrollbar-width:none;">
+			<div class="table-responsive" style="max-height: 300px; overflow-x: scroll; ">
 				<table class="table table-hover">
 					<thead>
 						<tr>
@@ -116,7 +118,7 @@
 	</div>
 
 	<!-- Blog Categories Card -->
-	<div class="card shadow mb-4" data-aos="fade-left" data-aos-duration="1500">
+	<!-- <div class="card shadow mb-4" data-aos="fade-left" data-aos-duration="1500">
 		<div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
 			<h5 class="m-0 font-weight-bold text-danger">Categories</h5>
 			<button class="btn btn-sm btn-prim" style="border:white solid 2px" data-bs-toggle="modal" data-bs-target="#addCategoryModal">
@@ -253,7 +255,7 @@
 				</div>
 			</div>
 		</div>
-	</div>
+	</div> -->
 
 	<!-- Blog Comments Card -->
 	<!-- <div class="card shadow mb-4">
@@ -487,7 +489,7 @@ exampleModal.addEventListener('show.bs.modal', function (event) {
 </script>
 
 <!-- Add Category Modal -->
-<div class="modal fade" id="addCategoryModal" tabindex="-1" aria-labelledby="addCategoryModalLabel" aria-hidden="true">
+<!-- <div class="modal fade" id="addCategoryModal" tabindex="-1" aria-labelledby="addCategoryModalLabel" aria-hidden="true">
 	<div class="modal-dialog">
 		<div class="modal-content">
 			<div class="modal-header">
@@ -526,4 +528,4 @@ exampleModal.addEventListener('show.bs.modal', function (event) {
 			</div>
 		</div>
 	</div>
-</div>
+</div> -->

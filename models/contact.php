@@ -31,7 +31,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['sendMail'])) {
         $mail->SMTPSecure = 'tls';
         $mail->Port = 587;
     
-        $mail->setFrom('example@gmail.com', 'Travel Blog');
+        $mail->setFrom('TravelBlog@gmail.com', 'Travel Blog');
         $mail->addAddress('prakashindu212@gmail.com', 'prakash');
     
         $mail->isHTML(true);

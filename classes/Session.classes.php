@@ -5,6 +5,14 @@ class Session
     public static function start()
     {
         if (session_status() === PHP_SESSION_NONE) {
+            // Set session cookie lifetime to 30 days (2592000 seconds) for persistent login
+            session_set_cookie_params([
+                'lifetime' => 2592000,
+                'path' => '/',
+                'secure' => isset($_SERVER['HTTPS']),
+                'httponly' => true,
+                'samesite' => 'Lax'
+            ]);
             session_start();
         }
     }

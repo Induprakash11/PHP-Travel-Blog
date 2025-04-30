@@ -3,7 +3,7 @@
     <div class="container">
         <a class="navbar-brand d-flex align-items-center" href="/Travel Blog">
             <img src="/Travel Blog/assets/images/favicon.png" width="30" height="30" class="rounded me-2" alt="Logo" title="TraveLog">
-            TraveLog
+            Travel Blog
         </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation" onclick="toggleIcon(this)">
             <span class="navbar-toggler-ico"><i class="fa fa-bars"></i></span>
@@ -11,7 +11,7 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ms-auto">
-            <li class="nav-item">
+                <li class="nav-item">
                     <input type="checkbox" id="switch-mode" hidden>
                     <label for="switch-mode" class="switch-mode"></label>
                 </li>
@@ -36,6 +36,13 @@
                             <i class="fa fa-user me-1"></i> <?= Session::get("user_name") ?>
                         </a>
                     </li>
+                    <?php if (Session::get('user_role') === "admin"): ?>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/Travel Blog/admin1/home">
+                                <i class="fa fa-cogs me-1"></i> Admin
+                            </a>
+                        </li>
+                    <?php endif; ?>
                     <li class="nav-item">
                         <a class="nav-link" href="logout">
                             <i class="fa fa-sign-out-alt"></i> Logout
