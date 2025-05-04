@@ -2,8 +2,6 @@
 require_once __DIR__ . '/../controllers/load.php';
 require_once __DIR__. '/../vendor/autoload.php';
 
-use PHPMailer\PHPMailer\PHPMailer;
-use PHPMailer\PHPMailer\Exception;
 
 // Check if the form is submitted
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['register'])) {
@@ -11,79 +9,63 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['register'])) {
     $name = Utils::sanitize($_POST['username'] ?? '');
     $email = Utils::sanitize($_POST['email'] ?? '');
     $password = Utils::sanitize($_POST['password'] ?? '');
+    $confirmPassword = Utils::sanitize($_POST['confirmPassword'] ?? '');
+    $role = Utils::sanitize('user');
+    
 
+    // Check if passwords match
+    if ($password !== $confirmPassword) {
+        Utils::setFlash('password match error', 'Passwords do not match.');
+        Utils::redirect('register');
+    }
+    
     // Validate user input
     if (User::checkEmptyFields([$name, $email, $password])) {
-        Utils::setFlash('field error', 'All fields are required.');
-        
+        Utils::setFlash('register field error', 'All fields are required.');
+        Utils::redirect('register');
     }
 
     // Validate email format
     if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-        Utils::setFlash('email invalid error', 'Invalid email format.');
-        
+        Utils::setFlash('register email error', 'Invalid email format.');
+        Utils::redirect('register');
     }
 
     // Check if the email is already registered
     if (User::isEmailRegistered($email)) {
-        Utils::setFlash('email error', 'Email already registered.');
-        
+        Utils::setFlash('register already error', 'Email already registered.');
+        Utils::redirect('register');
     }
 
     // Check password strength
     if (!User::isStrongPassword($password)) {
-        Utils::setFlash('password error', 'Password must be at least 8 characters long and contain at least one number and one special character.');
-        
-    }
-
-    // Register the user
-if (User::register($name, $email, $password)) {
-    // Generate OTP
-    $otp = rand(100000, 999999);
-
-    // Start session
-    Session::start();
-
-    // Fetch user details by email
-    $user = User::getUserByEmail($email);
-
-    // Set OTP in session
-    Session::set('otp', $otp);
-
-    // Set user session variables using helper function
-    User::setUserSession($user);
-
-    // Send OTP email
-    $mail = new PHPMailer(true);
-    try {
-        //Server settings
-        $mail->isSMTP();
-        $mail->Host = 'smtp.gmail.com'; // Replace with your SMTP server
-        $mail->SMTPAuth = true;
-        $mail->Username = 'prakashindu212@gmail.com'; // SMTP username
-        $mail->Password = 'dwxi ense cepp msjv'; // SMTP password
-        $mail->SMTPSecure = 'tls';
-        $mail->Port = 587;
-
-        //Recipients
-        $mail->setFrom('TravelBlog@example.com', 'Travel Blog');
-        $mail->addAddress($email, $name);
-
-        // Content
-        $mail->isHTML(true);
-        $mail->Subject = 'OTP Code';
-        $mail->Body    = "Your OTP code is: <b>$otp</b>";
-
-        $mail->send();
-    } catch (Exception $e) {
-        Utils::setFlash('email error', "Message could not be sent. Mailer Error: {$mail->ErrorInfo}");
+        Utils::setFlash('register password error', 'Password must be at least 8 characters long and contain at least one number and one special character.');
         Utils::redirect('register');
-        exit;
     }
 
-    Utils::redirect('otp');
-} else {
-    Utils::setFlash('register error', 'An error occurred during registration. Please try again.');
-}
+    // hash the password before storing it
+    $passwordHash = password_hash($password, PASSWORD_BCRYPT);
+
+    // Generate OTP
+    $otp = User::generateOtp();
+
+    // If OTP is generated and email is sent successfully
+    if (!empty($otp) && User::sendOtpEmail($email, $otp)) {
+
+        Session::start();
+        //set session 
+        Session::set('otp', $otp);
+        Session::set('user_name', $name);
+        Session::set('user_email', $email);
+        Session::set('user_password', $passwordHash);
+        Session::set('user_role', $role);
+   
+        // send Otp via Email
+        Utils::setFlash('register otp verification', 'OTP Send. Please Check your Email');
+        Utils::redirect('otp');
+    } else {
+        Utils::setFlash('register sendotp error', 'Failed to send OTP email. Please try again.');
+        Utils::redirect('register');
+    }
 }
 ?>

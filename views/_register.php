@@ -6,8 +6,14 @@
                     <h2>Register</h2>
                 </div>
                 <div class="card-body">
-                    <?php echo Utils::displayFlash('', 'danger'); ?>
-                <form method="POST" class="card-body p-4">
+                    <?php echo Utils::displayFlash('password match error', 'danger'); ?>
+                    <?php echo Utils::displayFlash('register password error', 'danger'); ?>
+                    <?php echo Utils::displayFlash('register email error', 'danger'); ?>
+                    <?php echo Utils::displayFlash('register error', 'danger'); ?>
+                    <?php echo Utils::displayFlash('register field error', 'danger'); ?>
+                    <?php echo Utils::displayFlash('register sendotp error', 'danger'); ?>
+                    <?php echo Utils::displayFlash('register already error', 'danger'); ?>
+                <form method="POST" class="card-body p-2">
                     <div class="mb-3">
                         <label for="username" class="form-label">Username</label>
                         <input
@@ -38,7 +44,17 @@
                             placeholder="Enter your password"
                             required />
                     </div>
-                    <div class="d-grid">
+                    <div class="mb-3">
+                        <label for="confirmPassword" class="form-label">Confirm Password</label>
+                        <input
+                            type="password"
+                            class="form-control"
+                            id="confirmPassword"
+                            name="confirmPassword"
+                            placeholder="Enter confirm password"
+                            required />
+                    </div>
+                    <div class="">
                         <button type="submit" name="register" class="btn btn-block">Register</button>
                     </div>
                     <div class="mt-3">

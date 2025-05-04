@@ -10,7 +10,7 @@
 <title>Travel Blog</title>
 
 <!-- Favicon -->
-<link rel="icon" href="/Travel Blog/assets/images/favicon.png">
+<link rel="icon" href="/Travel Blog/assets/images/ios/Icon-83.5@2x.png">
 
 <!-- Box Icons -->
 <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>

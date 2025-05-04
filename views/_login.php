@@ -9,8 +9,8 @@
                     <?php  ?>
                     <form method="POST">
                         <div>
-                            <?php echo Utils::displayFlash('field error', 'danger'); ?>
-                            <?php echo Utils::displayFlash('Invalid email error', 'danger'); ?>
+                            <?php echo Utils::displayFlash('login field error', 'danger'); ?>
+                            <?php echo Utils::displayFlash('login email error', 'danger'); ?>
                             <?php echo Utils::displayFlash('login error', 'danger'); ?>
                             <?php echo Utils::displayFlash('invalid login error', 'danger'); ?>
                         </div>

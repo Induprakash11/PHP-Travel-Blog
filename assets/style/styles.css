@@ -188,12 +188,6 @@ nav {
     border-radius: 5px;
 }
 
-#contact form button{
-    padding: 10px 10px;
-    background-color: var(--secondary-color);
-    color: #fff;
-}
-
 .blog-content p:hover {
     transition: background-color 0.3s ease;
     padding: 10px;
@@ -229,13 +223,18 @@ nav {
 }
 
 .btn-red {
-	color: var(--white);
-	background: var(--red);
+    min-width: 200px;
+    padding: 10px 5px;
+    background-color: var(--red);
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
 }
 
 .btn-red:hover {
 	color: var(--red);
-	background: var(--white);
+	background-color: var(--white);
 }
 
 /* Breadcrumbs */
@@ -433,9 +432,10 @@ nav {
 
 .container .card-body form button {
     padding: 10px 20px;
-    position: relative;
-    left: 100px;
-    max-width: 200px;
+    min-width: 200px;
+    display: flex;
+    justify-content: center;
+    justify-self: center;
     background-color: var(--red);
     color: #fff;
     border: none;
@@ -488,6 +488,109 @@ nav {
 }
 .container .card-body form .error-message ul li a:focus {
     color: var(--red);
+}
+
+/* OTP Container */
+.container-otp {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.form10 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    width: 100%;
+    max-width: 400px;
+    padding: 30px 20px;
+    border-radius: 6px;
+    background-color: #f5f5f5;
+    font-family: sans-serif;
+    box-shadow: 0 15px 25px #969696;
+}
+
+.form10 .form10-heading {
+    font-size: 24px;
+    font-weight: 700;
+    color: #000;
+    text-align: center;
+}
+
+.form10 .inputBox {
+    position: relative;
+    width: 100%;
+}
+
+.form10 label {
+    font-size: 14px;
+    color: #4e4e4e;
+    font-weight: 500;
+}
+
+.form10 input {
+    width: 100%;
+    padding: 10px;
+    border-radius: 4px;
+    outline: none;
+    border: 1px solid #e5e5e5;
+    background-color: transparent;
+}
+
+.form10 .VerifyBtn {
+    width: 60%;
+    height: 50px;
+    border: none;
+    outline: none;
+    text-align: center;
+    color: #fff;
+    font-size: 18px;
+    font-weight: 500;
+    cursor: pointer;
+    border-radius: 4px;
+    background-color: var(--red);
+}
+
+.form10 .VerifyBtn:hover {
+    background-color: var(--light);
+    color: var(--red);
+    border: 1px solid var(--red);
+}
+
+.form10 .VerifyBtn:focus {
+    background-color: var(--red);
+    color: var(--light);
+}
+
+.form10 .resendBtn {
+    width: 50%;
+    height: 40px;
+    border: 1px solid var(--dark);
+    outline: none;
+    text-align: center;
+    color: var(--dark);
+    font-size: 18px;
+    font-weight: 500;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.form10 .resendBtn:hover {
+    color: var(--secondary-color);
+}
+
+.form10 input:focus {
+    box-shadow: none;
+    border: 1px solid #4e4e4e;
+}
+
+.form10 input:focus + label {
+    top: -10px;
+    left: 0;
+    font-size: 12px;
+    color: #4e4e4e;
 }
 
 @media (max-width: 991.98px) {

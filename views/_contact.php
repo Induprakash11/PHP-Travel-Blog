@@ -27,8 +27,9 @@
                     <label for="message" class="form-label">Message</label>
                     <textarea class="form-control" name="message" id="message" rows="3" placeholder="Your Message" required ></textarea>
                 </div>
-                <div class="d-grid" data-aos="fade-up" data-aos-duration="1500">
-                    <button type="submit" id="submit" name="sendMail" class="btn btn-primary btn-block">Send Message</button>
+                <div>
+                <button class="btn-red" type="submit" name="sendMail" data-aos="fade-up" data-aos-duration="1500">
+                Send Message</button>
                 </div>
             </form>
         </div>

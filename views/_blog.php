@@ -28,7 +28,7 @@
 
     <div class="row align-items-center">
         <div class="col-lg-6 col-sm-12 mb-2 mb-lg-0 d-flex justify-content-lg-start justify-content-center">
-            <button class="btn btn-red" data-bs-toggle="modal" data-bs-target="#addBlogModal">
+            <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#addBlogModal">
                 <i class="fa fa-plus fa-sm me-2"></i> New Post
             </button>
         </div>
@@ -109,7 +109,7 @@
             // Loop through each blog and display it
             foreach ($blogs as $row) {
                 if ($row['status'] === "published") { ?>
-                    <div class="col-md-4 p-3">
+                    <div class="col-md-4 mt-5 p-4">
                         <div class="card" data-aos="fade-up" data-aos-easing="ease-out-cubic" data-aos-duration="<?= 1000 + ($loopIndex * 200) ?>">
                             <!-- Display blog image -->
                             <img src="admin1/assets/uploads/<?= $row['blog_image'] ?>"

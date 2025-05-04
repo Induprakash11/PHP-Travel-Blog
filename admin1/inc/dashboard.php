@@ -5,15 +5,13 @@
     <div data-aos="fade-left" data-aos-duration="1000" class="dashboard-header col-6">
         <h1 class="h3 mb-4 text-danger">Dashboard</h1>
     </div>
-    <div class="col-6" data-aos="fade-right" data-aos-duration="1000">
-        <?php echo Utils::displayFlash('login success', 'success'); ?>
-    </div>
+    
     </div>
 
     <!-- Dashboard Cards -->
     <div class="row" data-aos="fade-down"
         data-aos-duration="1000">
-        <div class="col-xl-4 col-md-6 mb-4">
+        <div class="col-xl-6 col-md-6 mb-4">
             <div class="card">
                 <div class="card-body dashboard-card success">
                     <h5>Total Users</h5>
@@ -25,7 +23,7 @@
             </div>
         </div>
 
-        <div class="col-xl-4 col-md-6 mb-4">
+        <div class="col-xl-6 col-md-6 mb-4">
             <div class="card">
                 <div class="card-body dashboard-card success">
                     <h5>Blog Posts</h5>
@@ -37,7 +35,7 @@
             </div>
         </div>
 
-        <div class="col-xl-4 col-md-6 mb-4">
+        <!-- <div class="col-xl-4 col-md-6 mb-4">
             <div class="card">
                 <div class="card-body dashboard-card success">
                     <h5>Comments</h5>
@@ -47,7 +45,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> -->
 
         <!-- <div class="col-xl-3 col-md-6 mb-4">
             <div class="card">

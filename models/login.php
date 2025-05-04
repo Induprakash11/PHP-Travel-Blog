@@ -7,13 +7,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     // Validate user input
     if (User::checkEmptyFields([$email, $password])) {
-        Utils::setFlash('field error', 'All fields are required.');
+        Utils::setFlash('login field error', 'All fields are required.');
         // die('error');
     }
 
     // Validate email format
     if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-        Utils::setFlash('Invalid email error', 'Invalid email format.');
+        Utils::setFlash('login email error', 'Invalid email format.');
     }
 
     // Login the user
