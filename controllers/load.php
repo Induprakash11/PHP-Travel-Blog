@@ -11,6 +11,8 @@ require_once __DIR__.'/../models/login.php';
 require_once __DIR__.'/../models/blogs.php';
 require_once __DIR__.'/../models/contact.php';
 require_once __DIR__.'/../models/otp.php';
+require_once __DIR__.'/../models/dashboard.php';
+
 // Load the configuration file
 class ViewTemp {
     public static function view($name){

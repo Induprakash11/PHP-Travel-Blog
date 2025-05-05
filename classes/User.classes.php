@@ -196,7 +196,7 @@ class User extends Database
     }
 
     // Function to send OTP email
-    public static function sendOtpEmail($toEmail, $otp)
+    public static function sendOtpEmail($toEmail, $otp, $name)
     {
         $mail = new PHPMailer(true);
         try {
@@ -216,74 +216,55 @@ class User extends Database
             // Content
             $mail->isHTML(true);
             $mail->Subject = 'Your OTP Code';
-            $mail->Body = "
-                <html>
-                <head>
-                    <style>
-                        body {
-                            font-family: Arial, sans-serif;
-                            background-color: #f4f4f4;
-                            margin: 0;
-                            padding: 0;
-                        }
-                        .email-container {
-                            max-width: 600px;
-                            margin: 20px auto;
-                            background: #ffffff;
-                            border-radius: 8px;
-                            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-                            overflow: hidden;
-                        }
-                        .email-header {
-                            background-color: #007bff;
-                            color: #ffffff;
-                            text-align: center;
-                            padding: 20px;
-                        }
-                        .email-body {
-                            padding: 20px;
-                            color: #333333;
-                            line-height: 1.6;
-                        }
-                        .otp-code {
-                            display: inline-block;
-                            background-color: #007bff;
-                            color: #ffffff;
-                            font-size: 20px;
-                            font-weight: bold;
-                            padding: 10px 20px;
-                            border-radius: 5px;
-                            margin: 20px 0;
-                            text-align: center;
-                        }
-                        .email-footer {
-                            text-align: center;
-                            padding: 10px;
-                            background-color: #f4f4f4;
-                            font-size: 12px;
-                            color: #666666;
-                        }
-                    </style>
-                </head>
-                <body>
-                    <div class='email-container'>
-                        <div class='email-header'>
-                            <h1>Travel Blog</h1>
-                        </div>
-                        <div class='email-body'>
-                            <p>Dear User,</p>
-                            <p>We received a request to verify your email address. Please use the OTP code below to complete the process:</p>
-                            <div class='otp-code'>$otp</div>
-                            <p>If you did not request this, please ignore this email.</p>
-                            <p>Thank you,<br>Travel Blog Team</p>
-                        </div>
-                        <div class='email-footer'>
-                            &copy; " . date('Y') . " Travel Blog. All rights reserved.
-                        </div>
-                    </div>
-                </body>
-                </html>
-            ";
+$mail->Body = "
+    <html>
+    <head>
+        <style>
+        .otp-email {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+        }
+        .otp-header {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px;
+            text-align: center;
+            font-size: 24px;
+        }
+        .otp-body {
+            padding: 20px;
+            text-align: center;
+        }
+        .otp-code {
+            font-size: 32px;
+            font-weight: bold;
+            color: #4CAF50;
+            margin: 20px 0;
+        }
+        .otp-footer {
+            margin-top: 20px;
+            font-size: 14px;
+            color: #777;
+        }
+        </style>
+    </head>
+    <body>
+        <div class='otp-email'>
+        <div class='otp-header'>Travel Blog - OTP Verification</div>
+        <div class='otp-body'>
+            <p>Dear $name,</p>
+            <p>Your OTP has been resent. Please use the following OTP to verify your email address:</p>
+            <div class='otp-code'>$otp</div>
+            <p>This OTP is valid for 10 minutes. If you did not request this, please ignore this email.</p>
+        </div>
+        <div class='otp-footer'>
+            <p>Best regards,<br>Travel Blog Team</p>
+        </div>  
+        </div>
+    </body>
+    </html>
+";
 
             $mail->send();
             return true;

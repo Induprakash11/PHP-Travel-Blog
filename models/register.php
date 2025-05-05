@@ -50,11 +50,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['register'])) {
     $otp = User::generateOtp();
 
     // If OTP is generated and email is sent successfully
-    if (!empty($otp) && User::sendOtpEmail($email, $otp)) {
+    if (!empty($otp) && User::sendOtpEmail($email, $otp, $name)) {
 
         Session::start();
         //set session 
         Session::set('otp', $otp);
+        Session::set('user_id', null); 
         Session::set('user_name', $name);
         Session::set('user_email', $email);
         Session::set('user_password', $passwordHash);

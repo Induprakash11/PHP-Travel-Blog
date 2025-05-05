@@ -7,9 +7,10 @@
         <?php Utils::displayFlash('otp error', 'danger'); ?>
         <?php Utils::displayFlash('Invalid_otp', 'danger'); ?>   
         <?php Utils::displayFlash('otp_success', 'success'); ?>
-        <?php Utils::displayFlash('otp_debug', 'info'); ?>
         <?php Utils::displayFlash('email_error', 'danger'); ?>
         <?php Utils::displayFlash('register otp veification', 'success'); ?>
+        <?php Utils::displayFlash('otp resend success', 'success'); ?>
+        <?php Utils::displayFlash('otp resend error', 'danger'); ?>
         <div class="form-group">
             <label for="otp">Enter OTP</label>
             <input type="text" id="otp" name="otp" class="form-control text-center" maxlength="6" pattern="\d{6}" placeholder="6-digit OTP" required>

@@ -5,8 +5,15 @@
             <p><strong><i class="fa fa-user"></i> Name :</strong> <?php echo Utils::sanitize($_SESSION['user_name']); ?></p>
             <p><strong><i class="fa fa-envelope"></i> Email :</strong> <?php echo Utils::sanitize($_SESSION['user_email']); ?></p>
             <p><strong><i class="fa fa-calendar"></i> Member Since :</strong> <?php echo Utils::sanitize($_SESSION['user_created']); ?></p>
-            <a href="logout" class="logout-btn">Logout</a>
+            <div class="d-flex justify-content-between align-items-center flex-row">
+            <a href="logout" class="btn btn-danger">Logout</a>
+            <form method="post" onsubmit="return confirm('Are you sure you want to delete your account? This action cannot be undone.');" style="margin-top: 10px;">
+                <button type="submit" name="deleteUser" value="<?php echo $_SESSION['user_id']; ?>" class="btn btn-danger">Delete My Account</button>
+            </form>
+            </div>
         </div>
+        <?php Utils::displayFlash('delete_success', 'success'); ?>
+        <?php Utils::displayFlash('delete_error', 'danger'); ?>
     </div>
     <div class="div2">
     <div class="row align-items-center">

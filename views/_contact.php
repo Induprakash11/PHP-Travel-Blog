@@ -1,5 +1,3 @@
-<?php require_once __DIR__ . '/../controllers/load.php';
-?>
 <section id="contact" class="container my-5">
     <div class="row justify-content-center">
         <div class="col-lg-8">
