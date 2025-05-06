@@ -13,10 +13,10 @@
             <label for="otp">Enter OTP</label>
             <input type="text" id="otp" name="otp" class="form-control text-center" maxlength="6" pattern="\d{6}" placeholder="6-digit OTP" required>
         </div>
-        <button type="submit" name="verify_otp" class="btn btn-primary btn-block mt-3">Verify OTP</button>
+        <button type="submit" name="verify_otp" id="verifyBtn" class="btn btn-primary btn-block mt-3">Verify OTP</button>
     </form>
     <form method="POST" class="mt-3" style="width: 100%; max-width: 400px;" id="resendForm">
-        <button type="submit" name="resend_otp" class="btn btn-secondary btn-block" id="resendBtn" disabled>Resend OTP</button>
+        <button type="submit" name="resend_otp" class="btn btn-secondary btn-block" id="resendBtn">Resend OTP</button>
         <small id="timer" class="form-text text-muted mt-2">You can resend OTP in 60 seconds.</small>
     </form>
     <div class="mt-4">

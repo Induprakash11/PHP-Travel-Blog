@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', function () {
     const otpInput = document.getElementById('otp');
-    const otpForm = document.getElementById('otpForm');
+    const verifyBtn = document.getElementById('verifyBtn');
     const resendBtn = document.getElementById('resendBtn');
     const resendForm = document.getElementById('resendForm');
     const timerElement = document.getElementById('timer');
@@ -8,7 +8,7 @@ document.addEventListener('DOMContentLoaded', function () {
     // Auto-submit OTP form when 6 digits are entered
     otpInput.addEventListener('input', function () {
         if (otpInput.value.length === 6 && /^\d{6}$/.test(otpInput.value)) {
-        otpForm.submit();
+        verifyBtn.click();
         }
     });
 
@@ -19,17 +19,18 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
 
-    // Handle resend button with 10-second limit
-    let resendCooldown = 60; // Cooldown in seconds
-    resendBtn.disabled = true;
+    // Handle resend button with 60-second limit by hiding and showing
+    let resendCooldown = 60; 
+    resendBtn.style.display = 'none'; 
+    timerElement.style.display = 'block'; 
     timerElement.textContent = `You can resend OTP in ${resendCooldown} seconds.`;
 
     const countdown = setInterval(() => {
         resendCooldown--;
         if (resendCooldown <= 0) {
             clearInterval(countdown);
-            resendBtn.disabled = false;
-            timerElement.textContent = 'You can resend OTP now.';
+            resendBtn.style.display = 'inline-block'; 
+            timerElement.style.display = 'none'; 
         } else {
             timerElement.textContent = `You can resend OTP in ${resendCooldown} seconds.`;
         }
