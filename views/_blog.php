@@ -43,56 +43,6 @@
             </form>
         </div>
     </div>
-    </div>
-
-    <!-- Add Blog Post Modal -->
-    <div class="modal fade" id="addBlogModal" tabindex="-1" aria-labelledby="addBlogModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-l">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="addBlogModalLabel">Create New Blog</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <form method="post" enctype="multipart/form-data">
-                        <div class="mb-3">
-                            <label for="postTitle" class="form-label">Title</label>
-                            <input type="text" class="form-control" name="title" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="postContent" class="form-label">Content</label>
-                            <textarea class="form-control" name="content" rows="5" required></textarea>
-                        </div>
-                        <div class="row mb-3">
-                            <label for="postUser" class="form-label">User</label>
-                            <select class="form-select" name="userId" required>
-                                <option value="">Select User</option>
-                                <?php if ($users) {
-                                    foreach ($users as $user) { ?>
-                                        <option value="<?= $user['id'] ?>"><?= $user['name'] ?></option>
-                                <?php }
-                                } ?>
-                            </select>
-                        </div>
-                        <div class="row mb-3">
-                            <label for="postStatus" class="form-label">Status</label>
-                            <select class="form-select" name="status" required>
-                                <option value="">Select Status</option>
-                                <option value="published">Published</option>
-                                <option value="draft">Draft</option>
-                            </select>
-                        </div>
-                        <div class="mb-3">
-                            <label for="featuredImage" class="form-label">Upload Image</label>
-                            <input class="form-control" type="file" name="file" required>
-                        </div>
-                        <button type="button" class="btn btn-red" data-bs-dismiss="modal">Cancel</button>
-                        <button type="submit" name="addBlog" class="btn btn-prim">Publish</button>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
 
     <div class="row">
         <?php
@@ -105,6 +55,9 @@
             $blogs = Blogs::getAllBlogs();
         }
 
+        // fetch users
+        $users = User::getAllUsers();
+
         if (!empty($blogs)) {
             // Loop through each blog and display it
             foreach ($blogs as $row) {
@@ -114,7 +67,7 @@
                             <!-- Display blog image -->
                             <img src="admin1/assets/uploads/<?= $row['blog_image'] ?>"
                                 class="card-img-top"
-                                alt="<?= htmlspecialchars($row['title']) ?>">
+                                alt="<?= htmlspecialchars($row['title']) ?>" >
                             <div class="card-body">
                                 <!-- Display blog title -->
                                 <h5 class="card-title"><?= htmlspecialchars($row['title']) ?></h5>
@@ -139,3 +92,56 @@
         <?php }; ?>
     </div>
 </section>
+
+        <!-- Add Blog Post Modal -->
+        <div class="modal fade" id="addBlogModal" tabindex="-1" aria-labelledby="addBlogModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header bg-danger text-white">
+                    <h5 class="modal-title" id="addBlogModalLabel">Create New Blog</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form method="post" enctype="multipart/form-data">
+                        <div class="mb-4">
+                            <label for="postTitle" class="form-label fw-semibold">Title</label>
+                            <input type="text" class="form-control" name="title" placeholder="Enter blog title" required>
+                        </div>
+                        <div class="mb-4">
+                            <label for="postContent" class="form-label fw-semibold">Content</label>
+                            <textarea class="form-control" name="content" rows="6" placeholder="Write your blog content here..." required></textarea>
+                        </div>
+                        <div class="row g-3 mb-4">
+                            <div class="col-md-6">
+                                <label for="postUser" class="form-label fw-semibold">User</label>
+                                <select class="form-select" name="userId" required>
+                                    <option value="">Select User</option>
+                                    <?php if (!empty($users)) {
+                                        foreach ($users as $user) { ?>
+                                            <option value="<?= $user['id'] ?>"><?= $user['name'] ?></option>
+                                    <?php }
+                                    } ?>
+                                </select>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="postStatus" class="form-label fw-semibold">Status</label>
+                                <select class="form-select" name="status" required>
+                                    <option value="">Select Status</option>
+                                    <option value="published">Published</option>
+                                    <option value="draft">Draft</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="mb-4">
+                            <label for="featuredImage" class="form-label fw-semibold">Upload Image</label>
+                            <input class="form-control" type="file" name="file" required>
+                        </div>
+                        <div class="d-flex justify-content-end gap-3">
+                            <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">Cancel</button>
+                            <button type="submit" name="addBlog" class="btn btn-danger">Publish</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>

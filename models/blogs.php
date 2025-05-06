@@ -1,7 +1,6 @@
 <?php require_once __DIR__.'/../controllers/load.php';
 // Removed unused Carbon import
 
-$users = User::getAllUsers();
 $blogs = Blogs::getAllBlogs();
 
 

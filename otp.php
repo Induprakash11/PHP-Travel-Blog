@@ -3,14 +3,16 @@
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <!-- Head Content -->
     <?= ViewTemp::view("_head") ?>
 </head>
+
 <body>
     <!-- Loading Bar -->
     <div id="loading-bar"></div>
-    
+
     <!-- Navbar -->
     <?= ViewTemp::view("_navbar") ?>
 
@@ -19,5 +21,10 @@
 
     <!-- Footer -->
     <?= ViewTemp::view("_footer") ?>
+
+    <!-- custom JS -->
+    <script src="/Travel Blog/assets/Js/otp.js"></script>
+    
 </body>
+
 </html>

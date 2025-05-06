@@ -11,10 +11,18 @@ if (empty($_GET['title'])) {
 // Fetch blog details by title
 $blog = Blogs::getBlogByTitle($title);
 
-if (!$blog) {
-    die("Blog not found");
-}
+if (!$blog) { ?>
+    <!-- Display message if no blogs are found -->
+            <div class="text-center my-5" data-aos="fade-up" data-aos-duration="1500">
+            <h3 class="text-muted">No Blogs Found</h3>
+            <p class="text-muted">It seems there are no blogs available at the moment. Check back later or create a new blog post!</p>
+            <button class="btn btn-red mt-3" data-bs-toggle="modal" data-bs-target="#addBlogModal">
+                <i class="fa fa-plus fa-sm me-2"></i> Create New Blog
+            </button>
+            </div>
+<?php } ?>
 
+<?php
 // Extract blog details
 $blog_title = $blog['title'];
 $content = $blog['content'];

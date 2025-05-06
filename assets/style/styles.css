@@ -65,19 +65,34 @@ body {
 html{
     scroll-behavior: smooth;
 }
-.hero {
-    background: url('https://cdn.wegic.ai/cms/seo/img/travel-blog-examples/179E378C.png?format=webp&args=pr:sharp/q:60') center/cover no-repeat;
+
+.carousel-item {
     height: 60vh;
-    color: var(--secondary-color);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
+    object-fit: cover;
 }
-.hero h1 {
-    font-size: 3rem;
-    text-shadow: 2px 2px 5px var(--red);
+
+.carousel-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
+
+.carousel-item h1 {
+    font-size: 2rem;
+    color: var(--red);
+    text-shadow: var(--dark) 10px 10px 20px, var(--dark) 0px 0px 5px;
+    position: relative;
+    bottom: 70px;
+}
+
+.carousel-item p {
+    font-size: 1rem;
+    color: var(--dark);
+    text-shadow: var(--dark) 10px 10px 20px, var(--dark) 0px 0px 5px;
+    position: relative;
+    bottom: 70px;
+}
+
 .card img {
     height: 200px;
     object-fit: cover;

@@ -109,6 +109,46 @@ class Blogs
         }
     }
 
+    //method to addblog in main site
+    public static function addBlogMain($title, $content, $userId, $status, $image)
+    {
+        $conn = self::checkDB();
+
+        // Define the upload directory
+        $uploadDir = __DIR__ . '/../assets/uploads/';
+        $imagePath = $uploadDir . basename($image['name']);
+
+        // Check if the file already exists and delete it
+        if (!is_dir($uploadDir)) {
+            mkdir($uploadDir, 0777, true); // Create the directory if it doesn't exist
+        } elseif (file_exists($imagePath)) {
+            unlink($imagePath); // Delete the existing file
+        }
+
+        // Move the uploaded file to the uploads directory
+        if (!move_uploaded_file($image['tmp_name'], $imagePath)) {
+            error_log("Failed to upload image.");
+            return false;
+        }
+
+        // Prepare the SQL statement
+        $stmt = $conn->prepare("INSERT INTO blogs (title, content, user_id, status, blog_image) VALUES (?, ?, ?, ?, ?)");
+
+        if (!$stmt) {
+            error_log("Prepare failed: " . $conn->error);
+            return false;
+        }
+
+        $stmt->bind_param("sssiss", $title, $content, $userId, $status, $image['name']);
+
+        if ($stmt->execute()) {
+            return true;
+        } else {
+            error_log("Execute failed: " . $stmt->error);
+            return false;
+        }
+    }
+
     //method to uploadfile($files)
     public static function uploadImage($image)
     {

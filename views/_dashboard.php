@@ -12,8 +12,6 @@
             </form>
             </div>
         </div>
-        <?php Utils::displayFlash('delete_success', 'success'); ?>
-        <?php Utils::displayFlash('delete_error', 'danger'); ?>
     </div>
     <div class="div2">
     <div class="row align-items-center">

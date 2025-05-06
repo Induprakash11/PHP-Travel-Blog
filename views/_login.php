@@ -6,14 +6,16 @@
                     <h2>Login</h2>
                 </div>
                 <div class="card-body p-lg-5">
+                    <div>
+                        <?php echo Utils::displayFlash('login field error', 'danger'); ?>
+                        <?php echo Utils::displayFlash('login email error', 'danger'); ?>
+                        <?php echo Utils::displayFlash('login error', 'danger'); ?>
+                        <?php echo Utils::displayFlash('invalid login error', 'danger'); ?>
+                        <?php Utils::displayFlash('delete_success', 'success'); ?>
+                        <?php Utils::displayFlash('delete_error', 'danger'); ?>
+                    </div>
                     <?php  ?>
                     <form method="POST">
-                        <div>
-                            <?php echo Utils::displayFlash('login field error', 'danger'); ?>
-                            <?php echo Utils::displayFlash('login email error', 'danger'); ?>
-                            <?php echo Utils::displayFlash('login error', 'danger'); ?>
-                            <?php echo Utils::displayFlash('invalid login error', 'danger'); ?>
-                        </div>
                         <div class="mb-3">
                             <label for="email" class="form-label">Email address</label>
                             <input type="email" class="form-control" id="email" name="email" placeholder="Enter your Email" aria-describedby="emailHelp" required>
