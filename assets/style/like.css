@@ -1,0 +1,118 @@
+/* like Button */
+.checkbox3 input {
+  appearance: none;
+  display: none;
+}
+
+.checkbox3 .svgContainer {
+  width: 30px;
+  height: auto;
+  fill: #777777;
+  cursor: pointer;
+  transition: 0.2s;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  transform-origin: top;
+}
+
+.checkbox3 .svgContainer::after {
+  content: "";
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  transform: scale(0);
+  padding: 1px;
+  box-shadow: 0 30px 0 -4px rgb(177, 12, 12), 30px 0 0 -4px rgb(177, 12, 12),
+    0 -30px 0 -4px rgb(177, 12, 12), -30px 0 0 -4px rgb(177, 12, 12),
+    -22px 22px 0 -4px rgb(177, 12, 12), -22px -22px 0 -4px rgb(177, 12, 12),
+    22px -22px 0 -4px rgb(177, 12, 12), 22px 22px 0 -4px rgb(177, 12, 12);
+}
+
+.checkbox3 .svgContainer::before {
+  content: "";
+  position: absolute;
+  border-radius: 50%;
+  border: 1px solid rgb(177, 12, 12);
+  opacity: 0;
+}
+
+.checkbox3:hover .svgContainer {
+  fill: #333;
+}
+
+.checkbox3 input:checked+.svgContainer::after {
+  animation: checkbox3-bg-dots 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+  animation-delay: 0.3s;
+}
+
+.checkbox3 input:checked+.svgContainer {
+  fill: rgb(177, 12, 12);
+  animation: checkbox3-click 0.3s forwards;
+  transition-delay: 0.3s;
+}
+
+.checkbox3 input:checked+.svgContainer::before {
+  animation: checkbox3-bg-circle 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+  animation-delay: 0.3s;
+}
+
+.blog-img {
+  height: 400px;
+  width: 500px;
+  border: 2px solid #ddd;
+  padding: 5px;
+  padding-bottom: 40px;
+  background-color: #f8f9fa;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+@keyframes checkbox3-click {
+  50% {
+    -webkit-transform: scaleY(0.6);
+    transform: scaleY(0.6);
+  }
+
+  100% {
+    -webkit-transform: scaleY(1);
+    transform: scaleY(1);
+  }
+}
+
+@keyframes checkbox3-bg-circle {
+  from {
+    width: 0;
+    height: 0;
+    opacity: 0;
+  }
+
+  90% {
+    width: 40px;
+    height: 40px;
+    opacity: 1;
+  }
+
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes checkbox3-bg-dots {
+  from {
+    -webkit-transform: scale(0);
+    transform: scale(0);
+  }
+
+  40% {
+    opacity: 1;
+  }
+
+  to {
+    -webkit-transform: scale(0.8);
+    transform: scale(0.8);
+    opacity: 0;
+  }
+}

@@ -337,4 +337,66 @@ class Blogs
         $result = $stmt->get_result();
         return $result->fetch_all(MYSQLI_ASSOC);
     }
+
+    // Add a like for a blog by a user
+    public static function addLike($blog_id, $user_id)
+    {
+        $conn = self::checkDB();
+        $sql = "INSERT INTO likes (blog_id, user_id, liked) VALUES (?, ?, 1) ON DUPLICATE KEY UPDATE liked = 1, created_at = CURRENT_TIMESTAMP";
+        $stmt = $conn->prepare($sql);
+        if (!$stmt) {
+            error_log("Prepare failed in addLike: " . $conn->error);
+            return false;
+        }
+        $stmt->bind_param("ii", $blog_id, $user_id);
+        return $stmt->execute();
+    }
+
+    // Remove a like (dislike) for a blog by a user
+    public static function removeLike($blog_id, $user_id)
+    {
+        $conn = self::checkDB();
+        $sql = "UPDATE likes SET liked = 0 WHERE blog_id = ? AND user_id = ?";
+        $stmt = $conn->prepare($sql);
+        if (!$stmt) {
+            error_log("Prepare failed in removeLike: " . $conn->error);
+            return false;
+        }
+        $stmt->bind_param("ii", $blog_id, $user_id);
+        return $stmt->execute();
+    }
+
+    // Get total number of likes for a blog
+    public static function getLikesCount($blog_id)
+    {
+        $conn = self::checkDB();
+        $sql = "SELECT COUNT(*) as total_likes FROM likes WHERE blog_id = ? AND liked = 1";
+        $stmt = $conn->prepare($sql);
+        if (!$stmt) {
+            error_log("Prepare failed in getLikesCount: " . $conn->error);
+            return 0;
+        }
+        $stmt->bind_param("i", $blog_id);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $row = $result->fetch_assoc();
+        return $row ? (int)$row['total_likes'] : 0;
+    }
+
+    // Check if a user has liked a blog
+    public static function checkUserLike($blog_id, $user_id)
+    {
+        $conn = self::checkDB();
+        $sql = "SELECT liked FROM likes WHERE blog_id = ? AND user_id = ? LIMIT 1";
+        $stmt = $conn->prepare($sql);
+        if (!$stmt) {
+            error_log("Prepare failed in checkUserLike: " . $conn->error);
+            return false;
+        }
+        $stmt->bind_param("ii", $blog_id, $user_id);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $row = $result->fetch_assoc();
+        return $row && $row['liked'] == 1;
+    }
 }

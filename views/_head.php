@@ -24,10 +24,12 @@
 <!-- Custom CSS -->
 <link rel="stylesheet" href="/Travel Blog/assets/style/styles.css">
 <link rel="stylesheet" href="/Travel Blog/admin1/assets/css/responsive.css">
+<link rel="stylesheet" href="/Travel Blog/assets/style/like.css">
 
 <!-- custom JS -->
 <script src="/Travel Blog/assets/Js/script.js"></script>
-<!-- <script src="/admin/assets/js/script.js"></script> -->
+<script src="/Travel Blog/assets/Js/like.js"></script>
+
 
 <!-- AOS Animation CSS -->
 <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">

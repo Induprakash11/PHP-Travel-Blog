@@ -1,4 +1,9 @@
 <?php require_once __DIR__ . '/controllers/load.php';
+
+// ensure only show after creating an otp
+if (!isset($_SESSION['otp'])) {
+    Utils::redirect("register");
+}
 ?>
 
 <!DOCTYPE html>

@@ -26,5 +26,6 @@ User::isAuthenticated();
 
     <!-- ViewTemp::view footer -->
     <?= ViewTemp::view("_footer") ?>
+
 </body>
 </html>
