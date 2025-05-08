@@ -37,13 +37,14 @@
             </div>
         </div>
 		<div class="card-body">
-			<div class="table-responsive" style="max-height: 300px; overflow-x: scroll; ">
-				<table class="table table-hover">
-					<thead>
+			<div class="table-responsive" style="max-height: 600px; overflow: auto;">
+				<table class="table table-hover align-middle table-bordered table-striped text-center">
+					<thead class="table-danger">
 						<tr>
 							<th>Blog</th>
 							<th>Title</th>
 							<th>User</th>
+							<th><i class="fa fa-heart text-danger"></i></th>
 							<th>Content</th>
 							<th>Posted At</th>
 							<th>Status</th>
@@ -55,10 +56,10 @@
 							foreach ($blogs as $blog) { ?>
 									<tr>
 										<td>
-											<img height="40px" width="40px" src="assets/uploads/<?= $blog['blog_image'] ?>" alt="Blog Image">
+											<img height="40px" width="40px" class="rounded-circle" src="assets/uploads/<?= $blog['blog_image'] ?>" alt="Blog Image">
 										</td>
 										<td>
-											<p><?= htmlspecialchars($blog['title']) ?></p>
+											<p class="fw-bold"><?= htmlspecialchars($blog['title']) ?></p>
 										</td>
 										<td>
 											<?php
@@ -68,15 +69,18 @@
 												echo htmlspecialchars(reset($userName)['name'] ?? 'Unknown');
 											?>
 										</td>
-										<td><?= htmlspecialchars(mb_strimwidth($blog['content'], 0, 40, "...")) ?></td>
-										<td><?= \Carbon\Carbon::parse($blog['created_at'])->diffForHumans() ?></td>
 										<td>
-											<span class="status-pill <?= $blog['status'] === 'published' ? 'active' : 'pending' ?>">
+											<span class="badge bg-danger"><?= htmlspecialchars(Blogs::getLikesCount($blog['id'])) ?></span>
+										</td>
+										<td><?= htmlspecialchars(mb_strimwidth($blog['content'], 0, 40, "...")) ?></td>
+										<td class="badge bg-primary text-dark self-center"><?= \Carbon\Carbon::parse($blog['created_at'])->diffForHumans() ?></td>
+										<td>
+											<span class="badge <?= $blog['status'] === 'published' ? 'bg-success' : 'bg-warning' ?>">
 												<?= ucfirst($blog['status']) ?>
 											</span>
 										</td>
 										<td>
-											<button class="btn btn-sm btn-prim me-1" 
+											<button class="btn btn-sm btn-outline-primary me-1" 
 												data-bs-toggle="modal" data-bs-target="#editBlogModal"
 												data-id="<?= $blog['id'] ?>"
 												data-title="<?= htmlspecialchars($blog['title']) ?>"
@@ -86,7 +90,7 @@
 												data-image="<?= $blog['blog_image'] ?>">
 												<i class="fas fa-edit"></i>
 											</button>
-											<button class="btn btn-sm btn-red">
+											<button class="btn btn-sm btn-outline-danger">
 												<i class="fas fa-trash"></i>
 											</button>
 										</td>
@@ -95,273 +99,14 @@
 							}
 						 else { ?>
 							<tr>
-								<td colspan="7">No Published Blogs Found</td>
+								<td colspan="8" class="text-center text-muted">No Published Blogs Found</td>
 							</tr>
 						<?php } ?>
 					</tbody>
 				</table>
 			</div>
-			<!-- <nav aria-label="Page navigation">
-				<ul class="pagination justify-content-end">
-					<li class="page-item disabled">
-						<a class="page-link" href="javascript:void(0)" tabindex="-1" aria-disabled="true">Previous</a>
-					</li>
-					<li class="page-item active"><a class="page-link" href="javascript:void(0)">1</a></li>
-					<li class="page-item"><a class="page-link" href="javascript:void(0)">2</a></li>
-					<li class="page-item"><a class="page-link" href="javascript:void(0)">3</a></li>
-					<li class="page-item">
-						<a class="page-link" href="javascript:void(0)">Next</a>
-					</li>
-				</ul>
-			</nav> -->
 		</div>
 	</div>
-
-	<!-- Blog Categories Card -->
-	<!-- <div class="card shadow mb-4" data-aos="fade-left" data-aos-duration="1500">
-		<div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-			<h5 class="m-0 font-weight-bold text-danger">Categories</h5>
-			<button class="btn btn-sm btn-prim" style="border:white solid 2px" data-bs-toggle="modal" data-bs-target="#addCategoryModal">
-				<i class="fas fa-plus fa-sm"></i> Add Category
-			</button>
-		</div>
-		<div class="card-body">
-			<div class="row">
-				<div class="col-lg-6">
-					<div class="table-responsive">
-						<table class="table table-hover">
-							<thead>
-								<tr>
-									<th>Category Name</th>
-									<th>Posts</th>
-									<th>Actions</th>
-								</tr>
-							</thead>
-							<tbody>
-								<tr>
-									<td>PHP</td>
-									<td>12</td>
-									<td>
-										<button class="btn btn-sm btn-prim me-1">
-											<i class="fas fa-edit"></i>
-										</button>
-										<button class="btn btn-sm btn-red">
-											<i class="fas fa-trash"></i>
-										</button>
-									</td>
-								</tr>
-								<tr>
-									<td>Laravel</td>
-									<td>8</td>
-									<td>
-										<button class="btn btn-sm btn-prim me-1">
-											<i class="fas fa-edit"></i>
-										</button>
-										<button class="btn btn-sm btn-red">
-											<i class="fas fa-trash"></i>
-										</button>
-									</td>
-								</tr>
-								<tr>
-									<td>MySQL</td>
-									<td>5</td>
-									<td>
-										<button class="btn btn-sm btn-prim me-1">
-											<i class="fas fa-edit"></i>
-										</button>
-										<button class="btn btn-sm btn-red">
-											<i class="fas fa-trash"></i>
-										</button>
-									</td>
-								</tr>
-								<tr>
-									<td>Web Development</td>
-									<td>15</td>
-									<td>
-										<button class="btn btn-sm btn-prim me-1">
-											<i class="fas fa-edit"></i>
-										</button>
-										<button class="btn btn-sm btn-red">
-											<i class="fas fa-trash"></i>
-										</button>
-									</td>
-								</tr>
-							</tbody>
-						</table>
-					</div>
-				</div>
-				<div class="col-lg-6">
-					<div class="table-responsive">
-						<table class="table table-hover">
-							<thead>
-								<tr>
-									<th>Category Name</th>
-									<th>Posts</th>
-									<th>Actions</th>
-								</tr>
-							</thead>
-							<tbody>
-								<tr>
-									<td>Security</td>
-									<td>6</td>
-									<td>
-										<button class="btn btn-sm btn-prim me-1">
-											<i class="fas fa-edit"></i>
-										</button>
-										<button class="btn btn-sm btn-red">
-											<i class="fas fa-trash"></i>
-										</button>
-									</td>
-								</tr>
-								<tr>
-									<td>JavaScript</td>
-									<td>10</td>
-									<td>
-										<button class="btn btn-sm btn-prim me-1">
-											<i class="fas fa-edit"></i>
-										</button>
-										<button class="btn btn-sm btn-red">
-											<i class="fas fa-trash"></i>
-										</button>
-									</td>
-								</tr>
-								<tr>
-									<td>API Development</td>
-									<td>7</td>
-									<td>
-										<button class="btn btn-sm btn-prim me-1">
-											<i class="fas fa-edit"></i>
-										</button>
-										<button class="btn btn-sm btn-red">
-											<i class="fas fa-trash"></i>
-										</button>
-									</td>
-								</tr>
-								<tr>
-									<td>Database</td>
-									<td>5</td>
-									<td>
-										<button class="btn btn-sm btn-prim me-1">
-											<i class="fas fa-edit"></i>
-										</button>
-										<button class="btn btn-sm btn-red">
-											<i class="fas fa-trash"></i>
-										</button>
-									</td>
-								</tr>
-							</tbody>
-						</table>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div> -->
-
-	<!-- Blog Comments Card -->
-	<!-- <div class="card shadow mb-4">
-		<div class="card-header py-3">
-			<h6 class="m-0 font-weight-bold text-primary">Recent Comments</h6>
-		</div>
-		<div class="card-body">
-			<div class="table-responsive">
-				<table class="table table-hover">
-					<thead>
-						<tr>
-							<th>Author</th>
-							<th>Comment</th>
-							<th>Post</th>
-							<th>Date</th>
-							<th>Status</th>
-							<th>Actions</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr>
-							<td>User123</td>
-							<td>Great article! Very helpful information.</td>
-							<td>How to optimize your PHP application</td>
-							<td>2023-11-20</td>
-							<td><span class="status-pill active">Approved</span></td>
-							<td>
-								<button class="btn btn-sm btn-prim me-1">
-									<i class="fas fa-edit"></i>
-								</button>
-								<button class="btn btn-sm btn-red">
-									<i class="fas fa-trash"></i>
-								</button>
-								<button class="btn btn-sm btn-warning">
-									<i class="fas fa-ban"></i>
-								</button>
-							</td>
-						</tr>
-						<tr>
-							<td>TechGuru</td>
-							<td>I disagree with point #3. In my experience...</td>
-							<td>Top 10 web development trends in 2025</td>
-							<td>2023-11-19</td>
-							<td><span class="status-pill active">Approved</span></td>
-							<td>
-								<button class="btn btn-sm btn-prim me-1">
-									<i class="fas fa-edit"></i>
-								</button>
-								<button class="btn btn-sm btn-red">
-									<i class="fas fa-trash"></i>
-								</button>
-								<button class="btn btn-sm btn-warning">
-									<i class="fas fa-ban"></i>
-								</button>
-							</td>
-						</tr>
-						<tr>
-							<td>NewDeveloper</td>
-							<td>Thank you for this tutorial! It helped me understand the basics.</td>
-							<td>Building secure PHP applications</td>
-							<td>2023-11-18</td>
-							<td><span class="status-pill pending">Pending</span></td>
-							<td>
-								<button class="btn btn-sm btn-success me-1">
-									<i class="fas fa-check"></i>
-								</button>
-								<button class="btn btn-sm btn-red">
-									<i class="fas fa-trash"></i>
-								</button>
-							</td>
-						</tr>
-						<tr>
-							<td>CodeMaster</td>
-							<td>Have you considered adding information about X? It would make this even more comprehensive.</td>
-							<td>Mastering MySQL performance optimization</td>
-							<td>2023-11-17</td>
-							<td><span class="status-pill active">Approved</span></td>
-							<td>
-								<button class="btn btn-sm btn-prim me-1">
-									<i class="fas fa-edit"></i>
-								</button>
-								<button class="btn btn-sm btn-red">
-									<i class="fas fa-trash"></i>
-								</button>
-								<button class="btn btn-sm btn-warning">
-									<i class="fas fa-ban"></i>
-								</button>
-							</td>
-						</tr>
-						<tr>
-							<td>Anonymous</td>
-							<td>This is spam content with lots of links...</td>
-							<td>Top 10 web development trends in 2025</td>
-							<td>2023-11-16</td>
-							<td><span class="status-pill inactive">Spam</span></td>
-							<td>
-								<button class="btn btn-sm btn-red">
-									<i class="fas fa-trash"></i>
-								</button>
-							</td>
-						</tr>
-					</tbody>
-				</table>
-			</div>
-		</div>
-	</div> -->
 </div>
 
 <!-- Add Blog Post Modal -->

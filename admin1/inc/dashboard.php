@@ -2,16 +2,16 @@
 ?>
 <div class="dashboard-section">
     <div class="row">
-    <div data-aos="fade-left" data-aos-duration="1000" class="dashboard-header col-6">
-        <h1 class="h3 mb-4 text-danger">Dashboard</h1>
-    </div>
-    
+        <div data-aos="fade-left" data-aos-duration="1000" class="dashboard-header col-6">
+            <h1 class="h3 mb-4 text-danger">Dashboard</h1>
+        </div>
+
     </div>
 
     <!-- Dashboard Cards -->
     <div class="row" data-aos="fade-down"
         data-aos-duration="1000">
-        <div class="col-xl-6 col-md-6 mb-4">
+        <div class="col-xl-4 col-md-6 mb-4">
             <div class="card">
                 <div class="card-body dashboard-card success">
                     <h5>Total Users</h5>
@@ -23,10 +23,10 @@
             </div>
         </div>
 
-        <div class="col-xl-6 col-md-6 mb-4">
+        <div class="col-xl-4 col-md-6 mb-4">
             <div class="card">
                 <div class="card-body dashboard-card success">
-                    <h5>Blog Posts</h5>
+                    <h5>Total Blogs</h5>
                     <h2><?= count($blogs) ?></h2>
                     <div class="card-icon">
                         <i class="fas fa-blog"></i>
@@ -35,30 +35,17 @@
             </div>
         </div>
 
-        <!-- <div class="col-xl-4 col-md-6 mb-4">
+        <div class="col-xl-4 col-md-6 mb-4">
             <div class="card">
                 <div class="card-body dashboard-card success">
-                    <h5>Comments</h5>
-                    <h2>156</h2>
+                    <h5>Total Likes</h5>
+                    <h2><?= $likecount ?></h2>
                     <div class="card-icon">
-                        <i class="fas fa-comments"></i>
-                    </div>
-                </div>
-            </div>
-        </div> -->
-
-        <!-- <div class="col-xl-3 col-md-6 mb-4">
-            <div class="card">
-                <div class="card-body dashboard-card danger">
-                    <h5>Page Views</h5>
-                    <h2>10,241</h2>
-                    <div class="card-icon">
-                        <i class="fas fa-eye"></i>
+                        <i class="fas fa-heart"></i>
                     </div>
                 </div>
             </div>
         </div>
-    </div> -->
 
         <!-- Analytics Charts -->
         <!-- <div class="row">
@@ -129,11 +116,11 @@
                         </div>
                     </div>
                     <div class="card-body">
-                        <div class="table-responsive">
-                            <table class="table table-hover">
-                                <thead>
+                        <div class="table-responsive table-hover align-middle table-striped table-bordered">
+                            <table class="table">
+                                <thead class="table-light">
                                     <tr>
-                                        <th>UserName</th>
+                                        <th>User Name</th>
                                         <th>Email</th>
                                         <th>Created At</th>
                                     </tr>
@@ -143,16 +130,19 @@
                                         foreach ($users as $user) { ?>
                                             <tr>
                                                 <td>
-                                                    <p><?= $user['name'] ?></p>
+                                                    <p class="fw-bold text-primary"><?= htmlspecialchars($user['name']) ?></p>
                                                 </td>
-                                                <td><?= $user['email'] ?></td>
-                                                <td><?= \Carbon\Carbon::parse($user['created_at'])->diffForHumans() ?></td>
-                                                <!-- <td><span class="status-pill active">Published</span></td> -->
+                                                <td>
+                                                    <p class="text-muted"><?= htmlspecialchars($user['email']) ?></p>
+                                                </td>
+                                                <td>
+                                                    <span class="badge bg-info text-dark"><?= \Carbon\Carbon::parse($user['created_at'])->diffForHumans() ?></span>
+                                                </td>
                                             </tr>
                                         <?php }
                                     } else { ?>
                                         <tr>
-                                            <td colspan="3">No Users Found</td>
+                                            <td colspan="3" class="text-center text-muted">No Users Found</td>
                                         </tr>
                                     <?php } ?>
                                 </tbody>
@@ -179,9 +169,9 @@
                         </div>
                     </div>
                     <div class="card-body">
-                        <div class="table-responsive">
-                            <table class="table table-hover">
-                                <thead>
+                        <div class="table-responsive table-hover align-middle table-striped table-bordered">
+                            <table class="table">
+                                <thead class="table-light">
                                     <tr>
                                         <th>Image</th>
                                         <th>Title</th>
@@ -195,12 +185,13 @@
                                         foreach ($blogs as $blog) { ?>
                                             <tr>
                                                 <td>
-                                                    <img height="20px" width="20px" src="assets/uploads/<?= $blog['blog_image'] ?>">
+                                                    <img height="40px" width="40px" class="rounded-circle" src="assets/uploads/<?= htmlspecialchars($blog['blog_image']) ?>" alt="Blog Image">
                                                 </td>
                                                 <td>
-                                                    <p><?= $blog['title'] ?></p>
+                                                    <p class="fw-bold text-primary"><?= htmlspecialchars($blog['title']) ?></p>
                                                 </td>
-                                                <td><?php
+                                                <td>
+                                                    <?php
                                                     $userName = array_filter($users, function ($user) use ($blog) {
                                                         return $user['id'] === $blog['user_id'];
                                                     });
@@ -209,15 +200,15 @@
                                                 </td>
                                                 <td><?= \Carbon\Carbon::parse($blog['created_at'])->diffForHumans() ?></td>
                                                 <td>
-                                                    <span class="status-pill <?= $blog['status'] === 'published' ? 'active' : 'pending' ?>">
-                                                        <?= ucfirst($blog['status']) ?>
+                                                    <span class="badge <?= $blog['status'] === 'published' ? 'bg-success' : 'bg-warning' ?>">
+                                                        <?= ucfirst(htmlspecialchars($blog['status'])) ?>
                                                     </span>
                                                 </td>
                                             </tr>
                                         <?php }
                                     } else { ?>
                                         <tr>
-                                            <td colspan="3">No Blogs Found</td>
+                                            <td colspan="5" class="text-center text-muted">No Blogs Found</td>
                                         </tr>
                                     <?php } ?>
                                 </tbody>

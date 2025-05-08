@@ -20,7 +20,9 @@ if (!$blog) { ?>
             <i class="fa fa-plus fa-sm me-2"></i> Create New Blog
         </button>
     </div>
-<?php } ?>
+<?php 
+    return; 
+} ?>
 
 <?php
 // Extract blog details
@@ -29,7 +31,7 @@ $content = $blog['content'];
 $blog_image = $blog['blog_image'];
 $status = $blog['status'];
 
-$currentUserId = Session::get('user_id') ?? null;
+$currentUserId = Session::get('user_id');
 $likeCount = Blogs::getLikesCount($blog['id']);
 $userLiked = $currentUserId ? Blogs::checkUserLike($blog['id'], $currentUserId) : false;
 ?>
@@ -76,5 +78,13 @@ $userLiked = $currentUserId ? Blogs::checkUserLike($blog['id'], $currentUserId) 
     <!-- Content -->
     <div class="blog-content" data-aos="fade-up" data-aos-duration="1500">
         <p class="fs-5 lh-lg text-muted" style="font-size: 1.1rem; line-height: 1.8; color: #555;"><?= nl2br(htmlspecialchars($content)) ?></p>
+    </div>
+
+    <!-- Share Component -->
+    <div class="share-component text-center mt-4" data-aos="fade-up" data-aos-duration="1500">
+        <h5 class="mb-3">Share this blog</h5>
+        <button id="shareBtn" class="btn btn-primary me-2" type="button"><i class="fa fa-share"></i></button>
+        <button id="copyUrlBtn" class="btn btn-outline-secondary" type="button" title="Copy URL to clipboard"><i class="fa fa-copy"></i></button>
+        <p id="copyMessage" class="text-success mt-2" style="display:none;">URL copied to clipboard!</p>
     </div>
 </div>

@@ -1,6 +1,6 @@
 <!-- Meta tags -->
 <meta charset="UTF-8">
-<meta name="Viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta name="description" content="TraveLog is a travel blog that shares travel experiences and tips from around the world.">
 <meta name="language" content="English">
 <meta name="theme-color" content="#ffffff">
@@ -29,7 +29,7 @@
 <!-- custom JS -->
 <script src="/Travel Blog/assets/Js/script.js"></script>
 <script src="/Travel Blog/assets/Js/like.js"></script>
-
+<script src="/Travel Blog/assets/Js/share.js"></script>
 
 <!-- AOS Animation CSS -->
 <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">

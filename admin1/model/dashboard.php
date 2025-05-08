@@ -2,6 +2,7 @@
 use Carbon\Carbon;
 
 $searchTerm = $_GET['blogSearch'] ?? '';
+$likecount = Blogs::getTotalLikesCount();
 
 if (!empty($searchTerm)) {
     $blogs = Blogs::searchBlogs($searchTerm);

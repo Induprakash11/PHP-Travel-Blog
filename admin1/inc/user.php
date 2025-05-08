@@ -38,123 +38,63 @@
             </div>
         </div>
         <div class="card-body">
-            <div class="table-responsive" style="max-height: 300px; overflow-x: scroll; overflow-y:hidden;">
-                <table class="table table-hover">
-                    <thead>
-                        <tr>
-                            <th>ID</th>
-                            <th>Name</th>
-                            <th>Email</th>
-                            <th>Created Date</th>
-                            <th>Role</th>
-                            <th>Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php if (isset($users) && count($users) > 0) {
-                            foreach ($users as $user) { ?>
-                                <tr>
-                                    <td>
-                                        <p><?= $user['id'] ?></p>
-                                    </td>
-                                    <td>
-                                        <p><?= $user['name'] ?></p>
-                                    </td>
-                                    <td><?= $user['email'] ?></td>
-                                    <td><?= \Carbon\Carbon::parse($user['created_at'])->diffForHumans() ?></td>
-                                    <td>
-                                        <span class="status-pill <?= $user['role'] === 'admin' ? 'active' : 'pending' ?>">
-                                            <?= $user['role'] ?>
-                                        </span>
-                                    </td>
-                                    <td>
-                                        <button class="btn btn-sm btn-prim me-1" data-id="<?= htmlspecialchars($user['id'], ENT_QUOTES, 'UTF-8'); ?>"
-                                            data-name="<?= htmlspecialchars($user['name'], ENT_QUOTES, 'UTF-8'); ?>"
-                                            data-email="<?= htmlspecialchars($user['email'], ENT_QUOTES, 'UTF-8'); ?>"
-                                            data-role="<?= htmlspecialchars($user['role'], ENT_QUOTES, 'UTF-8'); ?>"
-                                            data-bs-toggle="modal" data-bs-target="#editUserModal">
-                                            <i class="fas fa-edit"></i>
-                                        </button>
-                                        <button class="btn btn-sm btn-red" onclick="deleteUser(<?= htmlspecialchars($user['id'], ENT_QUOTES, 'UTF-8'); ?>)">
-                                            <i class="fas fa-trash"></i>
-                                        </button>
-                                    </td>
-                                </tr>
-                            <?php }
-                        } else { ?>
-                            <tr>
-                                <td colspan="3">No Users Found</td>
-                            </tr>
-                        <?php } ?>
-                        </tr>
-                    </tbody>
-                </table>
+            <div class="table-responsive" style="max-height: 300px; overflow: scroll;">
+            <table class="table table-hover align-middle table-bordered table-striped text-center">
+            <thead class="table-danger">
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Created Date</th>
+                <th>Role</th>
+                <th>Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            <?php if (isset($users) && count($users) > 0) {
+                foreach ($users as $user) { ?>
+                <tr>
+                <td>
+                <span class="badge bg-primary"><?= $user['id'] ?></span>
+                </td>
+                <td>
+                <div class="d-flex justify-content-center align-items-center">
+                    <div class="ms-3">
+                    <p class="fw-bold mb-1"><?= $user['name'] ?></p>
+                    </div>
+                </div>
+                </td>
+                <td><?= $user['email'] ?></td>
+                <td class="badge bg-primary text-dark"><?= \Carbon\Carbon::parse($user['created_at'])->diffForHumans() ?></td>
+                <td>
+                <span class="badge <?= $user['role'] === 'admin' ? 'bg-success' : 'bg-warning' ?>">
+                    <?= ucfirst($user['role']) ?>
+                </span>
+                </td>
+                <td>
+                <button class="btn btn-sm btn-outline-primary me-1" data-id="<?= htmlspecialchars($user['id'], ENT_QUOTES, 'UTF-8'); ?>"
+                    data-name="<?= htmlspecialchars($user['name'], ENT_QUOTES, 'UTF-8'); ?>"
+                    data-email="<?= htmlspecialchars($user['email'], ENT_QUOTES, 'UTF-8'); ?>"
+                    data-role="<?= htmlspecialchars($user['role'], ENT_QUOTES, 'UTF-8'); ?>"
+                    data-bs-toggle="modal" data-bs-target="#editUserModal">
+                    <i class="fas fa-edit"></i>
+                </button>
+                <button class="btn btn-sm btn-outline-danger" onclick="deleteUser(<?= htmlspecialchars($user['id'], ENT_QUOTES, 'UTF-8'); ?>)">
+                    <i class="fas fa-trash"></i>
+                </button>
+                </td>
+                </tr>
+                <?php }
+            } else { ?>
+                <tr>
+                <td colspan="6" class="text-center text-muted">No Users Found</td>
+                </tr>
+            <?php } ?>
+            </tbody>
+            </table>
             </div>
         </div>
-        <!-- <nav aria-label="Page navigation">
-            <ul class="pagination justify-content-end">
-                <li class="page-item disabled">
-                    <a class="page-link" href="javascript:void(0)" tabindex="-1" aria-disabled="true">Previous</a>
-                </li>
-                <li class="page-item active"><a class="page-link" href="javascript:void(0)">1</a></li>
-                <li class="page-item"><a class="page-link" href="javascript:void(0)">2</a></li>
-                <li class="page-item"><a class="page-link" href="javascript:void(0)">3</a></li>
-                <li class="page-item">
-                    <a class="page-link" href="javascript:void(0)">Next</a>
-                </li>
-            </ul>
-        </nav> -->
     </div>
-
-    <!-- User Roles & Permissions Card -->
-    <!-- <div class="card shadow mb-4" data-aos="fade-left" data-aos-duration="1000">
-        <div class="card-header py-3">
-            <h6 class="m-0 font-weight-bold text-danger">User Roles & Permissions</h6>
-        </div>
-        <div class="card-body">
-            <div class="table-responsive">
-                <table class="table table-hover">
-                    <thead>
-                        <tr>
-                            <th>Role</th>
-                            <th>Dashboard</th>
-                            <th>User Management</th>
-                            <th>Blog Management</th>
-                            <th>Settings</th>
-                            <th>Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>Administrator</td>
-                            <td><i class="fas fa-check text-success"></i></td>
-                            <td><i class="fas fa-check text-success"></i></td>
-                            <td><i class="fas fa-check text-success"></i></td>
-                            <td><i class="fas fa-check text-success"></i></td>
-                            <td>
-                                <button class="btn btn-sm btn-prim me-1" data-bs-toggle="modal" data-bs-target="#editRoleModal">
-                                    <i class="fas fa-edit"></i>
-                                </button>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td>User</td>
-                            <td><i class="fas fa-times text-danger"></i></td>
-                            <td><i class="fas fa-times text-danger"></i></td>
-                            <td><i class="fas fa-times text-danger"></i></td>
-                            <td><i class="fas fa-times text-danger"></i></td>
-                            <td>
-                                <button class="btn btn-sm btn-prim me-1" data-bs-toggle="modal" data-bs-target="#editRoleModal">
-                                    <i class="fas fa-edit"></i>
-                                </button>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </div> -->
 </div>
 
 <!-- Add User Modal -->

@@ -85,6 +85,7 @@
                                     </div>
                                 </label>
                                 <span class="like-count" style="position: absolute; top: 292px; right: 25px; font-weight: bold; color: #b10c0c;"><?= $likeCount ?></span>
+                                <button id="shareBtn" class="btn btn-primary me-2" type="button"><i class="fa fa-share"></i></button>
                             </div>
                         </div>
                     </div>

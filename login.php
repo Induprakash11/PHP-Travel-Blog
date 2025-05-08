@@ -4,9 +4,15 @@
 Session::start();
 
 // Check if the user is already logged in
+$redirect = $_GET['redirect'] ?? null;
+
 if(isset($_SESSION['user_id'])) {
-    // Redirect to the dashboard if the user is already logged in
-    header("Location: home");
+    // Redirect to the originally requested page if redirect parameter exists
+    if ($redirect) {
+        header("Location: " . $redirect);
+    } else {
+        header("Location: home");
+    }
     exit();
 }
 

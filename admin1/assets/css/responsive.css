@@ -1,4 +1,8 @@
+/* Responsive CSS for Mobile, Tablet, and Laptop */
+
+/* Mobile Styles (max-width: 480px) */
 @media (max-width: 480px) {
+
     /* Footer styles */
     .footer {
         padding: 10px;
@@ -39,7 +43,8 @@
         font-size: 0.9rem;
     }
 
-    .btn-prim, .btn-red {
+    .btn-prim,
+    .btn-red {
         padding: 8px 12px;
         font-size: 0.9rem;
     }
@@ -52,7 +57,8 @@
         font-size: 0.7rem;
     }
 
-    .profile-section, .blogs-section {
+    .profile-section,
+    .blogs-section {
         padding: 10px;
         max-width: 100%;
     }
@@ -72,18 +78,520 @@
         margin: 10px 0;
     }
 
+    .navbar-toggler-ico i {
+        font-size: 1.2rem;
+    }
+
+    .navbar-nav .nav-link {
+        font-size: 0.9rem;
+        margin: 0.5rem 0;
+    }
+
+    .profile-card {
+        padding: 10px;
+    }
+
+    .profile-card a {
+        padding: 6px 10px;
+        font-size: 0.8rem;
+    }
+
+    #contact button {
+        padding: 10px;
+    }
+
+    .navbar-brand {
+        font-size: 1.2rem;
+    }
+
+    .nav-link {
+        font-size: 1rem;
+        margin-right: 0.5rem;
+    }
+
+    .carousel-item h1 {
+        font-size: 1.5rem;
+    }
+
+    .carousel-item p {
+        font-size: 0.9rem;
+    }
+
+    #contact button {
+        max-width: 100%;
+        left: 0;
+    }
+
+    .profile-card h3 {
+        font-size: 1.2rem;
+    }
+
+    .profile-card a {
+        font-size: 0.85rem;
+    }
 }
 
-
-@media (min-width: 768px) {
-    .div1 {
-        flex: 1 1 40%;
-        max-width: 40%;
-        position: fixed;
+/* Tablet Styles (min-width: 481px and max-width: 768px) */
+@media (min-width: 481px) and (max-width: 768px) {
+    #sidebar {
+        min-width: 80px;
+        max-width: 80px;
+        text-align: center;
     }
+
+    #sidebar .sidebar-header h3 {
+        display: none;
+    }
+
+    #sidebar ul li a {
+        padding: 0.8rem 0.5rem;
+        text-align: center;
+    }
+
+    #sidebar ul li a span {
+        display: none;
+    }
+
+    #sidebar ul li a i {
+        margin: 0;
+        font-size: 1.2rem;
+    }
+
+    #content {
+        margin-left: 80px;
+        width: calc(100% - 80px);
+    }
+
+    /* Dashboard container flex layout */
+    .dashboard-container {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20px;
+        padding: 20px;
+        justify-content: center;
+        background-color: var(--light);
+    }
+
+    .profile-section,
+    .blogs-section {
+        padding: 20px;
+        flex: 1 1 300px;
+        max-width: 100%;
+    }
+
+    .profile-card {
+        padding: 20px;
+        border-radius: 10px;
+        background-color: var(--white);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        border: 2px solid var(--primary-color);
+    }
+
+    .profile-title {
+        color: var(--danger-color);
+        margin-bottom: 15px;
+    }
+
+    .profile-icon {
+        color: var(--primary-color);
+        margin-right: 8px;
+    }
+
+    .btn-logout {
+        display: inline-block;
+        margin-top: 15px;
+        padding: 10px 15px;
+        background-color: var(--red);
+        color: var(--white);
+        border-radius: 5px;
+        text-decoration: none;
+        transition: background-color 0.3s ease;
+    }
+
+    .btn-logout:hover {
+        background-color: var(--danger-color);
+    }
+
+    .blogs-title {
+        color: var(--danger-color);
+        margin-bottom: 15px;
+        text-align: center;
+    }
+
+    .blog-image {
+        width: 100%;
+        height: 200px;
+        object-fit: cover;
+        border-top-left-radius: 10px;
+        border-top-right-radius: 10px;
+    }
+
+    .blog-content {
+        padding: 15px;
+    }
+
+    .blog-title {
+        color: var(--primary-color);
+        margin-bottom: 10px;
+    }
+
+    .blog-excerpt {
+        color: var(--dark-color);
+        margin-bottom: 15px;
+    }
+
+    .btn-readmore {
+        display: inline-block;
+        padding: 8px 12px;
+        background-color: var(--primary-color);
+        color: var(--white);
+        border-radius: 5px;
+        text-decoration: none;
+        transition: background-color 0.3s ease;
+    }
+
+    .btn-readmore:hover {
+        background-color: var(--danger-color);
+    }
+
+    #blogs {
+        padding: 10px;
+    }
+
+    #blogs .card {
+        margin-bottom: 15px;
+    }
+
+    .category-image {
+        width: 100%;
+        height: auto;
+    }
+
     .div2 {
-        flex: 1 1 60%;
-        max-width: 60%;
-        margin-left: 40%;
+        max-width: 100% !important;
+        padding: 10px !important;
+    }
+
+    .div2 .card {
+        max-width: 100% !important;
+        margin-bottom: 15px;
+    }
+
+    .profile-card {
+        padding: 15px;
+    }
+
+    .profile-card a {
+        padding: 8px 15px;
+        font-size: 0.9rem;
+    }
+
+    .btn-red,
+    .btn-prim {
+        width: 100%;
+        padding: 12px 0;
+        font-size: 1rem;
+    }
+}
+
+/* Laptop Styles (min-width: 769px and max-width: 1024px) */
+@media (min-width: 769px) and (max-width: 1024px) {
+    #sidebar {
+        min-width: 150px;
+        max-width: 150px;
+    }
+
+    #content {
+        margin-left: 150px;
+        width: calc(100% - 150px);
+    }
+
+    .dashboard-container {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 30px;
+        padding: 30px;
+        justify-content: flex-start;
+        background-color: var(--light);
+    }
+
+    .profile-section,
+    .blogs-section {
+        padding: 30px;
+        flex: 1 1 400px;
+        max-width: 100%;
+    }
+
+    .profile-card {
+        padding: 30px;
+        border-radius: 10px;
+        background-color: var(--white);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        border: 2px solid var(--primary-color);
+    }
+
+    .profile-title {
+        color: var(--danger-color);
+        margin-bottom: 20px;
+    }
+
+    .profile-icon {
+        color: var(--primary-color);
+        margin-right: 10px;
+    }
+
+    .btn-logout {
+        display: inline-block;
+        margin-top: 20px;
+        padding: 12px 18px;
+        background-color: var(--red);
+        color: var(--white);
+        border-radius: 5px;
+        text-decoration: none;
+        transition: background-color 0.3s ease;
+    }
+
+    .btn-logout:hover {
+        background-color: var(--danger-color);
+    }
+
+    .blogs-title {
+        color: var(--danger-color);
+        margin-bottom: 20px;
+        text-align: left;
+    }
+
+    .blog-image {
+        width: 100%;
+        height: 250px;
+        object-fit: cover;
+        border-top-left-radius: 10px;
+        border-top-right-radius: 10px;
+    }
+
+    .blog-content {
+        padding: 20px;
+    }
+
+    .blog-title {
+        color: var(--primary-color);
+        margin-bottom: 15px;
+    }
+
+    .blog-excerpt {
+        color: var(--dark-color);
+        margin-bottom: 20px;
+    }
+
+    .btn-readmore {
+        display: inline-block;
+        padding: 10px 15px;
+        background-color: var(--primary-color);
+        color: var(--white);
+        border-radius: 5px;
+        text-decoration: none;
+        transition: background-color 0.3s ease;
+    }
+
+    .btn-readmore:hover {
+        background-color: var(--danger-color);
+    }
+
+    .navbar-collapse {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 60%;
+        height: 100%;
+        background-color: rgba(226, 225, 225, 0.7);
+        z-index: 1050;
+        display: none;
+    }
+
+    .navbar-collapse.show {
+        display: block;
+    }
+
+    .navbar-nav {
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100%;
+        background: linear-gradient(to bottom, rgba(219, 80, 74, 0.5) 0%, rgba(18, 255, 196, 0.5) 100%);
+    }
+
+    .navbar-nav .nav-link {
+        margin: 1rem 0;
+        font-size: 1.5rem;
+        color: var(--white);
+    }
+
+    .navbar-nav .nav-link:hover {
+        color: var(--red);
+    }
+
+    .sign {
+        display: flex;
+        flex-direction: column;
+        align-items: baseline;
+        justify-content: center;
+        margin-top: 9rem;
+    }
+
+    #contact button {
+        position: static;
+    }
+
+    .container .card-body form button {
+        position: static;
+        left: 100px;
+        max-width: 100%;
+    }
+}
+
+/* Desktop Styles (min-width: 1024px and max-width: 1440px) */
+@media (min-width: 1024px) and (max-width: 1440px) {
+    #sidebar {
+        min-width: 200px;
+        max-width: 200px;
+    }
+
+    #content {
+        margin-left: 200px;
+        width: calc(100% - 200px);
+    }
+
+    .dashboard-container {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 40px;
+        padding: 40px;
+        justify-content: flex-start;
+        background-color: var(--light);
+    }
+
+    .profile-section,
+    .blogs-section {
+        padding: 40px;
+        flex: 1 1 500px;
+        max-width: 100%;
+    }
+
+    .profile-card {
+        padding: 40px;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        border: 2px solid var(--primary-color);
+    }
+
+    .profile-title {
+        color: var(--danger-color);
+        margin-bottom: 25px;
+    }
+
+    .profile-icon {
+        color: var(--primary-color);
+        margin-right: 12px;
+    }
+
+    .btn-logout {
+        display: inline-block;
+        margin-top: 25px;
+        padding: 14px 20px;
+        background-color: var(--red);
+        color: var(--white);
+        border-radius: 5px;
+        text-decoration: none;
+        transition: background-color 0.3s ease;
+    }
+
+    .btn-logout:hover {
+        background-color: var(--danger-color);
+    }
+
+    .blogs-title {
+        color: var(--danger-color);
+        margin-bottom: 25px;
+        text-align: left;
+    }
+
+    .blog-image {
+        width: 100%;
+        height: 300px;
+        object-fit: cover;
+        border-top-left-radius: 10px;
+        border-top-right-radius: 10px;
+    }
+
+    .blog-content {
+        padding: 25px;
+    }
+
+    .blog-title {
+        color: var(--primary-color);
+        margin-bottom: 20px;
+    }
+
+    .blog-excerpt {
+        color: var(--dark-color);
+        margin-bottom: 25px;
+    }
+
+    .btn-readmore {
+        display: inline-block;
+        padding: 12px 18px;
+        background-color: var(--primary-color);
+        color: var(--white);
+        border-radius: 5px;
+        text-decoration: none;
+        transition: background-color 0.3s ease;
+    }
+
+    .btn-readmore:hover {
+        background-color: var(--danger-color);
+    }
+
+    .navbar-collapse {
+        position: static;
+        display: flex;
+        justify-content: flex-end;
+        background-color: transparent;
+    }
+
+    .navbar-nav {
+        flex-direction: row;
+        align-items: center;
+        justify-content: flex-end;
+    }
+
+    .navbar-nav .nav-link {
+        margin: 0 1rem;
+        font-size: 1rem;
+        color: var(--dark-color);
+    }
+
+    .navbar-nav .nav-link:hover {
+        color: var(--primary-color);
+    }
+
+    .sign {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: flex-end;
+        margin-top: 0;
+    }
+
+    #contact button {
+        position: static;
+        padding: 15px 20px;
+        font-size: 1rem;
+    }
+
+    .container .card-body form button {
+        position: static;
+        max-width: 100%;
+        padding: 15px 20px;
+        font-size: 1rem;
     }
 }

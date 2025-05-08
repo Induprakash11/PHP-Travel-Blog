@@ -399,4 +399,20 @@ class Blogs
         $row = $result->fetch_assoc();
         return $row && $row['liked'] == 1;
     }
+
+    //method to check total likes in all blogs
+    public static function getTotalLikesCount()
+    {
+        $conn = self::checkDB();
+        $sql = "SELECT COUNT(*) as total_likes FROM likes WHERE liked = 1";
+        $stmt = $conn->prepare($sql);
+        if (!$stmt) {
+            error_log("Prepare failed in getTotalLikesCount: " . $conn->error);
+            return 0;
+        }
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $row = $result->fetch_assoc();
+        return $row ? (int)$row['total_likes'] : 0;
+    }
 }

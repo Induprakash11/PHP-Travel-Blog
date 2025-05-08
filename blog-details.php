@@ -25,5 +25,6 @@ User::isAuthenticated();
     <?= ViewTemp::view("_footer") ?>
 
     <script src="/Travel Blog/assets/Js/like.js"></script>
+    <script src="/Travel Blog/assets/Js/share.js"></script>
 </body>
 </html>

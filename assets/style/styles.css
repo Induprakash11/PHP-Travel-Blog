@@ -59,7 +59,6 @@
 body {
     font-family: 'Poppins', sans-serif;
 	background: linear-gradient(360deg, var(--lightsecondary-color) 0%, var(--lightred) 100%);
-	overflow-x: hidden;
 }
 
 html{
@@ -245,6 +244,11 @@ nav {
     border: none;
     border-radius: 5px;
     cursor: pointer;
+}
+
+.btn-red:focus {
+    outline: 2px solid var(--secondary-color);
+    outline-offset: 2px;
 }
 
 .btn-red:hover {
@@ -600,52 +604,4 @@ nav {
     left: 0;
     font-size: 12px;
     color: #4e4e4e;
-}
-
-@media (max-width: 991.98px) {
-    .navbar-collapse {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 60%;
-        height: 100%;
-        background-color: rgba(226, 225, 225, 0.7);
-        z-index: 1050;
-        display: none;
-    }
-    .navbar-collapse.show {
-        display: block;
-    }
-    .navbar-nav {
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        height: 100%;
-        background: linear-gradient(to bottom, rgba(219, 80, 74, 0.5) 0%, rgba(18, 255, 196, 0.5) 100%);
-    }
-    .navbar-nav .nav-link {
-        margin: 1rem 0;
-        font-size: 1.5rem;
-        color: var(--white);
-    }
-    
-    .navbar-nav .nav-link:hover {
-        color: var(--red);
-    }
-
-    .sign {
-        display: flex;
-        flex-direction: column;
-        align-items: baseline;
-        justify-content: center;
-        margin-top: 9rem;
-    }
-    #contact button {
-        position: static;
-    }
-    .container .card-body form button {
-        position: static;
-        left: 100px;
-        max-width: 100%;
-    }
 }

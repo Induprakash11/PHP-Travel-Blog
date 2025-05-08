@@ -55,7 +55,6 @@
 body {
 	font-family: 'Poppins', sans-serif;
 	background: linear-gradient(360deg, var(--lightsecondary-color) 0%, var(--lightred) 100%);
-	overflow-x: hidden;
 }
 
 /* Sidebar Styles */

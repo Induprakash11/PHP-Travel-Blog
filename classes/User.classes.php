@@ -113,7 +113,9 @@ class User extends Database
     public static function isAuthenticated()
     {
         if (!Session::has('user_id')) {
-            header("Location: /Travel Blog/login");
+            $currentUrl = $_SERVER['REQUEST_URI'];
+            $redirectUrl = "/Travel Blog/login?redirect=" . $currentUrl;
+            header("Location: $redirectUrl");
             exit();
         }
         return true; // user is authenticated

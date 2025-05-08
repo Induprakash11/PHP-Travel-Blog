@@ -17,17 +17,27 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     // Login the user
+        $redirect = $_GET['redirect'] ?? null;
+
         if (User::login($email, $password)) {
             // Set session keys
             $user = User::fetchOne("SELECT * FROM users WHERE email = ?", [$email]);
             if ($user['role'] === 'user') {
                 User::setUserSession($user);
                 Utils::setFlash('login success', 'Login successful.');
-                Utils::redirect('home');
+                if ($redirect) {
+                    Utils::redirect($redirect);
+                } else {
+                    Utils::redirect('home');
+                }
             } else if ($user['role'] === 'admin') {
                 User::setUserSession($user);
                 Utils::setFlash('login success', 'Login successful.');
-                Utils::redirect('admin1/home');
+                if ($redirect) {
+                    Utils::redirect($redirect);
+                } else {
+                    Utils::redirect('admin1/home');
+                }
             } else {
                 Utils::setFlash('login error', 'Login failed.');
             }

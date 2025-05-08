@@ -1,17 +1,12 @@
-// This function is used to toggle the icon of the navbar toggler button
-
 function toggleIcon(button) {
   const icon = button.querySelector(".navbar-toggler-ico");
-  const Test = document.querySelector(".navbar-toggler-text");
-  if (
-    button.getAttribute("aria-expanded") === "true" ||
-    button.getAttribute("aria-expanded") === true
-  ) {
+  const expanded = button.getAttribute("aria-expanded") === "true";
+  if (expanded) {
     icon.innerHTML = '<i class="fa fa-times"></i>'; // Change to close icon
-    button.setAttribute("aria-expanded", "true");
+    button.setAttribute("aria-expanded", "false");
   } else {
     icon.innerHTML = '<i class="fa fa-bars"></i>'; // Change to menu icon
-    button.setAttribute("aria-expanded", "false");
+    button.setAttribute("aria-expanded", "true");
   }
 }
 

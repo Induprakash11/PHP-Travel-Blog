@@ -2,7 +2,6 @@
 // Removed unused Carbon import
 
 $users = User::getAllUsers();
-
 $searchTerm = $_GET['blogSearch'] ?? '';
 
 if (!empty($searchTerm)) {
