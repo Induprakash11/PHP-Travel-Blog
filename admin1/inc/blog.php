@@ -90,7 +90,7 @@
 												data-image="<?= $blog['blog_image'] ?>">
 												<i class="fas fa-edit"></i>
 											</button>
-											<button class="btn btn-sm btn-outline-danger">
+											<button class="btn btn-sm btn-outline-danger delete-blog-btn" data-id="<?= $blog['id'] ?>">
 												<i class="fas fa-trash"></i>
 											</button>
 										</td>
@@ -232,6 +232,27 @@ exampleModal.addEventListener('show.bs.modal', function (event) {
   // Removed setting value for blogInputImage for security reasons.
 });
 </script>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const deleteButtons = document.querySelectorAll('.delete-blog-btn');
+    deleteButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            const blogId = this.getAttribute('data-id');
+            if (confirm('Are you sure you want to delete this blog?')) {
+                const form = document.getElementById('deleteBlogForm');
+                form.blogId.value = blogId;
+                form.submit();
+            }
+        });
+    });
+});
+</script>
+
+<form id="deleteBlogForm" method="post" style="display:none;">
+    <input type="hidden" name="blogId" value="">
+    <input type="hidden" name="deleteBlog" value="1">
+</form>
 
 <!-- Add Category Modal -->
 <!-- <div class="modal fade" id="addCategoryModal" tabindex="-1" aria-labelledby="addCategoryModalLabel" aria-hidden="true">

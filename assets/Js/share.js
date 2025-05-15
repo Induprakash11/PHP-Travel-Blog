@@ -13,10 +13,10 @@ document.addEventListener('DOMContentLoaded', function () {
                 title: document.title,
                 url: currentUrl
             }).catch((error) => {
-                alert('Error sharing: ' + error);
+                message('Error sharing: ' + error);
             });
         } else {
-            alert('Web Share API is not supported in your browser. Please use the Copy URL button.');
+            message('Web Share API is not supported in your browser. Please use the Copy URL button.');
         }
     });
 
@@ -29,24 +29,22 @@ document.addEventListener('DOMContentLoaded', function () {
                     copyMessage.style.display = 'none';
                 }, 2000);
             }).catch(() => {
-                alert('Failed to copy URL. Please copy manually.');
+                message('Failed to copy URL. Please copy manually.');
             });
         } else {
             // Fallback for older browsers
-            const textArea = document.createElement('textarea');
-            textArea.value = currentUrl;
-            document.body.appendChild(textArea);
-            textArea.select();
             try {
-                document.execCommand('copy');
-                copyMessage.style.display = 'block';
-                setTimeout(() => {
-                    copyMessage.style.display = 'none';
-                }, 2000);
+                navigator.clipboard.writeText(currentUrl).then(() => {
+                    copyMessage.style.display = 'block';
+                    setTimeout(() => {
+                        copyMessage.style.display = 'none';
+                    }, 2000);
+                }).catch(() => {
+                    message('Failed to copy URL. Please copy manually.');
+                });
             } catch (err) {
-                alert('Failed to copy URL. Please copy manually.');
+                message('Failed to copy URL. Please copy manually.');
             }
-            document.body.removeChild(textArea);
         }
     });
 });

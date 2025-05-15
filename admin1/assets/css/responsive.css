@@ -1,9 +1,7 @@
-/* Responsive CSS for Mobile, Tablet, and Laptop */
+/*Responsive CSS for Mobile, Tablet, and Laptop*/
 
 /* Mobile Styles (max-width: 480px) */
 @media (max-width: 480px) {
-
-    /* Footer styles */
     .footer {
         padding: 10px;
         text-align: center;
@@ -87,6 +85,24 @@
         margin: 0.5rem 0;
     }
 
+    .navbar-collapse {
+        position: fixed;
+        top: 0;
+        left: 0px;
+        width: 60%;
+        height: 100%;
+        background: linear-gradient(360deg, var(--lightsecondary-color) 0%, #ff6b6b 100%);
+        z-index: 1050;
+        align-self: center;
+    }
+    
+    .nav-link {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0.5rem 1rem;
+    }
+
     .profile-card {
         padding: 10px;
     }
@@ -132,7 +148,7 @@
 }
 
 /* Tablet Styles (min-width: 481px and max-width: 768px) */
-@media (min-width: 481px) and (max-width: 768px) {
+/* @media (min-width: 481px) and (max-width: 768px) {
     #sidebar {
         min-width: 80px;
         max-width: 80px;
@@ -162,7 +178,6 @@
         width: calc(100% - 80px);
     }
 
-    /* Dashboard container flex layout */
     .dashboard-container {
         display: flex;
         flex-wrap: wrap;
@@ -292,10 +307,10 @@
         padding: 12px 0;
         font-size: 1rem;
     }
-}
+} */
 
 /* Laptop Styles (min-width: 769px and max-width: 1024px) */
-@media (min-width: 769px) and (max-width: 1024px) {
+/* @media (min-width: 769px) and (max-width: 1024px) {
     #sidebar {
         min-width: 150px;
         max-width: 150px;
@@ -447,10 +462,10 @@
         left: 100px;
         max-width: 100%;
     }
-}
+} */
 
 /* Desktop Styles (min-width: 1024px and max-width: 1440px) */
-@media (min-width: 1024px) and (max-width: 1440px) {
+/* @media (min-width: 1024px) and (max-width: 1440px) {
     #sidebar {
         min-width: 200px;
         max-width: 200px;
@@ -594,4 +609,4 @@
         padding: 15px 20px;
         font-size: 1rem;
     }
-}
+} */

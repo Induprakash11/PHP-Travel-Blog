@@ -237,8 +237,8 @@ nav {
 }
 
 .btn-red {
-    min-width: 200px;
-    padding: 10px 5px;
+    min-width: max-content;
+    padding: 10px 10px;
     background-color: var(--red);
     color: #fff;
     border: none;
